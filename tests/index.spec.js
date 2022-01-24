@@ -1,16 +1,16 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import Footer from '../index';
+import segmented from '../index';
 
-describe('rc-footer', () => {
-  it('render empty Footer', () => {
-    const wrapper = mount(<Footer />);
+describe('rc-segmented', () => {
+  it('render empty segmented', () => {
+    const wrapper = mount(<segmented />);
     expect(wrapper.render()).toMatchSnapshot();
   });
 
-  it('render Footer', () => {
+  it('render segmented', () => {
     const wrapper = mount(
-      <Footer
+      <segmented
         columns={[
           {
             title: '相关资源',
@@ -123,9 +123,9 @@ describe('rc-footer', () => {
     expect(wrapper.render()).toMatchSnapshot();
   });
 
-  it('render Footer with columnLayout and backgroundColor', () => {
+  it('render segmented with columnLayout and backgroundColor', () => {
     const wrapper = mount(
-      <Footer
+      <segmented
         columns={[{ title: 'title' }, { title: 'title' }]}
         columnLayout="space-between"
         backgroundColor="transparent"
@@ -135,9 +135,9 @@ describe('rc-footer', () => {
     expect(wrapper.render()).toMatchSnapshot();
   });
 
-  it('render light theme Footer', () => {
+  it('render light theme segmented', () => {
     const wrapper = mount(
-      <Footer
+      <segmented
         columns={[{ title: 'title' }, { title: 'title' }]}
         theme="light"
         style={{ color: 'red' }}
@@ -146,9 +146,9 @@ describe('rc-footer', () => {
     expect(wrapper.render()).toMatchSnapshot();
   });
 
-  it('render Footer with maxColumnsPerRow', () => {
+  it('render segmented with maxColumnsPerRow', () => {
     const wrapper = mount(
-      <Footer
+      <segmented
         maxColumnsPerRow={2}
         columns={[
           {

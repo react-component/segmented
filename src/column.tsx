@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-export interface FooterColumnItem {
+export interface segmentedColumnItem {
   title: React.ReactNode;
   url?: string;
   openExternal?: boolean;
@@ -12,16 +12,16 @@ export interface FooterColumnItem {
   LinkComponent?: React.ReactType;
 }
 
-export interface FooterColumn {
+export interface segmentedColumn {
   prefixCls?: string;
   title?: React.ReactNode;
   icon?: React.ReactNode;
-  items?: FooterColumnItem[];
+  items?: segmentedColumnItem[];
   className?: string;
   style?: React.CSSProperties;
 }
 
-const Column: React.FC<FooterColumn> = ({
+const Column: React.FC<segmentedColumn> = ({
   prefixCls,
   icon,
   title,

@@ -1,23 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`rc-footer render Footer 1`] = `
-<footer
-  class="rc-footer rc-footer-dark"
+exports[`rc-segmented render segmented 1`] = `
+<segmented
+  class="rc-segmented rc-segmented-dark"
 >
   <section
-    class="rc-footer-container"
+    class="rc-segmented-container"
   >
     <section
-      class="rc-footer-columns"
+      class="rc-segmented-columns"
     >
       <div
-        class="rc-footer-column"
+        class="rc-segmented-column"
       >
         <h2>
           相关资源
         </h2>
         <div
-          class="rc-footer-item"
+          class="rc-segmented-item"
         >
           <a
             href="https://pro.ant.design/"
@@ -28,7 +28,7 @@ exports[`rc-footer render Footer 1`] = `
           </a>
         </div>
         <div
-          class="rc-footer-item my-class-name"
+          class="rc-segmented-item my-class-name"
           style="color: blue;"
         >
           <a
@@ -40,7 +40,7 @@ exports[`rc-footer render Footer 1`] = `
           </a>
         </div>
         <div
-          class="rc-footer-item"
+          class="rc-segmented-item"
         >
           <span
             href="https://kitchen.alipay.com/"
@@ -48,26 +48,26 @@ exports[`rc-footer render Footer 1`] = `
             Kitchen
           </span>
           <span
-            class="rc-footer-item-separator"
+            class="rc-segmented-item-separator"
           >
             -
           </span>
           <span
-            class="rc-footer-item-description"
+            class="rc-segmented-item-description"
           >
             Sketch 工具集
           </span>
         </div>
       </div>
       <div
-        class="rc-footer-column my-class-name"
+        class="rc-segmented-column my-class-name"
         style="color: red;"
       >
         <h2>
           社区
         </h2>
         <div
-          class="rc-footer-item"
+          class="rc-segmented-item"
         >
           <a
             href="https://pro.ant.design/"
@@ -78,7 +78,7 @@ exports[`rc-footer render Footer 1`] = `
           </a>
         </div>
         <div
-          class="rc-footer-item"
+          class="rc-segmented-item"
         >
           <a
             href="https://mobile.ant.design/"
@@ -89,7 +89,7 @@ exports[`rc-footer render Footer 1`] = `
           </a>
         </div>
         <div
-          class="rc-footer-item"
+          class="rc-segmented-item"
         >
           <a
             href="https://kitchen.alipay.com/"
@@ -97,25 +97,25 @@ exports[`rc-footer render Footer 1`] = `
             Kitchen
           </a>
           <span
-            class="rc-footer-item-separator"
+            class="rc-segmented-item-separator"
           >
             -
           </span>
           <span
-            class="rc-footer-item-description"
+            class="rc-segmented-item-description"
           >
             Sketch 工具集
           </span>
         </div>
       </div>
       <div
-        class="rc-footer-column"
+        class="rc-segmented-column"
       >
         <h2>
           帮助
         </h2>
         <div
-          class="rc-footer-item"
+          class="rc-segmented-item"
         >
           <a
             href="https://pro.ant.design/"
@@ -126,7 +126,7 @@ exports[`rc-footer render Footer 1`] = `
           </a>
         </div>
         <div
-          class="rc-footer-item"
+          class="rc-segmented-item"
         >
           <a
             href="https://mobile.ant.design/"
@@ -137,7 +137,7 @@ exports[`rc-footer render Footer 1`] = `
           </a>
         </div>
         <div
-          class="rc-footer-item"
+          class="rc-segmented-item"
         >
           <a
             href="https://kitchen.alipay.com/"
@@ -145,23 +145,23 @@ exports[`rc-footer render Footer 1`] = `
             Kitchen
           </a>
           <span
-            class="rc-footer-item-separator"
+            class="rc-segmented-item-separator"
           >
             -
           </span>
           <span
-            class="rc-footer-item-description"
+            class="rc-segmented-item-description"
           >
             Sketch 工具集
           </span>
         </div>
       </div>
       <div
-        class="rc-footer-column"
+        class="rc-segmented-column"
       >
         <h2>
           <span
-            class="rc-footer-column-icon"
+            class="rc-segmented-column-icon"
           >
             <img
               alt="more products"
@@ -171,7 +171,7 @@ exports[`rc-footer render Footer 1`] = `
           更多产品
         </h2>
         <div
-          class="rc-footer-item"
+          class="rc-segmented-item"
         >
           <a
             href="https://yuque.com"
@@ -179,7 +179,7 @@ exports[`rc-footer render Footer 1`] = `
             target="_blank"
           >
             <span
-              class="rc-footer-item-icon"
+              class="rc-segmented-item-icon"
             >
               <img
                 alt="yuque"
@@ -189,18 +189,18 @@ exports[`rc-footer render Footer 1`] = `
             语雀
           </a>
           <span
-            class="rc-footer-item-separator"
+            class="rc-segmented-item-separator"
           >
             -
           </span>
           <span
-            class="rc-footer-item-description"
+            class="rc-segmented-item-description"
           >
             知识创作与分享工具
           </span>
         </div>
         <div
-          class="rc-footer-item"
+          class="rc-segmented-item"
         >
           <a
             href="https://yunfengdie.com"
@@ -208,7 +208,7 @@ exports[`rc-footer render Footer 1`] = `
             target="_blank"
           >
             <span
-              class="rc-footer-item-icon"
+              class="rc-segmented-item-icon"
             >
               <img
                 alt="yuque"
@@ -218,12 +218,12 @@ exports[`rc-footer render Footer 1`] = `
             云凤蝶
           </a>
           <span
-            class="rc-footer-item-separator"
+            class="rc-segmented-item-separator"
           >
             -
           </span>
           <span
-            class="rc-footer-item-description"
+            class="rc-segmented-item-description"
           >
             中台建站平台
           </span>
@@ -232,38 +232,38 @@ exports[`rc-footer render Footer 1`] = `
     </section>
   </section>
   <section
-    class="rc-footer-bottom"
+    class="rc-segmented-bottom"
   >
     <div
-      class="rc-footer-bottom-container"
+      class="rc-segmented-bottom-container"
     >
       Made with ❤️ by AFX
     </div>
   </section>
-</footer>
+</segmented>
 `;
 
-exports[`rc-footer render Footer with columnLayout and backgroundColor 1`] = `
-<footer
-  class="rc-footer rc-footer-dark"
+exports[`rc-segmented render segmented with columnLayout and backgroundColor 1`] = `
+<segmented
+  class="rc-segmented rc-segmented-dark"
   style="color: red; background-color: transparent;"
 >
   <section
-    class="rc-footer-container"
+    class="rc-segmented-container"
   >
     <section
-      class="rc-footer-columns"
+      class="rc-segmented-columns"
       style="justify-content: space-between;"
     >
       <div
-        class="rc-footer-column"
+        class="rc-segmented-column"
       >
         <h2>
           title
         </h2>
       </div>
       <div
-        class="rc-footer-column"
+        class="rc-segmented-column"
       >
         <h2>
           title
@@ -271,29 +271,29 @@ exports[`rc-footer render Footer with columnLayout and backgroundColor 1`] = `
       </div>
     </section>
   </section>
-</footer>
+</segmented>
 `;
 
-exports[`rc-footer render Footer with maxColumnsPerRow 1`] = `
-<footer
-  class="rc-footer rc-footer-dark"
+exports[`rc-segmented render segmented with maxColumnsPerRow 1`] = `
+<segmented
+  class="rc-segmented rc-segmented-dark"
 >
   <section
-    class="rc-footer-container"
+    class="rc-segmented-container"
   >
     <section
-      class="rc-footer-columns"
+      class="rc-segmented-columns"
       style="flex-wrap: wrap;"
     >
       <div
-        class="rc-footer-column"
+        class="rc-segmented-column"
         style="flex: 0 0 33.43333333333334%;"
       >
         <h2>
           相关资源
         </h2>
         <div
-          class="rc-footer-item"
+          class="rc-segmented-item"
         >
           <a
             href="https://pro.ant.design/"
@@ -304,7 +304,7 @@ exports[`rc-footer render Footer with maxColumnsPerRow 1`] = `
           </a>
         </div>
         <div
-          class="rc-footer-item my-class-name"
+          class="rc-segmented-item my-class-name"
           style="color: blue;"
         >
           <a
@@ -316,7 +316,7 @@ exports[`rc-footer render Footer with maxColumnsPerRow 1`] = `
           </a>
         </div>
         <div
-          class="rc-footer-item"
+          class="rc-segmented-item"
         >
           <span
             href="https://kitchen.alipay.com/"
@@ -324,26 +324,26 @@ exports[`rc-footer render Footer with maxColumnsPerRow 1`] = `
             Kitchen
           </span>
           <span
-            class="rc-footer-item-separator"
+            class="rc-segmented-item-separator"
           >
             -
           </span>
           <span
-            class="rc-footer-item-description"
+            class="rc-segmented-item-description"
           >
             Sketch 工具集
           </span>
         </div>
       </div>
       <div
-        class="rc-footer-column my-class-name"
+        class="rc-segmented-column my-class-name"
         style="color: red; flex: 0 0 33.43333333333334%;"
       >
         <h2>
           社区
         </h2>
         <div
-          class="rc-footer-item"
+          class="rc-segmented-item"
         >
           <a
             href="https://pro.ant.design/"
@@ -354,7 +354,7 @@ exports[`rc-footer render Footer with maxColumnsPerRow 1`] = `
           </a>
         </div>
         <div
-          class="rc-footer-item"
+          class="rc-segmented-item"
         >
           <a
             href="https://mobile.ant.design/"
@@ -365,7 +365,7 @@ exports[`rc-footer render Footer with maxColumnsPerRow 1`] = `
           </a>
         </div>
         <div
-          class="rc-footer-item"
+          class="rc-segmented-item"
         >
           <a
             href="https://kitchen.alipay.com/"
@@ -373,26 +373,26 @@ exports[`rc-footer render Footer with maxColumnsPerRow 1`] = `
             Kitchen
           </a>
           <span
-            class="rc-footer-item-separator"
+            class="rc-segmented-item-separator"
           >
             -
           </span>
           <span
-            class="rc-footer-item-description"
+            class="rc-segmented-item-description"
           >
             Sketch 工具集
           </span>
         </div>
       </div>
       <div
-        class="rc-footer-column"
+        class="rc-segmented-column"
         style="flex: 0 0 33.43333333333334%;"
       >
         <h2>
           帮助
         </h2>
         <div
-          class="rc-footer-item"
+          class="rc-segmented-item"
         >
           <a
             href="https://pro.ant.design/"
@@ -403,7 +403,7 @@ exports[`rc-footer render Footer with maxColumnsPerRow 1`] = `
           </a>
         </div>
         <div
-          class="rc-footer-item"
+          class="rc-segmented-item"
         >
           <a
             href="https://mobile.ant.design/"
@@ -414,7 +414,7 @@ exports[`rc-footer render Footer with maxColumnsPerRow 1`] = `
           </a>
         </div>
         <div
-          class="rc-footer-item"
+          class="rc-segmented-item"
         >
           <a
             href="https://kitchen.alipay.com/"
@@ -422,24 +422,24 @@ exports[`rc-footer render Footer with maxColumnsPerRow 1`] = `
             Kitchen
           </a>
           <span
-            class="rc-footer-item-separator"
+            class="rc-segmented-item-separator"
           >
             -
           </span>
           <span
-            class="rc-footer-item-description"
+            class="rc-segmented-item-description"
           >
             Sketch 工具集
           </span>
         </div>
       </div>
       <div
-        class="rc-footer-column"
+        class="rc-segmented-column"
         style="flex: 0 0 33.43333333333334%;"
       >
         <h2>
           <span
-            class="rc-footer-column-icon"
+            class="rc-segmented-column-icon"
           >
             <img
               alt="more products"
@@ -449,7 +449,7 @@ exports[`rc-footer render Footer with maxColumnsPerRow 1`] = `
           更多产品
         </h2>
         <div
-          class="rc-footer-item"
+          class="rc-segmented-item"
         >
           <a
             href="https://yuque.com"
@@ -457,7 +457,7 @@ exports[`rc-footer render Footer with maxColumnsPerRow 1`] = `
             target="_blank"
           >
             <span
-              class="rc-footer-item-icon"
+              class="rc-segmented-item-icon"
             >
               <img
                 alt="yuque"
@@ -467,18 +467,18 @@ exports[`rc-footer render Footer with maxColumnsPerRow 1`] = `
             语雀
           </a>
           <span
-            class="rc-footer-item-separator"
+            class="rc-segmented-item-separator"
           >
             -
           </span>
           <span
-            class="rc-footer-item-description"
+            class="rc-segmented-item-description"
           >
             知识创作与分享工具
           </span>
         </div>
         <div
-          class="rc-footer-item"
+          class="rc-segmented-item"
         >
           <a
             href="https://yunfengdie.com"
@@ -486,7 +486,7 @@ exports[`rc-footer render Footer with maxColumnsPerRow 1`] = `
             target="_blank"
           >
             <span
-              class="rc-footer-item-icon"
+              class="rc-segmented-item-icon"
             >
               <img
                 alt="yuque"
@@ -496,12 +496,12 @@ exports[`rc-footer render Footer with maxColumnsPerRow 1`] = `
             云凤蝶
           </a>
           <span
-            class="rc-footer-item-separator"
+            class="rc-segmented-item-separator"
           >
             -
           </span>
           <span
-            class="rc-footer-item-description"
+            class="rc-segmented-item-description"
           >
             中台建站平台
           </span>
@@ -510,47 +510,47 @@ exports[`rc-footer render Footer with maxColumnsPerRow 1`] = `
     </section>
   </section>
   <section
-    class="rc-footer-bottom"
+    class="rc-segmented-bottom"
   >
     <div
-      class="rc-footer-bottom-container"
+      class="rc-segmented-bottom-container"
     >
       Made with ❤️ by AFX
     </div>
   </section>
-</footer>
+</segmented>
 `;
 
-exports[`rc-footer render empty Footer 1`] = `
-<footer
-  class="rc-footer rc-footer-dark"
+exports[`rc-segmented render empty segmented 1`] = `
+<segmented
+  class="rc-segmented rc-segmented-dark"
 >
   <section
-    class="rc-footer-container"
+    class="rc-segmented-container"
   />
-</footer>
+</segmented>
 `;
 
-exports[`rc-footer render light theme Footer 1`] = `
-<footer
-  class="rc-footer rc-footer-light"
+exports[`rc-segmented render light theme segmented 1`] = `
+<segmented
+  class="rc-segmented rc-segmented-light"
   style="color: red;"
 >
   <section
-    class="rc-footer-container"
+    class="rc-segmented-container"
   >
     <section
-      class="rc-footer-columns"
+      class="rc-segmented-columns"
     >
       <div
-        class="rc-footer-column"
+        class="rc-segmented-column"
       >
         <h2>
           title
         </h2>
       </div>
       <div
-        class="rc-footer-column"
+        class="rc-segmented-column"
       >
         <h2>
           title
@@ -558,5 +558,5 @@ exports[`rc-footer render light theme Footer 1`] = `
       </div>
     </section>
   </section>
-</footer>
+</segmented>
 `;

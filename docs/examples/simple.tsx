@@ -1,11 +1,11 @@
 import '../../assets/index.less';
 import React from 'react';
-import Footer from 'rc-footer';
+import segmented from 'rc-segmented';
 
 export default function App() {
   return (
     <div>
-      <Footer
+      <segmented
         columns={[
           {
             title: '相关资源',

@@ -1,12 +1,13 @@
 {
-  "name": "rc-footer",
-  "version": "0.6.6",
-  "description": "Pretty Footer react component used in used in ant.design",
+  "name": "rc-segmented",
+  "version": "0.0.1",
+  "description": "React segmented controls used in ant.design",
   "keywords": [
     "react",
     "react-component",
-    "react-footer",
-    "footer",
+    "react-segmented",
+    "react-segmented-controls",
+    "segmented controls",
     "antd",
     "ant-design"
   ],
@@ -19,13 +20,13 @@
     "lib",
     "dist"
   ],
-  "homepage": "https://react-component.github.io/footer",
+  "homepage": "https://react-component.github.io/segmented",
   "repository": {
     "type": "git",
-    "url": "git@github.com:react-component/footer.git"
+    "url": "git@github.com:react-component/segmented.git"
   },
   "bugs": {
-    "url": "http://github.com/react-component/footer/issues"
+    "url": "http://github.com/react-component/segmented/issues"
   },
   "license": "MIT",
   "scripts": {

@@ -1,12 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
-import Column, { FooterColumn } from './column';
+import Column, { segmentedColumn } from './column';
 
-export interface FooterProps {
+export interface segmentedProps {
   prefixCls?: string;
   bottom?: React.ReactNode;
   maxColumnsPerRow?: number;
-  columns?: FooterColumn[];
+  columns?: segmentedColumn[];
   theme?: 'dark' | 'light';
   className?: string;
   style?: React.CSSProperties;
@@ -14,8 +14,8 @@ export interface FooterProps {
   columnLayout?: 'space-around' | 'space-between';
 }
 
-const Footer: React.FC<FooterProps> = ({
-  prefixCls = 'rc-footer',
+const segmented: React.FC<segmentedProps> = ({
+  prefixCls = 'rc-segmented',
   className,
   style,
   bottom,
@@ -26,15 +26,15 @@ const Footer: React.FC<FooterProps> = ({
   theme = 'dark',
   ...restProps
 }) => {
-  const footerClassName = classNames(`${prefixCls}`, className, {
+  const segmentedClassName = classNames(`${prefixCls}`, className, {
     [`${prefixCls}-${theme}`]: !!theme,
   });
   const shouldWrap =
     typeof maxColumnsPerRow === 'number' && maxColumnsPerRow > 0;
   return (
-    <footer
+    <segmented
       {...restProps}
-      className={footerClassName}
+      className={segmentedClassName}
       style={{
         ...style,
         backgroundColor,
@@ -62,8 +62,9 @@ const Footer: React.FC<FooterProps> = ({
               ) => {
                 const styleObject = { ...columnStyle } as React.CSSProperties;
                 if (shouldWrap) {
-                  styleObject.flex = `0 0 ${100 / (maxColumnsPerRow! + 1) +
-                    0.1}%`;
+                  styleObject.flex = `0 0 ${
+                    100 / (maxColumnsPerRow! + 1) + 0.1
+                  }%`;
                 }
                 return (
                   <Column
@@ -86,8 +87,8 @@ const Footer: React.FC<FooterProps> = ({
           <div className={`${prefixCls}-bottom-container`}>{bottom}</div>
         </section>
       )}
-    </footer>
+    </segmented>
   );
 };
 
-export default Footer;
+export default segmented;

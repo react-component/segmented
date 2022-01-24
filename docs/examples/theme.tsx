@@ -1,12 +1,12 @@
 import '../../assets/index.less';
 import React, { useState } from 'react';
-import Footer from 'rc-footer';
+import segmented from 'rc-segmented';
 
 export default function App() {
   const [theme, setTheme] = useState('light');
   return (
     <div>
-      <Footer
+      <segmented
         theme={theme}
         columns={[
           {
