@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import CSSMotion from 'rc-motion';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import omit from 'rc-util/lib/omit';
+import { useMergedRefs } from './useCombinedRefs';
 
 type RawOption = string | number;
 
@@ -13,7 +14,9 @@ interface LabeledOption {
   value: RawOption;
 }
 
-type Options = (RawOption | LabeledOption)[];
+type Option = RawOption | LabeledOption;
+
+type Options = Option[];
 
 export interface SegmentedProps extends React.HTMLProps<HTMLDivElement> {
   options: Options;
@@ -51,129 +54,133 @@ const calcThumbStyle = (targetElement: HTMLElement) => ({
   width: targetElement.clientWidth,
 });
 
-const Segmented: React.FC<SegmentedProps> = (props) => {
-  const {
-    prefixCls = 'rc-segmented',
-    direction,
-    options,
-    disabled,
-    onClick,
-    prefixCls: customizePrefixCls,
-    className = '',
-    ...restProps
-  } = props;
+const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
+  (props, ref) => {
+    const {
+      prefixCls = 'rc-segmented',
+      direction,
+      options,
+      disabled,
+      onClick,
+      prefixCls: customizePrefixCls,
+      className = '',
+      ...restProps
+    } = props;
 
-  const containerRef = React.useRef<HTMLDivElement>(null);
-  const targetThumbStyle = React.useRef<React.CSSProperties | null>(null);
+    const containerRef = React.useRef<HTMLDivElement>(null);
+    const divRef = useMergedRefs<HTMLDivElement | undefined>(containerRef, ref);
 
-  const [selected, setSelected] = useMergedState(
-    props.defaultValue || getDefaultValue(options),
-  );
-  const [visualSelected, setVisualSelected] = React.useState<
-    RawOption | undefined
-  >(selected);
+    const targetThumbStyle = React.useRef<React.CSSProperties | null>(null);
 
-  const [thumbShow, setThumbShow] = React.useState(false);
-
-  const segmentedOptions = normalizeOptions(options);
-
-  const classString = classNames(
-    prefixCls,
-    {
-      [`${prefixCls}-rtl`]: direction === 'rtl',
-      [`${prefixCls}-disabled`]: disabled,
-    },
-    className,
-  );
-
-  const handleItemClick = (
-    segmentedOption: LabeledOption,
-    event: React.MouseEvent<HTMLDivElement>,
-  ) => {
-    if (disabled || segmentedOption.disabled) {
-      return;
-    }
-
-    const targetElement = (event.target as HTMLElement).closest(
-      `.${prefixCls}-item`,
+    const [selected, setSelected] = useMergedState(
+      props.defaultValue || getDefaultValue(options),
     );
-    if (targetElement) {
-      targetThumbStyle.current = calcThumbStyle(targetElement as HTMLElement);
-      setThumbShow(true);
-    }
+    const [visualSelected, setVisualSelected] = React.useState<
+      RawOption | undefined
+    >(selected);
 
-    setSelected(segmentedOption.value);
+    const [thumbShow, setThumbShow] = React.useState(false);
 
-    onClick?.(event);
-  };
+    const segmentedOptions = normalizeOptions(options);
 
-  // --- motion event handlers for thumb move
-  const handleThumbEnterStart = () => {
-    const currentSelectedElement = containerRef.current?.querySelector(
-      `.${prefixCls}-item-selected`,
+    const classString = classNames(
+      prefixCls,
+      {
+        [`${prefixCls}-rtl`]: direction === 'rtl',
+        [`${prefixCls}-disabled`]: disabled,
+      },
+      className,
     );
-    if (currentSelectedElement) {
-      setVisualSelected(undefined);
 
-      const style = calcThumbStyle(currentSelectedElement as HTMLElement);
-      return style;
-    }
-  };
+    const handleItemClick = (
+      segmentedOption: LabeledOption,
+      event: React.MouseEvent<HTMLDivElement>,
+    ) => {
+      if (disabled || segmentedOption.disabled) {
+        return;
+      }
 
-  const handleThumbEnterActive = () => {
-    if (targetThumbStyle.current) {
-      return targetThumbStyle.current;
-    }
-  };
+      const targetElement = (event.target as HTMLElement).closest(
+        `.${prefixCls}-item`,
+      );
+      if (targetElement) {
+        targetThumbStyle.current = calcThumbStyle(targetElement as HTMLElement);
+        setThumbShow(true);
+      }
 
-  const handleThumbEnterEnd = React.useCallback(() => {
-    setThumbShow(false);
-    setVisualSelected(selected);
+      setSelected(segmentedOption.value);
 
-    if (targetThumbStyle.current) {
-      targetThumbStyle.current = null;
-    }
-  }, [selected]);
+      onClick?.(event);
+    };
 
-  const divProps = omit(restProps, ['children']);
+    // --- motion event handlers for thumb move
+    const handleThumbEnterStart = () => {
+      const currentSelectedElement = containerRef.current?.querySelector(
+        `.${prefixCls}-item-selected`,
+      );
+      if (currentSelectedElement) {
+        setVisualSelected(undefined);
 
-  return (
-    <div {...divProps} className={classString} ref={containerRef}>
-      <CSSMotion
-        visible={thumbShow}
-        motionName={`${prefixCls}-thumb-motion`}
-        motionDeadline={300}
-        onEnterStart={handleThumbEnterStart}
-        onEnterActive={handleThumbEnterActive}
-        onEnterEnd={handleThumbEnterEnd}
-      >
-        {({ className: motionClassName, style: motionStyle }) => {
-          return (
-            <div
-              className={classNames(`${prefixCls}-thumb`, motionClassName)}
-              style={motionStyle}
-            />
-          );
-        }}
-      </CSSMotion>
-      {segmentedOptions.map((segmentedOption) => (
-        <div
-          key={segmentedOption.value}
-          className={classNames(`${prefixCls}-item`, {
-            [`${prefixCls}-item-selected`]:
-              segmentedOption.value === visualSelected,
-            [`${prefixCls}-item-disabled`]: !!segmentedOption.disabled,
-          })}
-          onClick={(e) => handleItemClick(segmentedOption, e)}
+        const style = calcThumbStyle(currentSelectedElement as HTMLElement);
+        return style;
+      }
+    };
+
+    const handleThumbEnterActive = () => {
+      if (targetThumbStyle.current) {
+        return targetThumbStyle.current;
+      }
+    };
+
+    const handleThumbEnterEnd = React.useCallback(() => {
+      setThumbShow(false);
+      setVisualSelected(selected);
+
+      if (targetThumbStyle.current) {
+        targetThumbStyle.current = null;
+      }
+    }, [selected]);
+
+    const divProps = omit(restProps, ['children']);
+
+    return (
+      <div {...divProps} className={classString} ref={divRef}>
+        <CSSMotion
+          visible={thumbShow}
+          motionName={`${prefixCls}-thumb-motion`}
+          motionDeadline={300}
+          onEnterStart={handleThumbEnterStart}
+          onEnterActive={handleThumbEnterActive}
+          onEnterEnd={handleThumbEnterEnd}
         >
-          <span className={`${prefixCls}-item-label`}>
-            {segmentedOption.label}
-          </span>
-        </div>
-      ))}
-    </div>
-  );
-};
+          {({ className: motionClassName, style: motionStyle }) => {
+            return (
+              <div
+                className={classNames(`${prefixCls}-thumb`, motionClassName)}
+                style={motionStyle}
+              />
+            );
+          }}
+        </CSSMotion>
+        {segmentedOptions.map((segmentedOption) => (
+          <div
+            key={segmentedOption.value}
+            className={classNames(`${prefixCls}-item`, {
+              [`${prefixCls}-item-selected`]:
+                segmentedOption.value === visualSelected,
+              [`${prefixCls}-item-disabled`]: !!segmentedOption.disabled,
+            })}
+            onClick={(e) => handleItemClick(segmentedOption, e)}
+          >
+            <span className={`${prefixCls}-item-label`}>
+              {segmentedOption.label}
+            </span>
+          </div>
+        ))}
+      </div>
+    );
+  },
+);
 
 Segmented.defaultProps = {};
 
