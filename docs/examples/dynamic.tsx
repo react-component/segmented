@@ -6,7 +6,7 @@ const defaultOptions1 = ['iOS', 'Android', 'Web'];
 const defaultOptions2 = [
   { title: 'iOS', value: 'iOS' },
   { title: 'Android', value: 'Android' },
-  { title: 'Web', value: 'Web' },
+  'Web',
 ];
 
 export default () => {
@@ -28,14 +28,18 @@ export default () => {
   return (
     <>
       <div>
-        <Segmented options={options1} />
-        <button type="primary" onClick={handleLoadOptions1}>
-          load option1
-        </button>
-        <Segmented options={options2} defaultValue="Android" />
-        <button type="primary" onClick={handleLoadOptions2}>
-          load option2
-        </button>
+        <div className="wrapper">
+          <Segmented options={options1} />
+          <div>
+            <button onClick={handleLoadOptions1}>load option1</button>
+          </div>
+        </div>
+        <div className="wrapper">
+          <Segmented options={options2} defaultValue="Android" />
+          <div>
+            <button onClick={handleLoadOptions2}>load option2</button>
+          </div>
+        </div>
       </div>
     </>
   );

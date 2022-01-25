@@ -16,7 +16,7 @@
 .@{segmented-prefix-cls} {
   position: relative;
 
-  display: inline-flex;
+  display: inline-block;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -28,10 +28,12 @@
 
   &-item {
     position: relative;
-    box-sizing: border-box;
+    // box-sizing: border-box;
+    display: inline-block;
     height: 28px;
     padding: 4px 10px;
     color: fade(#000, 85%);
+    line-height: 28px;
 
     cursor: pointer;
 
@@ -69,6 +71,7 @@
     left: 0px;
     width: 0;
     height: 28px;
+    padding: 4px 0;
 
     // transition effect when `enter-active`
     &-motion-enter-active {
@@ -77,4 +80,8 @@
       will-change: transform, width;
     }
   }
+}
+
+.wrapper {
+  margin-bottom: 10px;
 }
