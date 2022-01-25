@@ -18,7 +18,7 @@ export default function App() {
         <Segmented
           options={[
             'iOS',
-            { title: 'Android', value: 'Android', disabled: true },
+            { label: 'Android', value: 'Android', disabled: true },
             'Web',
           ]}
         />

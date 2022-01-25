@@ -9,7 +9,7 @@ type RawOption = string | number;
 interface LabeledOption {
   className?: string;
   disabled?: boolean;
-  title: string;
+  label: string;
   value: RawOption;
 }
 
@@ -40,7 +40,7 @@ function normalizeOptions(options: Options): LabeledOption[] {
       return option;
     }
     return {
-      title: String(option),
+      label: String(option),
       value: option,
     };
   });
@@ -167,7 +167,7 @@ const Segmented: React.FC<SegmentedProps> = (props) => {
           onClick={(e) => handleItemClick(segmentedOption, e)}
         >
           <span className={`${prefixCls}-item-label`}>
-            {segmentedOption.title}
+            {segmentedOption.label}
           </span>
         </div>
       ))}
