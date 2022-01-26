@@ -2,9 +2,8 @@ import * as React from 'react';
 import classNames from 'classnames';
 import CSSMotion from 'rc-motion';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
+import { composeRef } from 'rc-util/lib/ref';
 import omit from 'rc-util/lib/omit';
-
-import { useMergedRefs } from './useMergedRefs';
 
 type RawOption = string | number;
 
@@ -69,7 +68,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     } = props;
 
     const containerRef = React.useRef<HTMLDivElement>(null);
-    const divRef = useMergedRefs<HTMLDivElement | undefined>(containerRef, ref);
+    const mergedRef = composeRef<HTMLDivElement>(containerRef, ref);
 
     const thumbMoveStyles = React.useRef<
       Record<'from' | 'to', React.CSSProperties | null>
@@ -98,20 +97,25 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       className,
     );
 
-    const handleItemClick = (
-      segmentedOption: LabeledOption,
-      event: React.MouseEvent<HTMLDivElement>,
-    ) => {
-      if (disabled || segmentedOption.disabled) {
-        return;
-      }
+    const handleItemClick = React.useCallback(
+      (
+        segmentedOption: LabeledOption,
+        event: React.MouseEvent<HTMLDivElement>,
+      ) => {
+        if (disabled || segmentedOption.disabled) {
+          return;
+        }
 
-      calcThumbMoveStyle(event);
+        if (segmentedOption.value !== selected) {
+          calcThumbMoveStyle(event);
+        }
 
-      setSelected(segmentedOption.value);
+        setSelected(segmentedOption.value);
 
-      onClick?.(event);
-    };
+        onClick?.(event);
+      },
+      [selected],
+    );
 
     const calcThumbMoveStyle = (event: React.MouseEvent<HTMLDivElement>) => {
       const toElement = (event.target as HTMLElement).closest(
@@ -163,7 +167,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     const divProps = omit(restProps, ['children']);
 
     return (
-      <div {...divProps} className={classString} ref={divRef}>
+      <div {...divProps} className={classString} ref={mergedRef}>
         <CSSMotion
           visible={thumbShow}
           motionName={`${prefixCls}-thumb-motion`}
