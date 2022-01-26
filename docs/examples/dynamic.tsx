@@ -4,8 +4,8 @@ import Segmented from 'rc-segmented';
 
 const defaultOptions1 = ['iOS', 'Android', 'Web'];
 const defaultOptions2 = [
-  { title: 'iOS', value: 'iOS' },
-  { title: 'Android', value: 'Android' },
+  { label: 'iOS', value: 'iOS' },
+  { label: 'Android', value: 'Android' },
   'Web',
 ];
 
@@ -19,7 +19,7 @@ export default () => {
 
   const handleLoadOptions2 = () => {
     setOptions2([
-      { title: 'Electron', value: 'Electron' },
+      { label: 'Electron', value: 'Electron' },
       'Mini App',
       ...defaultOptions2.reverse(),
     ]);

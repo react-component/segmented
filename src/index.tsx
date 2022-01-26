@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import CSSMotion from 'rc-motion';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import omit from 'rc-util/lib/omit';
+
 import { useMergedRefs } from './useMergedRefs';
 
 type RawOption = string | number;
@@ -49,7 +50,7 @@ function normalizeOptions(options: Options): LabeledOption[] {
   });
 }
 
-const calcThumbStyle = (targetElement: HTMLElement) => ({
+const calcThumbStyle = (targetElement: HTMLElement): React.CSSProperties => ({
   transform: `translateX(${targetElement.offsetLeft}px)`,
   width: targetElement.clientWidth,
 });
@@ -70,7 +71,12 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     const containerRef = React.useRef<HTMLDivElement>(null);
     const divRef = useMergedRefs<HTMLDivElement | undefined>(containerRef, ref);
 
-    const targetThumbStyle = React.useRef<React.CSSProperties | null>(null);
+    const thumbMoveStyles = React.useRef<
+      Record<'from' | 'to', React.CSSProperties | null>
+    >({
+      from: null,
+      to: null,
+    });
 
     const [selected, setSelected] = useMergedState(
       props.defaultValue || getDefaultValue(options),
@@ -100,35 +106,45 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
         return;
       }
 
-      const targetElement = (event.target as HTMLElement).closest(
-        `.${prefixCls}-item`,
-      );
-      if (targetElement) {
-        targetThumbStyle.current = calcThumbStyle(targetElement as HTMLElement);
-        setThumbShow(true);
-      }
+      calcThumbMoveStyle(event);
 
       setSelected(segmentedOption.value);
 
       onClick?.(event);
     };
 
-    // --- motion event handlers for thumb move
-    const handleThumbEnterStart = () => {
-      const currentSelectedElement = containerRef.current?.querySelector(
+    const calcThumbMoveStyle = (event: React.MouseEvent<HTMLDivElement>) => {
+      const toElement = (event.target as HTMLElement).closest(
+        `.${prefixCls}-item`,
+      );
+
+      const fromElement = containerRef.current?.querySelector(
         `.${prefixCls}-item-selected`,
       );
-      if (currentSelectedElement) {
-        setVisualSelected(undefined);
 
-        const style = calcThumbStyle(currentSelectedElement as HTMLElement);
-        return style;
+      if (fromElement && toElement && thumbMoveStyles.current) {
+        thumbMoveStyles.current.from = calcThumbStyle(
+          fromElement as HTMLElement,
+        );
+        thumbMoveStyles.current.to = calcThumbStyle(toElement as HTMLElement);
+
+        setThumbShow(true);
+      }
+    };
+
+    // --- motion event handlers for thumb move
+    const handleThumbEnterStart = () => {
+      const fromStyle = thumbMoveStyles.current.from;
+      if (fromStyle) {
+        setVisualSelected(undefined);
+        return fromStyle;
       }
     };
 
     const handleThumbEnterActive = () => {
-      if (targetThumbStyle.current) {
-        return targetThumbStyle.current;
+      const toStyle = thumbMoveStyles.current.to;
+      if (toStyle) {
+        return toStyle;
       }
     };
 
@@ -136,8 +152,11 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       setThumbShow(false);
       setVisualSelected(selected);
 
-      if (targetThumbStyle.current) {
-        targetThumbStyle.current = null;
+      if (thumbMoveStyles.current) {
+        thumbMoveStyles.current = {
+          from: null,
+          to: null,
+        };
       }
     }, [selected]);
 
