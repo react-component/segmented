@@ -16,10 +16,11 @@ export function useMergedRefs<T>(...refs: ReactRef<T>[]): React.RefCallback<T> {
         if (!ref) return;
 
         // Ref contains three types - a function or an object or a string
-        if (typeof ref === 'string') {
-          // cannot handle
-        } else if (isRefCallback(ref)) {
+        // React convert string typed ref to ref callback internally
+        if (isRefCallback(ref)) {
           ref(element);
+          // } else if (typeof ref === 'string') {
+          //   noop
         } else {
           (ref as React.MutableRefObject<T>).current = element;
         }

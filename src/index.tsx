@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import CSSMotion from 'rc-motion';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import omit from 'rc-util/lib/omit';
-import { useMergedRefs } from './useCombinedRefs';
+import { useMergedRefs } from './useMergedRefs';
 
 type RawOption = string | number;
 
