@@ -18,9 +18,15 @@ type Option = RawOption | LabeledOption;
 
 type Options = Option[];
 
+type ExtendedHTMLInputElement = Omit<HTMLInputElement, 'value'> & {
+  value: RawOption;
+};
+
 export interface SegmentedProps extends React.HTMLProps<HTMLDivElement> {
   options: Options;
   defaultValue?: RawOption;
+  value?: RawOption;
+  onChange?: (e: React.ChangeEvent<ExtendedHTMLInputElement>) => void;
   disabled?: boolean;
   prefixCls?: string;
   direction?: 'ltr' | 'rtl';
@@ -61,7 +67,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       direction,
       options,
       disabled,
-      onClick,
+      onChange,
       prefixCls: customizePrefixCls,
       className = '',
       ...restProps
@@ -97,30 +103,8 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       className,
     );
 
-    const handleItemClick = React.useCallback(
-      (
-        segmentedOption: LabeledOption,
-        event: React.MouseEvent<HTMLDivElement>,
-      ) => {
-        if (disabled || segmentedOption.disabled) {
-          return;
-        }
-
-        if (segmentedOption.value !== selected) {
-          calcThumbMoveStyle(event);
-        }
-
-        setSelected(segmentedOption.value);
-
-        onClick?.(event);
-      },
-      [selected],
-    );
-
-    const calcThumbMoveStyle = (event: React.MouseEvent<HTMLDivElement>) => {
-      const toElement = (event.target as HTMLElement).closest(
-        `.${prefixCls}-item`,
-      );
+    const calcThumbMoveStyle = (event: React.ChangeEvent<HTMLInputElement>) => {
+      const toElement = event.target.closest(`.${prefixCls}-item`);
 
       const fromElement = containerRef.current?.querySelector(
         `.${prefixCls}-item-selected`,
@@ -135,6 +119,37 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
         setThumbShow(true);
       }
     };
+
+    const handleChange = React.useCallback(
+      (
+        event: React.ChangeEvent<HTMLInputElement>,
+        segmentedOption: LabeledOption,
+      ) => {
+        if (disabled || segmentedOption.disabled) {
+          return;
+        }
+
+        if (segmentedOption.value !== selected) {
+          calcThumbMoveStyle(event);
+        }
+
+        setSelected(segmentedOption.value);
+        if (onChange) {
+          const mutationTarget = Object.create(event.target, {
+            value: {
+              value: segmentedOption.value,
+            },
+          });
+          const mutatedEvent = Object.create(event, {
+            target: {
+              value: mutationTarget,
+            },
+          });
+          onChange(mutatedEvent);
+        }
+      },
+      [selected, disabled],
+    );
 
     // --- motion event handlers for thumb move
     const handleThumbEnterStart = () => {
@@ -179,26 +194,31 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
           {({ className: motionClassName, style: motionStyle }) => {
             return (
               <div
-                className={classNames(`${prefixCls}-thumb`, motionClassName)}
                 style={motionStyle}
+                className={classNames(`${prefixCls}-thumb`, motionClassName)}
               />
             );
           }}
         </CSSMotion>
         {segmentedOptions.map((segmentedOption) => (
-          <div
+          <label
             key={segmentedOption.value}
             className={classNames(`${prefixCls}-item`, {
               [`${prefixCls}-item-selected`]:
                 segmentedOption.value === visualSelected,
               [`${prefixCls}-item-disabled`]: !!segmentedOption.disabled,
             })}
-            onClick={(e) => handleItemClick(segmentedOption, e)}
           >
+            <input
+              className={`${prefixCls}-item-input`}
+              type="radio"
+              checked={segmentedOption.value === selected}
+              onChange={(e) => handleChange(e, segmentedOption)}
+            />
             <span className={`${prefixCls}-item-label`}>
               {segmentedOption.label}
             </span>
-          </div>
+          </label>
         ))}
       </div>
     );

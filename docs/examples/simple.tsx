@@ -6,10 +6,16 @@ export default function App() {
   return (
     <div>
       <div className="wrapper">
-        <Segmented options={['iOS', 'Android', 'Web']} />
+        <Segmented
+          options={['iOS', 'Android', 'Web']}
+          onChange={(e) => console.log(e.target.value, typeof e.target.value)}
+        />
       </div>
       <div className="wrapper">
-        <Segmented options={['13333333333', '057110000', '02110086']} />
+        <Segmented
+          options={[13333333333, 157110000, 12110086]}
+          onChange={(e) => console.log(e.target.value, typeof e.target.value)}
+        />
       </div>
       <div className="wrapper">
         <Segmented options={['iOS', 'Android', 'Web']} disabled />
