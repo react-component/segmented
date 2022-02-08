@@ -1,4 +1,4 @@
-import '../../assets/index.less';
+import '../../assets/style.less';
 import * as React from 'react';
 import Segmented from 'rc-segmented';
 

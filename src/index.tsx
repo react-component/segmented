@@ -134,6 +134,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
         }
 
         setSelected(segmentedOption.value);
+
         if (onChange) {
           const mutationTarget = Object.create(event.target, {
             value: {
@@ -206,12 +207,14 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
             className={classNames(`${prefixCls}-item`, {
               [`${prefixCls}-item-selected`]:
                 segmentedOption.value === visualSelected,
-              [`${prefixCls}-item-disabled`]: !!segmentedOption.disabled,
+              [`${prefixCls}-item-disabled`]:
+                !!disabled || !!segmentedOption.disabled,
             })}
           >
             <input
               className={`${prefixCls}-item-input`}
               type="radio"
+              disabled={!!disabled || !!segmentedOption.disabled}
               checked={segmentedOption.value === selected}
               onChange={(e) => handleChange(e, segmentedOption)}
             />
