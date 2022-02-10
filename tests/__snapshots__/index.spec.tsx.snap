@@ -6,6 +6,103 @@ exports[`rc-segmented render empty segmented 1`] = `
 />
 `;
 
+exports[`rc-segmented render segmented with CSSMotion 1`] = `
+<div
+  class="rc-segmented"
+>
+  <label
+    class="rc-segmented-item rc-segmented-item-selected"
+  >
+    <input
+      checked=""
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    >
+      iOS
+    </span>
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    >
+      Android
+    </span>
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    >
+      Web
+    </span>
+  </label>
+</div>
+`;
+
+exports[`rc-segmented render segmented with CSSMotion 2`] = `
+<div
+  class="rc-segmented"
+>
+  <div
+    class="rc-segmented-thumb"
+  />
+  <label
+    class="rc-segmented-item rc-segmented-item-selected"
+  >
+    <input
+      checked=""
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    >
+      iOS
+    </span>
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    >
+      Android
+    </span>
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    >
+      Web
+    </span>
+  </label>
+</div>
+`;
+
 exports[`rc-segmented render segmented with options 1`] = `
 <div
   class="rc-segmented"

@@ -1,9 +1,11 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { act } from 'react-dom/test-utils';
+import { mount } from './wrapper';
 
 import Segmented from '../src';
 
 jest.useFakeTimers();
+// jest.useRealTimers();
 
 describe('rc-segmented', () => {
   it('render empty segmented', () => {
@@ -211,5 +213,59 @@ describe('rc-segmented', () => {
     );
 
     expect(wrapper.find(Segmented).getElement().ref).toBe(ref);
+  });
+
+  it('render segmented with CSSMotion', () => {
+    const handleValueChange = jest.fn();
+    const wrapper = mount(
+      <Segmented
+        options={['iOS', 'Android', 'Web']}
+        onChange={(e) => handleValueChange(e.target.value)}
+      />,
+    );
+    expect(wrapper.render()).toMatchSnapshot();
+
+    expect(
+      wrapper
+        .find('.rc-segmented-item-input')
+        .map((el) => (el.getDOMNode() as HTMLInputElement).checked),
+    ).toEqual([true, false, false]);
+    expect(
+      wrapper
+        .find('.rc-segmented-item')
+        .at(0)
+        .hasClass('rc-segmented-item-selected'),
+    ).toBeTruthy();
+
+    wrapper.find('.rc-segmented-item-input').at(2).simulate('change');
+    expect(handleValueChange).toBeCalledWith('Web');
+
+    expect(
+      wrapper
+        .find('.rc-segmented-item-input')
+        .map((el) => (el.getDOMNode() as HTMLInputElement).checked),
+    ).toEqual([false, false, true]);
+
+    // Motion start
+    wrapper.update();
+
+    // Motion active
+    act(() => {
+      jest.runAllTimers();
+      wrapper.update();
+    });
+
+    expect(wrapper.find('.rc-segmented-thumb').length).toBe(1);
+    expect(wrapper.render()).toMatchSnapshot();
+
+    // Motion end
+    wrapper.triggerMotionEvent();
+
+    act(() => {
+      jest.runAllTimers();
+      wrapper.update();
+    });
+
+    expect(wrapper.find('.rc-segmented-thumb').length).toBe(0);
   });
 });

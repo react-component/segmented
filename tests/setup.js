@@ -27,3 +27,25 @@ Object.assign(Enzyme.ReactWrapper.prototype, {
     return this;
   },
 });
+
+// https://github.com/jsdom/jsdom/issues/135#issuecomment-68191941
+Object.defineProperties(window.HTMLElement.prototype, {
+  offsetLeft: {
+    get() {
+      let offsetLeft = 0;
+      for (const child of Array.from(this.parentNode.children)) {
+        offsetLeft += child.clientWidth;
+        if (child === this) {
+          break;
+        }
+      }
+      return offsetLeft;
+    },
+  },
+  clientWidth: {
+    get() {
+      // text length + vertical padding
+      return this.textContent.length * 14 + 20;
+    },
+  },
+});
