@@ -1,8 +1,9 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
+import { mount as emount } from 'enzyme';
 import { mount } from './wrapper';
 
-import Segmented from '../src';
+import Segmented, { SegmentedValue } from '../src';
 
 jest.mock('rc-motion/lib/util/motion', () => {
   return {
@@ -233,6 +234,42 @@ describe('rc-segmented', () => {
     );
 
     expect(wrapper.find(Segmented).getElement().ref).toBe(ref);
+  });
+
+  it('render segmented with controlled mode', () => {
+    class Demo extends React.Component<{}, { value: SegmentedValue }> {
+      state = {
+        value: 'Web3',
+      };
+
+      render() {
+        return (
+          <Segmented
+            options={['iOS', 'Android', 'Web3']}
+            value={this.state.value}
+            onChange={(e) =>
+              this.setState({
+                value: e.target.value,
+              })
+            }
+          />
+        );
+      }
+    }
+    const wrapper = mount<Demo>(<Demo />);
+    wrapper
+      .find('Segmented')
+      .find('.rc-segmented-item-input')
+      .at(0)
+      .simulate('change');
+    expect(wrapper.state().value).toBe('iOS');
+
+    wrapper
+      .find('Segmented')
+      .find('.rc-segmented-item-input')
+      .at(1)
+      .simulate('change');
+    expect(wrapper.state().value).toBe('Android');
   });
 
   it('render segmented with CSSMotion', () => {

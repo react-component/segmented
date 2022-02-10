@@ -5,7 +5,9 @@ import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import { composeRef } from 'rc-util/lib/ref';
 import omit from 'rc-util/lib/omit';
 
-type RawOption = string | number;
+export type SegmentedValue = string | number;
+
+type RawOption = SegmentedValue;
 
 interface LabeledOption {
   className?: string;
@@ -19,13 +21,13 @@ type Option = RawOption | LabeledOption;
 type Options = Option[];
 
 type ExtendedHTMLInputElement = Omit<HTMLInputElement, 'value'> & {
-  value: RawOption;
+  value: SegmentedValue;
 };
 
 export interface SegmentedProps extends React.HTMLProps<HTMLDivElement> {
   options: Options;
-  defaultValue?: RawOption;
-  value?: RawOption;
+  defaultValue?: SegmentedValue;
+  value?: SegmentedValue;
   onChange?: (e: React.ChangeEvent<ExtendedHTMLInputElement>) => void;
   disabled?: boolean;
   prefixCls?: string;
@@ -230,6 +232,8 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     );
   },
 );
+
+Segmented.displayName = 'Segmented';
 
 Segmented.defaultProps = {};
 

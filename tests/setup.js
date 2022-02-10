@@ -7,9 +7,6 @@ window.requestAnimationFrame = (func) => {
   window.setTimeout(func, 16);
 };
 
-// window.TransitionEvent = window.Event;
-// window.AnimationEvent = window.Event;
-
 Enzyme.configure({ adapter: new Adapter() });
 
 Object.assign(Enzyme.ReactWrapper.prototype, {
