@@ -4,13 +4,33 @@ import { mount } from './wrapper';
 
 import Segmented from '../src';
 
+jest.mock('rc-motion/lib/util/motion', () => {
+  return {
+    ...jest.requireActual('rc-motion/lib/util/motion'),
+    supportTransition: true,
+  };
+});
+
 jest.useFakeTimers();
-// jest.useRealTimers();
 
 describe('rc-segmented', () => {
   it('render empty segmented', () => {
     const wrapper = mount(<Segmented options={[]} />);
     expect(wrapper.render()).toMatchSnapshot();
+  });
+
+  it('render segmented ok', () => {
+    const wrapper = mount(
+      <Segmented
+        options={[{ label: 'iOS', value: 'iOS' }, 'Android', 'Web']}
+      />,
+    );
+
+    expect(
+      wrapper
+        .find('.rc-segmented-item-input')
+        .map((el) => (el.getDOMNode() as HTMLInputElement).checked),
+    ).toEqual([true, false, false]);
   });
 
   it('render segmented with defaultValue', () => {
@@ -219,7 +239,7 @@ describe('rc-segmented', () => {
     const handleValueChange = jest.fn();
     const wrapper = mount(
       <Segmented
-        options={['iOS', 'Android', 'Web']}
+        options={['iOS', 'Android', 'Web3']}
         onChange={(e) => handleValueChange(e.target.value)}
       />,
     );
@@ -238,7 +258,7 @@ describe('rc-segmented', () => {
     ).toBeTruthy();
 
     wrapper.find('.rc-segmented-item-input').at(2).simulate('change');
-    expect(handleValueChange).toBeCalledWith('Web');
+    expect(handleValueChange).toBeCalledWith('Web3');
 
     expect(
       wrapper
@@ -246,26 +266,55 @@ describe('rc-segmented', () => {
         .map((el) => (el.getDOMNode() as HTMLInputElement).checked),
     ).toEqual([false, false, true]);
 
-    // Motion start
-    wrapper.update();
+    const thumb = wrapper.find('.rc-segmented-thumb').at(0);
+    expect(thumb.hasClass('rc-segmented-thumb-motion'));
 
-    // Motion active
-    act(() => {
-      jest.runAllTimers();
-      wrapper.update();
-    });
-
-    expect(wrapper.find('.rc-segmented-thumb').length).toBe(1);
-    expect(wrapper.render()).toMatchSnapshot();
+    // thumb appeared at `iOS`
+    const thumbDom = wrapper
+      .find('.rc-segmented-thumb')
+      .at(0)
+      .getDOMNode() as HTMLDivElement;
+    expect(thumbDom.style.transform).toBe('translateX(0px)');
+    expect(thumbDom.style.width).toBe('62px');
 
     // Motion end
     wrapper.triggerMotionEvent();
-
     act(() => {
       jest.runAllTimers();
       wrapper.update();
     });
+    // thumb should disappear
+    expect(wrapper.find('.rc-segmented-thumb').length).toBe(0);
 
+    // change selection again
+    wrapper.find('.rc-segmented-item-input').at(1).simulate('change');
+    expect(handleValueChange).toBeCalledWith('Android');
+
+    expect(
+      wrapper
+        .find('.rc-segmented-item-input')
+        .map((el) => (el.getDOMNode() as HTMLInputElement).checked),
+    ).toEqual([false, true, false]);
+
+    // thumb should move
+    const thumb1 = wrapper.find('.rc-segmented-thumb').at(0);
+    expect(thumb1.hasClass('rc-segmented-thumb-motion'));
+
+    // thumb appeared at `Web3`
+    const thumbDom1 = wrapper
+      .find('.rc-segmented-thumb')
+      .at(0)
+      .getDOMNode() as HTMLDivElement;
+    expect(thumbDom1.style.transform).toBe('translateX(180px)');
+    expect(thumbDom1.style.width).toBe('76px');
+
+    // Motion end
+    wrapper.triggerMotionEvent();
+    act(() => {
+      jest.runAllTimers();
+      wrapper.update();
+    });
+    // thumb should disappear
     expect(wrapper.find('.rc-segmented-thumb').length).toBe(0);
   });
 });

@@ -7,6 +7,9 @@ window.requestAnimationFrame = (func) => {
   window.setTimeout(func, 16);
 };
 
+// window.TransitionEvent = window.Event;
+// window.AnimationEvent = window.Event;
+
 Enzyme.configure({ adapter: new Adapter() });
 
 Object.assign(Enzyme.ReactWrapper.prototype, {
@@ -20,7 +23,7 @@ Object.assign(Enzyme.ReactWrapper.prototype, {
 
     act(() => {
       const element = this.find('CSSMotion').getDOMNode();
-      element.dispatchEvent(motionEvent);
+      element?.dispatchEvent(motionEvent);
       this.update();
     });
 
@@ -33,8 +36,11 @@ Object.defineProperties(window.HTMLElement.prototype, {
   offsetLeft: {
     get() {
       let offsetLeft = 0;
-      for (const child of Array.from(this.parentNode.children)) {
-        offsetLeft += child.clientWidth;
+      const childList = Array.from(this.parentNode.children);
+      for (let i = 0; i < childList.length; i++) {
+        const child = childList[i];
+        const lastChild = childList[i - 1];
+        offsetLeft += lastChild?.clientWidth || 0;
         if (child === this) {
           break;
         }

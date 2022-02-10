@@ -86,6 +86,9 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     const [selected, setSelected] = useMergedState(
       props.defaultValue || getDefaultValue(options),
     );
+
+    // TODO: should we trigger `options` changes to update `selected`
+
     const [visualSelected, setVisualSelected] = React.useState<
       RawOption | undefined
     >(selected);
