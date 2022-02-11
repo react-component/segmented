@@ -12,7 +12,7 @@ type RawOption = SegmentedValue;
 interface LabeledOption {
   className?: string;
   disabled?: boolean;
-  label: string;
+  label: React.ReactNode;
   value: RawOption;
 }
 
