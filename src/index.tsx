@@ -40,11 +40,6 @@ function isLabledOption(
   return option === Object(option);
 }
 
-function getDefaultValue(options: Options) {
-  const option0 = options[0];
-  return isLabledOption(option0) ? option0.value : option0;
-}
-
 function normalizeOptions(options: Options): LabeledOption[] {
   return options.map((option) => {
     if (isLabledOption(option)) {
@@ -85,8 +80,12 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       to: null,
     });
 
+    const segmentedOptions = React.useMemo(() => {
+      return normalizeOptions(options);
+    }, [options]);
+
     const [selected, setSelected] = useMergedState(
-      props.defaultValue || getDefaultValue(options),
+      props.defaultValue || segmentedOptions[0]?.value,
     );
 
     // TODO: should we trigger `options` changes to update `selected`
@@ -96,8 +95,6 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     >(selected);
 
     const [thumbShow, setThumbShow] = React.useState(false);
-
-    const segmentedOptions = normalizeOptions(options);
 
     const classString = classNames(
       prefixCls,
