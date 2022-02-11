@@ -100,6 +100,48 @@ exports[`rc-segmented render segmented with options 1`] = `
 </div>
 `;
 
+exports[`rc-segmented render segmented with options null/undefined 1`] = `
+<div
+  class="rc-segmented rc-segmented-disabled"
+>
+  <label
+    class="rc-segmented-item rc-segmented-item-selected"
+  >
+    <input
+      checked=""
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    />
+  </label>
+  <label
+    class="rc-segmented-item rc-segmented-item-selected"
+  >
+    <input
+      checked=""
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    />
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    />
+  </label>
+</div>
+`;
+
 exports[`rc-segmented render segmented with options: 1 1`] = `
 <div
   class="rc-segmented"

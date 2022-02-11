@@ -35,19 +35,13 @@ export interface SegmentedProps extends React.HTMLProps<HTMLDivElement> {
   motionName?: string;
 }
 
-function isLabledOption(
-  option: RawOption | LabeledOption,
-): option is LabeledOption {
-  return option === Object(option);
-}
-
 function normalizeOptions(options: Options): LabeledOption[] {
   return options.map((option) => {
-    if (isLabledOption(option)) {
-      return option;
+    if (typeof option === 'object') {
+      return option || {};
     }
     return {
-      label: String(option),
+      label: option?.toString(),
       value: option,
     };
   });

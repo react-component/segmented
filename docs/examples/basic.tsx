@@ -13,6 +13,12 @@ export default function App() {
       </div>
       <div className="wrapper">
         <Segmented
+          options={['iOS', 'Android', null, undefined, '', 'Web']}
+          onChange={(e) => console.log(e.target.value, typeof e.target.value)}
+        />
+      </div>
+      <div className="wrapper">
+        <Segmented
           options={[13333333333, 157110000, 12110086]}
           onChange={(e) => console.log(e.target.value, typeof e.target.value)}
         />

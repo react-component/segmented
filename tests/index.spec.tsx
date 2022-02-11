@@ -199,6 +199,23 @@ describe('rc-segmented', () => {
     ).toEqual([true, false, false]);
   });
 
+  it('render segmented with options null/undefined', () => {
+    const handleValueChange = jest.fn();
+    const wrapper = mount(
+      <Segmented
+        options={[null, undefined, ''] as any}
+        disabled
+        onChange={(e) => handleValueChange(e.target.value)}
+      />,
+    );
+    expect(wrapper.render()).toMatchSnapshot();
+    expect(
+      wrapper
+        .find('.rc-segmented-item-label')
+        .map((n) => n.getDOMNode().textContent),
+    ).toEqual(['', '', '']);
+  });
+
   it('render segmented with className and other html attribues', () => {
     const wrapper = mount(
       <Segmented
