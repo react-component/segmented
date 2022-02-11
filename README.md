@@ -47,16 +47,16 @@ render(
 
 ## API
 
-| Property     | Type                                                          | Default      | Description                        |
-| ------------ | ------------------------------------------------------------- | ------------ | ---------------------------------- |
-| prefixCls    | string                                                        | rc-segmented |                                    |
-| className    | string                                                        | ''           | additional class name of segmented |
-| style        | React.CSSProperties                                           |              | style properties of segmented      |
-| options      | [string \| number \| SegmentedOption](#SegmentedOption) Array | []           | options for choices                |
-| value        | string \| number                                              |              | value of segmented                 |
-| defaultValue | string \| number                                              |              | defaultValue of segmented          |
-| onChange     | (e: any) => void                                              |              | defaultValue of segmented          |
-| disabled     | boolean                                                       | false        | disabled status of segmented       |
+| Property     | Type                                                           | Default      | Description                        |
+| ------------ | -------------------------------------------------------------- | ------------ | ---------------------------------- |
+| prefixCls    | string                                                         | rc-segmented |                                    |
+| className    | string                                                         | ''           | additional class name of segmented |
+| style        | React.CSSProperties                                            |              | style properties of segmented      |
+| options      | Array<string \| number \| [SegmentedOption](#SegmentedOption)> | []           | options for choices                |
+| value        | string \| number                                               |              | value of segmented                 |
+| defaultValue | string \| number                                               |              | defaultValue of segmented          |
+| onChange     | (e: any) => void                                               |              | defaultValue of segmented          |
+| disabled     | boolean                                                        | false        | disabled status of segmented       |
 
 ### SegmentedOption
 
