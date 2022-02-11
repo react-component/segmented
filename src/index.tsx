@@ -101,7 +101,6 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       options,
       disabled,
       onChange,
-      prefixCls: customizePrefixCls,
       className = '',
       motionName = 'thumb-motion',
       ...restProps
