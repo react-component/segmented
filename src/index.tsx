@@ -57,6 +57,44 @@ const calcThumbStyle = (targetElement: HTMLElement): React.CSSProperties => ({
   width: targetElement.clientWidth,
 });
 
+const SegmentedOption: React.FC<{
+  prefixCls: string;
+  className?: string;
+  disabled?: boolean;
+  checked: boolean;
+  label: React.ReactNode;
+  value: RawOption;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>, value: RawOption) => void;
+}> = ({ prefixCls, className, disabled, checked, label, value, onChange }) => {
+  const handleChange = React.useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (disabled) {
+        return;
+      }
+
+      onChange(event, value);
+    },
+    [onChange, value, disabled],
+  );
+
+  return (
+    <label
+      className={classNames(`${prefixCls}-item`, className, {
+        [`${prefixCls}-item-disabled`]: disabled,
+      })}
+    >
+      <input
+        className={`${prefixCls}-item-input`}
+        type="radio"
+        disabled={disabled}
+        checked={checked}
+        onChange={handleChange}
+      />
+      <span className={`${prefixCls}-item-label`}>{label}</span>
+    </label>
+  );
+};
+
 const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
   (props, ref) => {
     const {
@@ -87,8 +125,6 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     const [selected, setSelected] = useMergedState(
       props.defaultValue || segmentedOptions[0]?.value,
     );
-
-    // TODO: should we trigger `options` changes to update `selected`
 
     const [visualSelected, setVisualSelected] = React.useState<
       RawOption | undefined
@@ -123,24 +159,21 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     };
 
     const handleChange = React.useCallback(
-      (
-        event: React.ChangeEvent<HTMLInputElement>,
-        segmentedOption: LabeledOption,
-      ) => {
-        if (disabled || segmentedOption.disabled) {
+      (event: React.ChangeEvent<HTMLInputElement>, value: RawOption) => {
+        if (disabled) {
           return;
         }
 
-        if (segmentedOption.value !== selected) {
+        if (value !== selected) {
           calcThumbMoveStyle(event);
         }
 
-        setSelected(segmentedOption.value);
+        setSelected(value);
 
         if (onChange) {
           const mutationTarget = Object.create(event.target, {
             value: {
-              value: segmentedOption.value,
+              value,
             },
           });
           const mutatedEvent = Object.create(event, {
@@ -204,30 +237,17 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
           }}
         </CSSMotion>
         {segmentedOptions.map((segmentedOption) => (
-          <label
+          <SegmentedOption
             key={segmentedOption.value}
-            className={classNames(
-              `${prefixCls}-item`,
-              segmentedOption.className,
-              {
-                [`${prefixCls}-item-selected`]:
-                  segmentedOption.value === visualSelected,
-                [`${prefixCls}-item-disabled`]:
-                  !!disabled || !!segmentedOption.disabled,
-              },
-            )}
-          >
-            <input
-              className={`${prefixCls}-item-input`}
-              type="radio"
-              disabled={!!disabled || !!segmentedOption.disabled}
-              checked={segmentedOption.value === selected}
-              onChange={(e) => handleChange(e, segmentedOption)}
-            />
-            <span className={`${prefixCls}-item-label`}>
-              {segmentedOption.label}
-            </span>
-          </label>
+            prefixCls={prefixCls}
+            className={classNames(segmentedOption.className, {
+              [`${prefixCls}-item-selected`]:
+                segmentedOption.value === visualSelected,
+            })}
+            checked={segmentedOption.value === selected}
+            onChange={handleChange}
+            {...segmentedOption}
+          />
         ))}
       </div>
     );

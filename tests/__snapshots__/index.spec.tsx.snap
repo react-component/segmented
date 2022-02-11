@@ -273,12 +273,11 @@ exports[`rc-segmented render segmented: disabled 1`] = `
   class="rc-segmented rc-segmented-disabled"
 >
   <label
-    class="rc-segmented-item rc-segmented-item-selected rc-segmented-item-disabled"
+    class="rc-segmented-item rc-segmented-item-selected"
   >
     <input
       checked=""
       class="rc-segmented-item-input"
-      disabled=""
       type="radio"
     />
     <span
@@ -288,11 +287,10 @@ exports[`rc-segmented render segmented: disabled 1`] = `
     </span>
   </label>
   <label
-    class="rc-segmented-item rc-segmented-item-disabled"
+    class="rc-segmented-item"
   >
     <input
       class="rc-segmented-item-input"
-      disabled=""
       type="radio"
     />
     <span
@@ -302,11 +300,10 @@ exports[`rc-segmented render segmented: disabled 1`] = `
     </span>
   </label>
   <label
-    class="rc-segmented-item rc-segmented-item-disabled"
+    class="rc-segmented-item"
   >
     <input
       class="rc-segmented-item-input"
-      disabled=""
       type="radio"
     />
     <span

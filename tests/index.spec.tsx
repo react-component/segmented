@@ -189,16 +189,6 @@ describe('rc-segmented', () => {
         .map((el) => (el.getDOMNode() as HTMLInputElement).checked),
     ).toEqual([true, false, false]);
 
-    expect(
-      wrapper.find('.rc-segmented-item-input').map((el) => el.prop('disabled')),
-    ).toEqual([true, true, true]);
-
-    expect(
-      wrapper
-        .find('.rc-segmented-item')
-        .map((el) => el.hasClass('rc-segmented-item-disabled')),
-    ).toEqual([true, true, true]);
-
     wrapper.find('.rc-segmented-item-input').at(2).simulate('change');
     expect(handleValueChange).not.toBeCalled();
 
