@@ -17,9 +17,9 @@
 [bundlephobia-url]: https://bundlephobia.com/result?p=rc-segmented
 [bundlephobia-image]: https://badgen.net/bundlephobia/minzip/rc-segmented
 
-Pretty segmented react component used in [ant.design](https://ant.design) and [antv.vision](https://antv.vision).
+React Segmented Control.
 
-![](https://gw.alipayobjects.com/zos/antfincdn/z4ie3X8x6u/1cb23945-ec67-45a3-b521-f8da62e12255.png)
+![](https://gw.alipayobjects.com/mdn/rms_50855f/afts/img/A*bmGGQpnWs0oAAAAAAAAAAAAAARQnAQ)
 
 ## Live Demo
 
@@ -32,24 +32,14 @@ https://react-component.github.io/segmented/
 ## Usage
 
 ```js
-import segmented from 'rc-segmented';
+import Segmented from 'rc-segmented';
 import 'rc-segmented/assets/index.css'; // import 'rc-segmented/asssets/index.less';
 import { render } from 'react-dom';
 
 render(
-  <segmented
-    columns={[
-      {
-        icon: (
-          <img src="https://gw.alipayobjects.com/zos/rmsportal/XuVpGqBFxXplzvLjJBZB.svg" />
-        ),
-        title: '语雀',
-        url: 'https://yuque.com',
-        description: '知识创作与分享工具',
-        openExternal: true,
-      },
-    ]}
-    bottom="Made with ❤️ by AFX"
+  <Segmented
+    options={['Antd', 'Antv', 'Egg.js']}
+    onChange={(e) => handleValueChange(e.target.value)}
   />,
   mountNode,
 );
@@ -57,40 +47,24 @@ render(
 
 ## API
 
-| Property         | Type                              | Default        | Description                                 |
-| ---------------- | --------------------------------- | -------------- | ------------------------------------------- |
-| prefixCls        | string                            | rc-segmented   |                                             |
-| className        | string                            | ''             | additional class name of segmented          |
-| style            | React.CSSProperties               |                | style properties of segmented               |
-| columns          | [Column](#Column) Array           | []             | columns data inside segmented               |
-| bottom           | ReactNode                         |                | extra bottom area beneath segmented columns |
-| theme            | 'light' \| 'dark'                 | 'dark'         | preset theme of segmented                   |
-| backgroundColor  | string                            | '#000'         | background color of segmented               |
-| columnLayout     | 'space-around' or 'space-between' | 'space-around' | justify-content value of columns element    |
-| maxColumnsPerRow | number                            | -              | max count of columns for each row           |
+| Property     | Type                                                          | Default      | Description                        |
+| ------------ | ------------------------------------------------------------- | ------------ | ---------------------------------- |
+| prefixCls    | string                                                        | rc-segmented |                                    |
+| className    | string                                                        | ''           | additional class name of segmented |
+| style        | React.CSSProperties                                           |              | style properties of segmented      |
+| options      | [string \| number \| SegmentedOption](#SegmentedOption) Array | []           | options for choices                |
+| value        | string \| number                                              |              | value of segmented                 |
+| defaultValue | string \| number                                              |              | defaultValue of segmented          |
+| onChange     | (e: any) => void                                              |              | defaultValue of segmented          |
+| disabled     | boolean                                                       | false        | disabled status of segmented       |
 
-### Column
+### SegmentedOption
 
-| Property  | Type                       | Default | Description                        |
-| --------- | -------------------------- | ------- | ---------------------------------- |
-| icon      | ReactNode                  |         | icon that before column title      |
-| title     | ReactNode                  |         | title of column                    |
-| items     | [Item](#Column-Item) Array | []      | items data inside each column      |
-| className | string                     | ''      | additional class name of segmented |
-| style     | React.CSSProperties        |         | style properties of segmented      |
-
-### Column Item
-
-| Property      | Type                | Default | Description                                             |
-| ------------- | ------------------- | ------- | ------------------------------------------------------- |
-| icon          | ReactNode           |         | icon that before column title                           |
-| title         | ReactNode           |         | title of column                                         |
-| description   | ReactNode           |         | description of column, come after title                 |
-| url           | string              |         | link url of item title                                  |
-| openExternal  | boolean             | false   | link target would be `_blank` if `openExternal` is ture |
-| className     | string              | ''      | additional class name of segmented                      |
-| style         | React.CSSProperties |         | style properties of segmented                           |
-| LinkComponent | React.ReactType     | 'a'     | the link element to render item                         |
+| Property | Type    | Default | Description                         |
+| -------- | ------- | ------- | ----------------------------------- |
+| label    | string  |         | label of segmented option           |
+| value    | string  |         | value of segmented option           |
+| disabled | boolean | false   | disabled status of segmented option |
 
 ## Development
 
