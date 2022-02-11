@@ -84,12 +84,12 @@
     width: 0;
     height: 28px;
     padding: 4px 0;
+  }
 
-    // transition effect when `enter-active`
-    &-motion-enter-active {
-      transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
-        width 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-      will-change: transform, width;
-    }
+  // transition effect when `enter-active`
+  &-thumb-motion-enter-active {
+    transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
+      width 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    will-change: transform, width;
   }
 }

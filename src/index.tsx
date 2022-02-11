@@ -32,6 +32,7 @@ export interface SegmentedProps extends React.HTMLProps<HTMLDivElement> {
   disabled?: boolean;
   prefixCls?: string;
   direction?: 'ltr' | 'rtl';
+  motionName?: string;
 }
 
 function isLabledOption(
@@ -66,16 +67,13 @@ const SegmentedOption: React.FC<{
   value: RawOption;
   onChange: (e: React.ChangeEvent<HTMLInputElement>, value: RawOption) => void;
 }> = ({ prefixCls, className, disabled, checked, label, value, onChange }) => {
-  const handleChange = React.useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (disabled) {
-        return;
-      }
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (disabled) {
+      return;
+    }
 
-      onChange(event, value);
-    },
-    [onChange, value, disabled],
-  );
+    onChange(event, value);
+  };
 
   return (
     <label
@@ -105,6 +103,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       onChange,
       prefixCls: customizePrefixCls,
       className = '',
+      motionName = 'thumb-motion',
       ...restProps
     } = props;
 
@@ -132,15 +131,6 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
 
     const [thumbShow, setThumbShow] = React.useState(false);
 
-    const classString = classNames(
-      prefixCls,
-      {
-        [`${prefixCls}-rtl`]: direction === 'rtl',
-        [`${prefixCls}-disabled`]: disabled,
-      },
-      className,
-    );
-
     const calcThumbMoveStyle = (event: React.ChangeEvent<HTMLInputElement>) => {
       const toElement = event.target.closest(`.${prefixCls}-item`);
 
@@ -158,34 +148,34 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       }
     };
 
-    const handleChange = React.useCallback(
-      (event: React.ChangeEvent<HTMLInputElement>, value: RawOption) => {
-        if (disabled) {
-          return;
-        }
+    const handleChange = (
+      event: React.ChangeEvent<HTMLInputElement>,
+      value: RawOption,
+    ) => {
+      if (disabled) {
+        return;
+      }
 
-        if (value !== selected) {
-          calcThumbMoveStyle(event);
-        }
+      if (value !== selected) {
+        calcThumbMoveStyle(event);
+      }
 
-        setSelected(value);
+      setSelected(value);
 
-        if (onChange) {
-          const mutationTarget = Object.create(event.target, {
-            value: {
-              value,
-            },
-          });
-          const mutatedEvent = Object.create(event, {
-            target: {
-              value: mutationTarget,
-            },
-          });
-          onChange(mutatedEvent);
-        }
-      },
-      [selected, disabled],
-    );
+      if (onChange) {
+        const mutationTarget = Object.create(event.target, {
+          value: {
+            value,
+          },
+        });
+        const mutatedEvent = Object.create(event, {
+          target: {
+            value: mutationTarget,
+          },
+        });
+        onChange(mutatedEvent);
+      }
+    };
 
     // --- motion event handlers for thumb move
     const handleThumbEnterStart = () => {
@@ -203,7 +193,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       }
     };
 
-    const handleThumbEnterEnd = React.useCallback(() => {
+    const handleThumbEnterEnd = () => {
       setThumbShow(false);
       setVisualSelected(selected);
 
@@ -213,15 +203,26 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
           to: null,
         };
       }
-    }, [selected]);
+    };
 
     const divProps = omit(restProps, ['children']);
 
     return (
-      <div {...divProps} className={classString} ref={mergedRef}>
+      <div
+        {...divProps}
+        className={classNames(
+          prefixCls,
+          {
+            [`${prefixCls}-rtl`]: direction === 'rtl',
+            [`${prefixCls}-disabled`]: disabled,
+          },
+          className,
+        )}
+        ref={mergedRef}
+      >
         <CSSMotion
           visible={thumbShow}
-          motionName={`${prefixCls}-thumb-motion`}
+          motionName={`${prefixCls}-${motionName}`}
           motionDeadline={300}
           onEnterStart={handleThumbEnterStart}
           onEnterActive={handleThumbEnterActive}
