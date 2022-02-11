@@ -209,12 +209,16 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
         {segmentedOptions.map((segmentedOption) => (
           <label
             key={segmentedOption.value}
-            className={classNames(`${prefixCls}-item`, {
-              [`${prefixCls}-item-selected`]:
-                segmentedOption.value === visualSelected,
-              [`${prefixCls}-item-disabled`]:
-                !!disabled || !!segmentedOption.disabled,
-            })}
+            className={classNames(
+              `${prefixCls}-item`,
+              segmentedOption.className,
+              {
+                [`${prefixCls}-item-selected`]:
+                  segmentedOption.value === visualSelected,
+                [`${prefixCls}-item-disabled`]:
+                  !!disabled || !!segmentedOption.disabled,
+              },
+            )}
           >
             <input
               className={`${prefixCls}-item-input`}
