@@ -34,4 +34,7 @@ coverage/
 .umi
 .umi-production
 .umi-test
-.env.local 
+.env.local
+
+# vscode
+.vscode

@@ -12,6 +12,7 @@
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "declaration": true,
+    "types": ["jest", "node"],
     "paths": {
       "@/*": ["src/*"],
       "@@/*": ["src/.umi/*"],

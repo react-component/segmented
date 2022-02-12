@@ -1,0 +1,358 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rc-segmented render empty segmented 1`] = `
+<div
+  class="rc-segmented"
+/>
+`;
+
+exports[`rc-segmented render segmented with CSSMotion 1`] = `
+<div
+  class="rc-segmented"
+>
+  <label
+    class="rc-segmented-item rc-segmented-item-selected"
+  >
+    <input
+      checked=""
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    >
+      iOS
+    </span>
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    >
+      Android
+    </span>
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    >
+      Web3
+    </span>
+  </label>
+</div>
+`;
+
+exports[`rc-segmented render segmented with options 1`] = `
+<div
+  class="rc-segmented"
+>
+  <label
+    class="rc-segmented-item rc-segmented-item-selected"
+  >
+    <input
+      checked=""
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    >
+      iOS
+    </span>
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    >
+      Android
+    </span>
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    >
+      Web
+    </span>
+  </label>
+</div>
+`;
+
+exports[`rc-segmented render segmented with options null/undefined 1`] = `
+<div
+  class="rc-segmented rc-segmented-disabled"
+>
+  <label
+    class="rc-segmented-item rc-segmented-item-selected"
+  >
+    <input
+      checked=""
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    />
+  </label>
+  <label
+    class="rc-segmented-item rc-segmented-item-selected"
+  >
+    <input
+      checked=""
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    />
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    />
+  </label>
+</div>
+`;
+
+exports[`rc-segmented render segmented with options: 1 1`] = `
+<div
+  class="rc-segmented"
+>
+  <label
+    class="rc-segmented-item rc-segmented-item-selected"
+  >
+    <input
+      checked=""
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    >
+      1
+    </span>
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    >
+      2
+    </span>
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    >
+      3
+    </span>
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    >
+      4
+    </span>
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    >
+      5
+    </span>
+  </label>
+</div>
+`;
+
+exports[`rc-segmented render segmented with options: 2 1`] = `
+<div
+  class="rc-segmented"
+>
+  <label
+    class="rc-segmented-item rc-segmented-item-selected"
+  >
+    <input
+      checked=""
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    >
+      iOS
+    </span>
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    >
+      Android
+    </span>
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    >
+      Web
+    </span>
+  </label>
+</div>
+`;
+
+exports[`rc-segmented render segmented with options: disabled 1`] = `
+<div
+  class="rc-segmented"
+>
+  <label
+    class="rc-segmented-item rc-segmented-item-selected"
+  >
+    <input
+      checked=""
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    >
+      iOS
+    </span>
+  </label>
+  <label
+    class="rc-segmented-item rc-segmented-item-disabled"
+  >
+    <input
+      class="rc-segmented-item-input"
+      disabled=""
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    >
+      Android
+    </span>
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    >
+      Web
+    </span>
+  </label>
+</div>
+`;
+
+exports[`rc-segmented render segmented: disabled 1`] = `
+<div
+  class="rc-segmented rc-segmented-disabled"
+>
+  <label
+    class="rc-segmented-item rc-segmented-item-selected"
+  >
+    <input
+      checked=""
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    >
+      iOS
+    </span>
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    >
+      Android
+    </span>
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <span
+      class="rc-segmented-item-label"
+    >
+      Web
+    </span>
+  </label>
+</div>
+`;
