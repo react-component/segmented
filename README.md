@@ -48,7 +48,7 @@ render(
 ## API
 
 | Property     | Type                                                           | Default      | Description                        |
-| ------------ | -------------------------------------------------------------- | ------------ | ---------------------------------- |
+| --------- | --------- | --------- | --------- |
 | prefixCls    | string                                                         | rc-segmented |                                    |
 | className    | string                                                         | ''           | additional class name of segmented |
 | style        | React.CSSProperties                                            |              | style properties of segmented      |
@@ -61,7 +61,7 @@ render(
 ### SegmentedOption
 
 | Property  | Type      | Default | Description                               |
-| --------- | --------- | ------- | ----------------------------------------- | ------------------------- |
+| --------- | --------- | --------- | --------- |
 | label     | ReactNode |         | label of segmented option                 |
 | value     | string    | number  |                                           | value of segmented option |
 | className | string    | ''      | additional class name of segmented option |
