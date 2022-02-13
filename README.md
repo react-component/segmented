@@ -63,7 +63,7 @@ render(
 | Property  | Type      | Default | Description                               |
 | --------- | --------- | --------- | --------- |
 | label     | ReactNode |         | label of segmented option                 |
-| value     | string    | number  |                                           | value of segmented option |
+| value     | string \| number   |  | value of segmented option |
 | className | string    | ''      | additional class name of segmented option |
 | disabled  | boolean   | false   | disabled status of segmented option       |
 
