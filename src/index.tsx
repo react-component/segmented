@@ -156,14 +156,14 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       setSelected(value);
 
       if (onChange) {
-        const mutationTarget = Object.create(event.target, {
+        const mutatedTarget = Object.create(event.target, {
           value: {
             value,
           },
         });
         const mutatedEvent = Object.create(event, {
           target: {
-            value: mutationTarget,
+            value: mutatedTarget,
           },
         });
         onChange(mutatedEvent);
