@@ -6,8 +6,8 @@
 [npm-url]: http://npmjs.org/package/rc-segmented
 [github-actions-image]: https://github.com/react-component/segmented/workflows/CI/badge.svg
 [github-actions-url]: https://github.com/react-component/segmented/actions
-[codecov-image]: https://img.shields.io/codecov/c/github/react-component/segmented/master.svg?style=flat-square
-[codecov-url]: https://codecov.io/gh/react-component/segmented/branch/master/graph/badge.svg
+[codecov-image]: https://codecov.io/gh/react-component/segmented/branch/master/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/react-component/segmented/branch/master
 [download-image]: https://img.shields.io/npm/dm/rc-segmented.svg?style=flat-square
 [download-url]: https://npmjs.org/package/rc-segmented
 [bundlephobia-url]: https://bundlephobia.com/result?p=rc-segmented
