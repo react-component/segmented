@@ -45,7 +45,7 @@ render(
 
 | Property     | Type                                                           | Default      | Description                        |
 | --------- | --------- | --------- | --------- |
-| prefixCls    | string                                                         | rc-segmented |                                    |
+| prefixCls    | string                                                         | rc-segmented | prefixCls of this component |
 | className    | string                                                         | ''           | additional class name of segmented |
 | style        | React.CSSProperties                                            |              | style properties of segmented      |
 | options      | Array<string \| number \| [SegmentedOption](#SegmentedOption)> | []           | options for choices                |
