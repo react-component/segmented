@@ -1,9 +1,9 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
-import { mount as emount } from 'enzyme';
 import { mount } from './wrapper';
 
-import Segmented, { SegmentedValue } from '../src';
+import Segmented from '../src';
+import type { SegmentedValue } from '../src';
 
 jest.mock('rc-motion/lib/util/motion', () => {
   return {
@@ -27,11 +27,36 @@ describe('rc-segmented', () => {
       />,
     );
 
+    expect(wrapper.render()).toMatchSnapshot();
+
     expect(
       wrapper
         .find('.rc-segmented-item-input')
         .map((el) => (el.getDOMNode() as HTMLInputElement).checked),
     ).toEqual([true, false, false]);
+  });
+
+  it('render', () => {
+    const wrapper = mount(
+      <Segmented
+        options={[
+          { label: 'iOS', value: 'iOS' },
+          { label: <div id="android">Android</div>, value: 'Android' },
+          { label: <h2>Web</h2>, value: 'Web' },
+        ]}
+      />,
+    );
+
+    expect(wrapper.render()).toMatchSnapshot();
+
+    expect(
+      wrapper
+        .find('.rc-segmented-item-input')
+        .map((el) => (el.getDOMNode() as HTMLInputElement).checked),
+    ).toEqual([true, false, false]);
+
+    expect(wrapper.find('#android').at(0).text()).toContain('Android');
+    expect(wrapper.find('h2').at(0).text()).toContain('Web');
   });
 
   it('render segmented with defaultValue', () => {
@@ -199,23 +224,6 @@ describe('rc-segmented', () => {
     ).toEqual([true, false, false]);
   });
 
-  it('render segmented with options null/undefined', () => {
-    const handleValueChange = jest.fn();
-    const wrapper = mount(
-      <Segmented
-        options={[null, undefined, ''] as any}
-        disabled
-        onChange={(e) => handleValueChange(e.target.value)}
-      />,
-    );
-    expect(wrapper.render()).toMatchSnapshot();
-    expect(
-      wrapper
-        .find('.rc-segmented-item-label')
-        .map((n) => n.getDOMNode().textContent),
-    ).toEqual(['', '', '']);
-  });
-
   it('render segmented with className and other html attribues', () => {
     const wrapper = mount(
       <Segmented
@@ -360,5 +368,22 @@ describe('rc-segmented', () => {
     });
     // thumb should disappear
     expect(wrapper.find('.rc-segmented-thumb').length).toBe(0);
+  });
+
+  it('render segmented with options null/undefined', () => {
+    const handleValueChange = jest.fn();
+    const wrapper = mount(
+      <Segmented
+        options={[null, undefined, ''] as any}
+        disabled
+        onChange={(e) => handleValueChange(e.target.value)}
+      />,
+    );
+    expect(wrapper.render()).toMatchSnapshot();
+    expect(
+      wrapper
+        .find('.rc-segmented-item-label')
+        .map((n) => n.getDOMNode().textContent),
+    ).toEqual(['', '', '']);
   });
 });
