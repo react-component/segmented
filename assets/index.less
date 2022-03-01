@@ -16,26 +16,21 @@
 .@{segmented-prefix-cls} {
   position: relative;
 
-  display: inline-block;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  padding: 2px;
+  display: inline-flex;
+  align-items: stretch;
+  justify-items: flex-start;
 
   background-color: rgba(0, 0, 0, 0.04);
-
   border-radius: 2px;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.04);
 
   &-item {
-    // box-sizing: border-box;
     position: relative;
-    display: inline-block;
-    height: 28px;
+    min-height: 28px;
     padding: 4px 10px;
-    color: fade(#000, 85%);
-    line-height: 28px;
-    text-align: center;
 
+    color: fade(#000, 85%);
+    text-align: center;
     cursor: pointer;
 
     &-selected {
@@ -79,10 +74,10 @@
     .segmented-item-selected();
 
     position: absolute;
-    top: 2px;
-    left: 0px;
+    top: 0;
+    left: 0;
     width: 0;
-    height: 28px;
+    height: 100%;
     padding: 4px 0;
   }
 
