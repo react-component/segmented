@@ -224,7 +224,7 @@ describe('rc-segmented', () => {
     ).toEqual([true, false, false]);
   });
 
-  it('render segmented with className and other html attribues', () => {
+  it('render segmented with className and other html attributes', () => {
     const wrapper = mount(
       <Segmented
         options={['iOS', 'Android', 'Web']}
