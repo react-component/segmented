@@ -7,25 +7,23 @@ import omit from 'rc-util/lib/omit';
 
 export type SegmentedValue = string | number;
 
-type RawOption = SegmentedValue;
+type SegmentedRawOption = SegmentedValue;
 
-interface LabeledOption {
+interface SegmentedLabeledOption {
   className?: string;
   disabled?: boolean;
   label: React.ReactNode;
-  value: RawOption;
+  value: SegmentedRawOption;
 }
 
-type Option = RawOption | LabeledOption;
-
-type Options = Option[];
+type SegmentedOptions = (SegmentedRawOption | SegmentedLabeledOption)[];
 
 type ExtendedHTMLInputElement = Omit<HTMLInputElement, 'value'> & {
   value: SegmentedValue;
 };
 
 export interface SegmentedProps extends React.HTMLProps<HTMLDivElement> {
-  options: Options;
+  options: SegmentedOptions;
   defaultValue?: SegmentedValue;
   value?: SegmentedValue;
   onChange?: (e: React.ChangeEvent<ExtendedHTMLInputElement>) => void;
@@ -35,7 +33,7 @@ export interface SegmentedProps extends React.HTMLProps<HTMLDivElement> {
   motionName?: string;
 }
 
-function normalizeOptions(options: Options): LabeledOption[] {
+function normalizeOptions(options: SegmentedOptions): SegmentedLabeledOption[] {
   return options.map((option) => {
     if (typeof option === 'object') {
       return option || {};
@@ -52,14 +50,17 @@ const calcThumbStyle = (targetElement: HTMLElement): React.CSSProperties => ({
   width: targetElement.clientWidth,
 });
 
-const SegmentedOption: React.FC<{
+const InternalSegmentedOption: React.FC<{
   prefixCls: string;
   className?: string;
   disabled?: boolean;
   checked: boolean;
   label: React.ReactNode;
-  value: RawOption;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>, value: RawOption) => void;
+  value: SegmentedRawOption;
+  onChange: (
+    e: React.ChangeEvent<HTMLInputElement>,
+    value: SegmentedRawOption,
+  ) => void;
 }> = ({ prefixCls, className, disabled, checked, label, value, onChange }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (disabled) {
@@ -119,7 +120,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     );
 
     const [visualSelected, setVisualSelected] = React.useState<
-      RawOption | undefined
+      SegmentedRawOption | undefined
     >(selected);
 
     const [thumbShow, setThumbShow] = React.useState(false);
@@ -143,7 +144,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
 
     const handleChange = (
       event: React.ChangeEvent<HTMLInputElement>,
-      value: RawOption,
+      value: SegmentedRawOption,
     ) => {
       if (disabled) {
         return;
@@ -231,7 +232,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
           }}
         </CSSMotion>
         {segmentedOptions.map((segmentedOption) => (
-          <SegmentedOption
+          <InternalSegmentedOption
             key={segmentedOption.value}
             prefixCls={prefixCls}
             className={classNames(segmentedOption.className, {
