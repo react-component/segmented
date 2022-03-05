@@ -7,9 +7,9 @@ import omit from 'rc-util/lib/omit';
 
 export type SegmentedValue = string | number;
 
-type SegmentedRawOption = SegmentedValue;
+export type SegmentedRawOption = SegmentedValue;
 
-interface SegmentedLabeledOption {
+export interface SegmentedLabeledOption {
   className?: string;
   disabled?: boolean;
   label: React.ReactNode;
