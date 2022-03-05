@@ -1,9 +1,10 @@
 import '../../assets/style.less';
 import React from 'react';
-import Segmented, { SegmentedValue } from 'rc-segmented';
+import Segmented from 'rc-segmented';
+import type { SegmentedValue } from 'rc-segmented';
 
 export default class Demo extends React.Component<
-  {},
+  unknown,
   { value: SegmentedValue }
 > {
   state = {
