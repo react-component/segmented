@@ -36,7 +36,12 @@ export interface SegmentedProps extends React.HTMLProps<HTMLDivElement> {
 function normalizeOptions(options: SegmentedOptions): SegmentedLabeledOption[] {
   return options.map((option) => {
     if (typeof option === 'object') {
-      return option || {};
+      return {
+        ...option,
+        // use value as default label
+        label:
+          typeof option.label !== 'undefined' ? option.label : option.value,
+      };
     }
     return {
       label: option?.toString(),
