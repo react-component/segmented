@@ -36,7 +36,7 @@ describe('rc-segmented', () => {
     ).toEqual([true, false, false]);
   });
 
-  it('render', () => {
+  it('render label with ReactNode', () => {
     const wrapper = mount(
       <Segmented
         options={[
