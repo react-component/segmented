@@ -121,7 +121,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     }, [options]);
 
     const [selected, setSelected] = useMergedState(segmentedOptions[0]?.value, {
-      value: value,
+      value,
       defaultValue,
     });
 
