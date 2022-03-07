@@ -51,6 +51,7 @@ render(
 | options      | Array<string \| number \| [SegmentedOption](#SegmentedOption)> | []           | options for choices                |
 | value        | string \| number                                               |              | value of segmented                 |
 | defaultValue | string \| number                                               |              | defaultValue of segmented          |
+| value | string \| number                                               |              | currently selected value of segmented          |
 | onChange     | (e: any) => void                                               |              | defaultValue of segmented          |
 | disabled     | boolean                                                        | false        | disabled status of segmented       |
 

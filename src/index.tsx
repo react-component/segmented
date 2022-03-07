@@ -88,6 +88,11 @@ const InternalSegmentedOption: React.FC<{
   );
 };
 
+interface ThumbMoveStatus {
+  from: React.CSSProperties | null;
+  to: React.CSSProperties | null;
+}
+
 const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
   (props, ref) => {
     const {
@@ -95,6 +100,8 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       direction,
       options,
       disabled,
+      defaultValue,
+      value,
       onChange,
       className = '',
       motionName = 'thumb-motion',
@@ -104,9 +111,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     const containerRef = React.useRef<HTMLDivElement>(null);
     const mergedRef = composeRef<HTMLDivElement>(containerRef, ref);
 
-    const thumbMoveStyles = React.useRef<
-      Record<'from' | 'to', React.CSSProperties | null>
-    >({
+    const thumbMoveStatus = React.useRef<ThumbMoveStatus>({
       from: null,
       to: null,
     });
@@ -115,9 +120,10 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       return normalizeOptions(options);
     }, [options]);
 
-    const [selected, setSelected] = useMergedState(
-      props.defaultValue || segmentedOptions[0]?.value,
-    );
+    const [selected, setSelected] = useMergedState(segmentedOptions[0]?.value, {
+      value,
+      defaultValue,
+    });
 
     const [visualSelected, setVisualSelected] = React.useState<
       SegmentedRawOption | undefined
@@ -125,18 +131,20 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
 
     const [thumbShow, setThumbShow] = React.useState(false);
 
-    const calcThumbMoveStyle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const calcThumbMoveStatus = (
+      event: React.ChangeEvent<HTMLInputElement>,
+    ) => {
       const toElement = event.target.closest(`.${prefixCls}-item`);
 
       const fromElement = containerRef.current?.querySelector(
         `.${prefixCls}-item-selected`,
       );
 
-      if (fromElement && toElement && thumbMoveStyles.current) {
-        thumbMoveStyles.current.from = calcThumbStyle(
+      if (fromElement && toElement && thumbMoveStatus.current) {
+        thumbMoveStatus.current.from = calcThumbStyle(
           fromElement as HTMLElement,
         );
-        thumbMoveStyles.current.to = calcThumbStyle(toElement as HTMLElement);
+        thumbMoveStatus.current.to = calcThumbStyle(toElement as HTMLElement);
 
         setThumbShow(true);
       }
@@ -144,22 +152,20 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
 
     const handleChange = (
       event: React.ChangeEvent<HTMLInputElement>,
-      value: SegmentedRawOption,
+      val: SegmentedRawOption,
     ) => {
       if (disabled) {
         return;
       }
 
-      if (value !== selected) {
-        calcThumbMoveStyle(event);
-      }
+      calcThumbMoveStatus(event);
 
-      setSelected(value);
+      setSelected(val);
 
       if (onChange) {
         const mutatedTarget = Object.create(event.target, {
           value: {
-            value,
+            value: val,
           },
         });
         const mutatedEvent = Object.create(event, {
@@ -173,7 +179,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
 
     // --- motion event handlers for thumb move
     const handleThumbEnterStart = () => {
-      const fromStyle = thumbMoveStyles.current.from;
+      const fromStyle = thumbMoveStatus.current.from;
       if (fromStyle) {
         setVisualSelected(undefined);
         return fromStyle;
@@ -181,7 +187,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     };
 
     const handleThumbEnterActive = () => {
-      const toStyle = thumbMoveStyles.current.to;
+      const toStyle = thumbMoveStatus.current.to;
       if (toStyle) {
         return toStyle;
       }
@@ -191,8 +197,8 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       setThumbShow(false);
       setVisualSelected(selected);
 
-      if (thumbMoveStyles.current) {
-        thumbMoveStyles.current = {
+      if (thumbMoveStatus.current) {
+        thumbMoveStatus.current = {
           from: null,
           to: null,
         };
@@ -251,6 +257,8 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
 
 Segmented.displayName = 'Segmented';
 
-Segmented.defaultProps = {};
+Segmented.defaultProps = {
+  options: [],
+};
 
 export default Segmented;
