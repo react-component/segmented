@@ -83,7 +83,7 @@ const InternalSegmentedOption: React.FC<{
         checked={checked}
         onChange={handleChange}
       />
-      <span className={`${prefixCls}-item-label`}>{label}</span>
+      <div className={`${prefixCls}-item-label`}>{label}</div>
     </label>
   );
 };
