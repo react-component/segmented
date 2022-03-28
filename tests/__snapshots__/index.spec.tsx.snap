@@ -34,7 +34,6 @@ exports[`rc-segmented render label with ReactNode 1`] = `
     />
     <div
       class="rc-segmented-item-label"
-      title="Android"
     >
       <div
         id="android"
@@ -52,7 +51,6 @@ exports[`rc-segmented render label with ReactNode 1`] = `
     />
     <div
       class="rc-segmented-item-label"
-      title="Web"
     >
       <h2>
         Web
@@ -93,42 +91,6 @@ exports[`rc-segmented render segmented ok 1`] = `
       title="Android"
     >
       Android
-    </div>
-  </label>
-  <label
-    class="rc-segmented-item"
-  >
-    <input
-      class="rc-segmented-item-input"
-      type="radio"
-    />
-    <div
-      class="rc-segmented-item-label"
-      title="Web"
-    >
-      Web
-    </div>
-  </label>
-</div>
-`;
-
-exports[`rc-segmented render segmented options without label 1`] = `
-<div
-  class="rc-segmented"
->
-  <label
-    class="rc-segmented-item rc-segmented-item-selected"
-  >
-    <input
-      checked=""
-      class="rc-segmented-item-input"
-      type="radio"
-    />
-    <div
-      class="rc-segmented-item-label"
-      title="iOS"
-    >
-      iOS
     </div>
   </label>
   <label
@@ -240,7 +202,6 @@ exports[`rc-segmented render segmented with htmlTitle 1`] = `
     />
     <div
       class="rc-segmented-item-label"
-      title="test2"
     >
       <div>
         test1

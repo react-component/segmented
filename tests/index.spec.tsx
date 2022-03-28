@@ -387,26 +387,6 @@ describe('rc-segmented', () => {
     ).toEqual(['', '', '']);
   });
 
-  it('render segmented options without label', () => {
-    const wrapper = mount(
-      <Segmented options={[{ value: 'iOS' }, { value: 'Web' }] as any} />,
-    );
-
-    expect(wrapper.render()).toMatchSnapshot();
-
-    const labels = wrapper.find('.rc-segmented-item-label');
-
-    expect(labels.map((n) => n.getDOMNode().textContent)).toEqual([
-      'iOS',
-      'Web',
-    ]);
-
-    expect(labels.map((n) => (n.getDOMNode() as HTMLElement).title)).toEqual([
-      'iOS',
-      'Web',
-    ]);
-  });
-
   it('render segmented with htmlTitle', () => {
     const wrapper = mount(
       <Segmented
@@ -438,6 +418,6 @@ describe('rc-segmented', () => {
       wrapper
         .find('.rc-segmented-item-label')
         .map((n) => (n.getDOMNode() as HTMLElement).title),
-    ).toEqual(['Web', 'hello1', 'test2', 'hello1.5', '']);
+    ).toEqual(['Web', 'hello1', '', 'hello1.5', '']);
   });
 });

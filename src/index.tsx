@@ -37,28 +37,28 @@ export interface SegmentedProps extends React.HTMLProps<HTMLDivElement> {
   motionName?: string;
 }
 
+function getValidHtmlTitle(option: SegmentedLabeledOption) {
+  if (typeof option.htmlTitle !== 'undefined') {
+    return option.htmlTitle;
+  }
+
+  // read `label` when htmlTitle is `undefined`
+  if (typeof option.label !== 'object') {
+    return option.label?.toString();
+  }
+}
+
 function normalizeOptions(options: SegmentedOptions): SegmentedLabeledOption[] {
   return options.map((option) => {
     if (typeof option === 'object' && option !== null) {
-      // read `value` when label is `undefined`
-      const validLabel =
-        typeof option.label !== 'undefined'
-          ? option.label
-          : option.value.toString();
-      // read `label` and `value` when htmlTitle is `undefined`
-      const validHtmlTitle =
-        typeof option.htmlTitle !== 'undefined'
-          ? option.htmlTitle
-          : React.isValidElement(validLabel)
-          ? option.value.toString()
-          : validLabel.toString();
+      const validHtmlTitle = getValidHtmlTitle(option);
 
       return {
         ...option,
-        label: validLabel,
         htmlTitle: validHtmlTitle,
       };
     }
+
     return {
       label: option?.toString(),
       htmlTitle: option?.toString(),
