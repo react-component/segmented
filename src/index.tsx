@@ -14,6 +14,10 @@ export interface SegmentedLabeledOption {
   disabled?: boolean;
   label: React.ReactNode;
   value: SegmentedRawOption;
+  /**
+   * html `title` property for label
+   */
+  htmlTitle?: string;
 }
 
 type SegmentedOptions = (SegmentedRawOption | SegmentedLabeledOption)[];
@@ -35,11 +39,29 @@ export interface SegmentedProps extends React.HTMLProps<HTMLDivElement> {
 
 function normalizeOptions(options: SegmentedOptions): SegmentedLabeledOption[] {
   return options.map((option) => {
-    if (typeof option === 'object') {
-      return option || {};
+    if (typeof option === 'object' && option !== null) {
+      // read `value` when label is `undefined`
+      const validLabel =
+        typeof option.label !== 'undefined'
+          ? option.label
+          : option.value.toString();
+      // read `label` and `value` when htmlTitle is `undefined`
+      const validHtmlTitle =
+        typeof option.htmlTitle !== 'undefined'
+          ? option.htmlTitle
+          : React.isValidElement(validLabel)
+          ? option.value.toString()
+          : validLabel.toString();
+
+      return {
+        ...option,
+        label: validLabel,
+        htmlTitle: validHtmlTitle,
+      };
     }
     return {
       label: option?.toString(),
+      htmlTitle: option?.toString(),
       value: option,
     };
   });
@@ -56,12 +78,22 @@ const InternalSegmentedOption: React.FC<{
   disabled?: boolean;
   checked: boolean;
   label: React.ReactNode;
+  htmlTitle?: string;
   value: SegmentedRawOption;
   onChange: (
     e: React.ChangeEvent<HTMLInputElement>,
     value: SegmentedRawOption,
   ) => void;
-}> = ({ prefixCls, className, disabled, checked, label, value, onChange }) => {
+}> = ({
+  prefixCls,
+  className,
+  disabled,
+  checked,
+  label,
+  htmlTitle,
+  value,
+  onChange,
+}) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (disabled) {
       return;
@@ -83,7 +115,9 @@ const InternalSegmentedOption: React.FC<{
         checked={checked}
         onChange={handleChange}
       />
-      <div className={`${prefixCls}-item-label`}>{label}</div>
+      <div className={`${prefixCls}-item-label`} title={htmlTitle}>
+        {label}
+      </div>
     </label>
   );
 };

@@ -20,6 +20,7 @@ exports[`rc-segmented render label with ReactNode 1`] = `
     />
     <div
       class="rc-segmented-item-label"
+      title="iOS"
     >
       iOS
     </div>
@@ -33,6 +34,7 @@ exports[`rc-segmented render label with ReactNode 1`] = `
     />
     <div
       class="rc-segmented-item-label"
+      title="Android"
     >
       <div
         id="android"
@@ -50,6 +52,7 @@ exports[`rc-segmented render label with ReactNode 1`] = `
     />
     <div
       class="rc-segmented-item-label"
+      title="Web"
     >
       <h2>
         Web
@@ -73,6 +76,7 @@ exports[`rc-segmented render segmented ok 1`] = `
     />
     <div
       class="rc-segmented-item-label"
+      title="iOS"
     >
       iOS
     </div>
@@ -86,6 +90,7 @@ exports[`rc-segmented render segmented ok 1`] = `
     />
     <div
       class="rc-segmented-item-label"
+      title="Android"
     >
       Android
     </div>
@@ -99,6 +104,43 @@ exports[`rc-segmented render segmented ok 1`] = `
     />
     <div
       class="rc-segmented-item-label"
+      title="Web"
+    >
+      Web
+    </div>
+  </label>
+</div>
+`;
+
+exports[`rc-segmented render segmented options without label 1`] = `
+<div
+  class="rc-segmented"
+>
+  <label
+    class="rc-segmented-item rc-segmented-item-selected"
+  >
+    <input
+      checked=""
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <div
+      class="rc-segmented-item-label"
+      title="iOS"
+    >
+      iOS
+    </div>
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <div
+      class="rc-segmented-item-label"
+      title="Web"
     >
       Web
     </div>
@@ -120,6 +162,7 @@ exports[`rc-segmented render segmented with CSSMotion 1`] = `
     />
     <div
       class="rc-segmented-item-label"
+      title="iOS"
     >
       iOS
     </div>
@@ -133,6 +176,7 @@ exports[`rc-segmented render segmented with CSSMotion 1`] = `
     />
     <div
       class="rc-segmented-item-label"
+      title="Android"
     >
       Android
     </div>
@@ -146,8 +190,89 @@ exports[`rc-segmented render segmented with CSSMotion 1`] = `
     />
     <div
       class="rc-segmented-item-label"
+      title="Web3"
     >
       Web3
+    </div>
+  </label>
+</div>
+`;
+
+exports[`rc-segmented render segmented with htmlTitle 1`] = `
+<div
+  class="rc-segmented"
+>
+  <label
+    class="rc-segmented-item rc-segmented-item-selected"
+  >
+    <input
+      checked=""
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <div
+      class="rc-segmented-item-label"
+      title="Web"
+    >
+      Web
+    </div>
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <div
+      class="rc-segmented-item-label"
+      title="hello1"
+    >
+      hello1
+    </div>
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <div
+      class="rc-segmented-item-label"
+      title="test2"
+    >
+      <div>
+        test1
+      </div>
+    </div>
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <div
+      class="rc-segmented-item-label"
+      title="hello1.5"
+    >
+      hello1
+    </div>
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <div
+      class="rc-segmented-item-label"
+      title=""
+    >
+      foo1
     </div>
   </label>
 </div>
@@ -167,6 +292,7 @@ exports[`rc-segmented render segmented with options 1`] = `
     />
     <div
       class="rc-segmented-item-label"
+      title="iOS"
     >
       iOS
     </div>
@@ -180,6 +306,7 @@ exports[`rc-segmented render segmented with options 1`] = `
     />
     <div
       class="rc-segmented-item-label"
+      title="Android"
     >
       Android
     </div>
@@ -193,6 +320,7 @@ exports[`rc-segmented render segmented with options 1`] = `
     />
     <div
       class="rc-segmented-item-label"
+      title="Web"
     >
       Web
     </div>
@@ -217,10 +345,9 @@ exports[`rc-segmented render segmented with options null/undefined 1`] = `
     />
   </label>
   <label
-    class="rc-segmented-item rc-segmented-item-selected"
+    class="rc-segmented-item"
   >
     <input
-      checked=""
       class="rc-segmented-item-input"
       type="radio"
     />
@@ -237,6 +364,7 @@ exports[`rc-segmented render segmented with options null/undefined 1`] = `
     />
     <div
       class="rc-segmented-item-label"
+      title=""
     />
   </label>
 </div>
@@ -256,6 +384,7 @@ exports[`rc-segmented render segmented with options: 1 1`] = `
     />
     <div
       class="rc-segmented-item-label"
+      title="1"
     >
       1
     </div>
@@ -269,6 +398,7 @@ exports[`rc-segmented render segmented with options: 1 1`] = `
     />
     <div
       class="rc-segmented-item-label"
+      title="2"
     >
       2
     </div>
@@ -282,6 +412,7 @@ exports[`rc-segmented render segmented with options: 1 1`] = `
     />
     <div
       class="rc-segmented-item-label"
+      title="3"
     >
       3
     </div>
@@ -295,6 +426,7 @@ exports[`rc-segmented render segmented with options: 1 1`] = `
     />
     <div
       class="rc-segmented-item-label"
+      title="4"
     >
       4
     </div>
@@ -308,6 +440,7 @@ exports[`rc-segmented render segmented with options: 1 1`] = `
     />
     <div
       class="rc-segmented-item-label"
+      title="5"
     >
       5
     </div>
@@ -329,6 +462,7 @@ exports[`rc-segmented render segmented with options: 2 1`] = `
     />
     <div
       class="rc-segmented-item-label"
+      title="iOS"
     >
       iOS
     </div>
@@ -342,6 +476,7 @@ exports[`rc-segmented render segmented with options: 2 1`] = `
     />
     <div
       class="rc-segmented-item-label"
+      title="Android"
     >
       Android
     </div>
@@ -355,6 +490,7 @@ exports[`rc-segmented render segmented with options: 2 1`] = `
     />
     <div
       class="rc-segmented-item-label"
+      title="Web"
     >
       Web
     </div>
@@ -376,6 +512,7 @@ exports[`rc-segmented render segmented with options: disabled 1`] = `
     />
     <div
       class="rc-segmented-item-label"
+      title="iOS"
     >
       iOS
     </div>
@@ -390,6 +527,7 @@ exports[`rc-segmented render segmented with options: disabled 1`] = `
     />
     <div
       class="rc-segmented-item-label"
+      title="Android"
     >
       Android
     </div>
@@ -403,6 +541,7 @@ exports[`rc-segmented render segmented with options: disabled 1`] = `
     />
     <div
       class="rc-segmented-item-label"
+      title="Web"
     >
       Web
     </div>
@@ -424,6 +563,7 @@ exports[`rc-segmented render segmented: disabled 1`] = `
     />
     <div
       class="rc-segmented-item-label"
+      title="iOS"
     >
       iOS
     </div>
@@ -437,6 +577,7 @@ exports[`rc-segmented render segmented: disabled 1`] = `
     />
     <div
       class="rc-segmented-item-label"
+      title="Android"
     >
       Android
     </div>
@@ -450,6 +591,7 @@ exports[`rc-segmented render segmented: disabled 1`] = `
     />
     <div
       class="rc-segmented-item-label"
+      title="Web"
     >
       Web
     </div>
