@@ -16,13 +16,13 @@ export default function App() {
               value: 'iOS',
             },
             {
-              label: <h3>Web</h3>,
-              value: 'Web',
-            },
-            {
               label: 'Android',
               value: 'Android',
               htmlTitle: 'Android12',
+            },
+            {
+              label: <h3>Web</h3>,
+              value: 'Web',
             },
           ]}
         />
