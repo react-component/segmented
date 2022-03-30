@@ -37,7 +37,7 @@ export interface SegmentedProps extends React.HTMLProps<HTMLDivElement> {
   motionName?: string;
 }
 
-function getValidtitle(option: SegmentedLabeledOption) {
+function getValidTitle(option: SegmentedLabeledOption) {
   if (typeof option.title !== 'undefined') {
     return option.title;
   }
@@ -51,11 +51,11 @@ function getValidtitle(option: SegmentedLabeledOption) {
 function normalizeOptions(options: SegmentedOptions): SegmentedLabeledOption[] {
   return options.map((option) => {
     if (typeof option === 'object' && option !== null) {
-      const validtitle = getValidtitle(option);
+      const validTitle = getValidTitle(option);
 
       return {
         ...option,
-        title: validtitle,
+        title: validTitle,
       };
     }
 
