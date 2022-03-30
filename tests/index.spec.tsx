@@ -386,4 +386,38 @@ describe('rc-segmented', () => {
         .map((n) => n.getDOMNode().textContent),
     ).toEqual(['', '', '']);
   });
+
+  it('render segmented with title', () => {
+    const wrapper = mount(
+      <Segmented
+        options={[
+          'Web',
+          {
+            label: 'hello1',
+            value: 'hello2',
+          },
+          {
+            label: <div>test1</div>,
+            value: 'test2',
+          },
+          {
+            label: 'hello1',
+            value: 'hello1',
+            title: 'hello1.5',
+          },
+          {
+            label: 'foo1',
+            value: 'foo2',
+            title: '',
+          },
+        ]}
+      />,
+    );
+    expect(wrapper.render()).toMatchSnapshot();
+    expect(
+      wrapper
+        .find('.rc-segmented-item-label')
+        .map((n) => (n.getDOMNode() as HTMLElement).title),
+    ).toEqual(['Web', 'hello1', '', 'hello1.5', '']);
+  });
 });

@@ -14,6 +14,10 @@ export interface SegmentedLabeledOption {
   disabled?: boolean;
   label: React.ReactNode;
   value: SegmentedRawOption;
+  /**
+   * html `title` property for label
+   */
+  title?: string;
 }
 
 type SegmentedOptions = (SegmentedRawOption | SegmentedLabeledOption)[];
@@ -33,13 +37,31 @@ export interface SegmentedProps extends React.HTMLProps<HTMLDivElement> {
   motionName?: string;
 }
 
+function getValidTitle(option: SegmentedLabeledOption) {
+  if (typeof option.title !== 'undefined') {
+    return option.title;
+  }
+
+  // read `label` when title is `undefined`
+  if (typeof option.label !== 'object') {
+    return option.label?.toString();
+  }
+}
+
 function normalizeOptions(options: SegmentedOptions): SegmentedLabeledOption[] {
   return options.map((option) => {
-    if (typeof option === 'object') {
-      return option || {};
+    if (typeof option === 'object' && option !== null) {
+      const validTitle = getValidTitle(option);
+
+      return {
+        ...option,
+        title: validTitle,
+      };
     }
+
     return {
       label: option?.toString(),
+      title: option?.toString(),
       value: option,
     };
   });
@@ -56,12 +78,22 @@ const InternalSegmentedOption: React.FC<{
   disabled?: boolean;
   checked: boolean;
   label: React.ReactNode;
+  title?: string;
   value: SegmentedRawOption;
   onChange: (
     e: React.ChangeEvent<HTMLInputElement>,
     value: SegmentedRawOption,
   ) => void;
-}> = ({ prefixCls, className, disabled, checked, label, value, onChange }) => {
+}> = ({
+  prefixCls,
+  className,
+  disabled,
+  checked,
+  label,
+  title,
+  value,
+  onChange,
+}) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (disabled) {
       return;
@@ -83,7 +115,9 @@ const InternalSegmentedOption: React.FC<{
         checked={checked}
         onChange={handleChange}
       />
-      <div className={`${prefixCls}-item-label`}>{label}</div>
+      <div className={`${prefixCls}-item-label`} title={title}>
+        {label}
+      </div>
     </label>
   );
 };
