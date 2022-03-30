@@ -18,7 +18,7 @@ export default function App() {
             {
               label: 'Android',
               value: 'Android',
-              htmlTitle: 'Android12',
+              title: 'Android12',
             },
             {
               label: <h3>Web</h3>,
@@ -30,9 +30,9 @@ export default function App() {
       <div className="wrapper">
         <Segmented
           options={[
-            { label: 'iOS', value: 'iOS', htmlTitle: 'IOS' },
-            { label: 'Android', value: 'Android', htmlTitle: '' },
-            { label: <h1>Web</h1>, value: 'Web', htmlTitle: 'WEB' },
+            { label: 'iOS', value: 'iOS', title: 'IOS' },
+            { label: 'Android', value: 'Android', title: '' },
+            { label: <h1>Web</h1>, value: 'Web', title: 'WEB' },
           ]}
         />
       </div>

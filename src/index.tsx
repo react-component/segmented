@@ -17,7 +17,7 @@ export interface SegmentedLabeledOption {
   /**
    * html `title` property for label
    */
-  htmlTitle?: string;
+  title?: string;
 }
 
 type SegmentedOptions = (SegmentedRawOption | SegmentedLabeledOption)[];
@@ -37,12 +37,12 @@ export interface SegmentedProps extends React.HTMLProps<HTMLDivElement> {
   motionName?: string;
 }
 
-function getValidHtmlTitle(option: SegmentedLabeledOption) {
-  if (typeof option.htmlTitle !== 'undefined') {
-    return option.htmlTitle;
+function getValidtitle(option: SegmentedLabeledOption) {
+  if (typeof option.title !== 'undefined') {
+    return option.title;
   }
 
-  // read `label` when htmlTitle is `undefined`
+  // read `label` when title is `undefined`
   if (typeof option.label !== 'object') {
     return option.label?.toString();
   }
@@ -51,17 +51,17 @@ function getValidHtmlTitle(option: SegmentedLabeledOption) {
 function normalizeOptions(options: SegmentedOptions): SegmentedLabeledOption[] {
   return options.map((option) => {
     if (typeof option === 'object' && option !== null) {
-      const validHtmlTitle = getValidHtmlTitle(option);
+      const validtitle = getValidtitle(option);
 
       return {
         ...option,
-        htmlTitle: validHtmlTitle,
+        title: validtitle,
       };
     }
 
     return {
       label: option?.toString(),
-      htmlTitle: option?.toString(),
+      title: option?.toString(),
       value: option,
     };
   });
@@ -78,7 +78,7 @@ const InternalSegmentedOption: React.FC<{
   disabled?: boolean;
   checked: boolean;
   label: React.ReactNode;
-  htmlTitle?: string;
+  title?: string;
   value: SegmentedRawOption;
   onChange: (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -90,7 +90,7 @@ const InternalSegmentedOption: React.FC<{
   disabled,
   checked,
   label,
-  htmlTitle,
+  title,
   value,
   onChange,
 }) => {
@@ -115,7 +115,7 @@ const InternalSegmentedOption: React.FC<{
         checked={checked}
         onChange={handleChange}
       />
-      <div className={`${prefixCls}-item-label`} title={htmlTitle}>
+      <div className={`${prefixCls}-item-label`} title={title}>
         {label}
       </div>
     </label>

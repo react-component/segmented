@@ -387,7 +387,7 @@ describe('rc-segmented', () => {
     ).toEqual(['', '', '']);
   });
 
-  it('render segmented with htmlTitle', () => {
+  it('render segmented with title', () => {
     const wrapper = mount(
       <Segmented
         options={[
@@ -403,12 +403,12 @@ describe('rc-segmented', () => {
           {
             label: 'hello1',
             value: 'hello1',
-            htmlTitle: 'hello1.5',
+            title: 'hello1.5',
           },
           {
             label: 'foo1',
             value: 'foo2',
-            htmlTitle: '',
+            title: '',
           },
         ]}
       />,
