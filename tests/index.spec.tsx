@@ -163,7 +163,7 @@ describe('rc-segmented', () => {
     expect(wrapper.render()).toMatchSnapshot();
     expect(
       wrapper
-        .find('.rc-segmented-item')
+        .find('label.rc-segmented-item')
         .at(1)
         .hasClass('rc-segmented-item-disabled'),
     ).toBeTruthy();

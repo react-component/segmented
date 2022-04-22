@@ -13,15 +13,27 @@ export default class Demo extends React.Component<
 
   render() {
     return (
-      <Segmented
-        options={['iOS', 'Android', 'Web3']}
-        value={this.state.value}
-        onChange={(e) =>
-          this.setState({
-            value: e.target.value,
-          })
-        }
-      />
+      <>
+        <Segmented
+          options={['iOS', 'Android', 'Web3']}
+          value={this.state.value}
+          onChange={(e) =>
+            this.setState({
+              value: e.target.value,
+            })
+          }
+        />
+        &nbsp;&nbsp;
+        <Segmented
+          options={['iOS', 'Android', 'Web3']}
+          value={this.state.value}
+          onChange={(e) =>
+            this.setState({
+              value: e.target.value,
+            })
+          }
+        />
+      </>
     );
   }
 }
