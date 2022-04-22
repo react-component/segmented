@@ -163,7 +163,7 @@ describe('rc-segmented', () => {
     expect(wrapper.render()).toMatchSnapshot();
     expect(
       wrapper
-        .find('.rc-segmented-item')
+        .find('label.rc-segmented-item')
         .at(1)
         .hasClass('rc-segmented-item-disabled'),
     ).toBeTruthy();
@@ -285,6 +285,34 @@ describe('rc-segmented', () => {
       .at(1)
       .simulate('change');
     expect(wrapper.state().value).toBe('Android');
+
+    // change state directly
+    wrapper.find(Demo).setState({ value: 'Web3' });
+
+    // Motion end
+    wrapper.triggerMotionEvent();
+    act(() => {
+      jest.runAllTimers();
+      wrapper.update();
+    });
+
+    expect(
+      wrapper.find('.rc-segmented-item-selected').contains('Web3'),
+    ).toBeTruthy();
+
+    // Motion end
+    wrapper.triggerMotionEvent();
+    act(() => {
+      jest.runAllTimers();
+      wrapper.update();
+    });
+
+    // change it strangely
+    wrapper.find(Demo).setState({ value: 'Web4' });
+    // invalid changes
+    expect(
+      wrapper.find('.rc-segmented-item-selected').contains('Web3'),
+    ).toBeTruthy();
   });
 
   it('render segmented with CSSMotion', () => {
