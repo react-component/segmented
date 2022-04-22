@@ -163,12 +163,6 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       SegmentedRawOption | undefined
     >(selected);
 
-    const latestVisualSelected = React.useRef(visualSelected);
-
-    React.useEffect(() => {
-      latestVisualSelected.current = visualSelected;
-    });
-
     const [thumbShow, setThumbShow] = React.useState(false);
 
     const doThumbAnimation = React.useCallback(
@@ -176,6 +170,10 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
         const segmentedItemIndex = segmentedOptions.findIndex(
           (n) => n.value === selectedValue,
         );
+
+        if (segmentedItemIndex < 0) {
+          return;
+        }
 
         // find target element
         const toElement = containerRef.current?.querySelector(
@@ -204,6 +202,12 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       },
       [prefixCls, segmentedOptions],
     );
+
+    // get latest version of `visualSelected`
+    const latestVisualSelected = React.useRef(visualSelected);
+    React.useEffect(() => {
+      latestVisualSelected.current = visualSelected;
+    });
 
     React.useEffect(() => {
       // Syncing `visualSelected` when `selected` changed
