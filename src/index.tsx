@@ -22,15 +22,12 @@ export interface SegmentedLabeledOption {
 
 type SegmentedOptions = (SegmentedRawOption | SegmentedLabeledOption)[];
 
-type ExtendedHTMLInputElement = Omit<HTMLInputElement, 'value'> & {
-  value: SegmentedValue;
-};
-
-export interface SegmentedProps extends React.HTMLProps<HTMLDivElement> {
+export interface SegmentedProps
+  extends Omit<React.HTMLProps<HTMLDivElement>, 'onChange'> {
   options: SegmentedOptions;
   defaultValue?: SegmentedValue;
   value?: SegmentedValue;
-  onChange?: (e: React.ChangeEvent<ExtendedHTMLInputElement>) => void;
+  onChange?: (value: SegmentedValue) => void;
   disabled?: boolean;
   prefixCls?: string;
   direction?: 'ltr' | 'rtl';
@@ -230,19 +227,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
 
       setSelected(val);
 
-      if (onChange) {
-        const mutatedTarget = Object.create(event.target, {
-          value: {
-            value: val,
-          },
-        });
-        const mutatedEvent = Object.create(event, {
-          target: {
-            value: mutatedTarget,
-          },
-        });
-        onChange(mutatedEvent);
-      }
+      onChange?.(val);
     };
 
     // --- motion event handlers for thumb move

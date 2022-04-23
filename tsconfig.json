@@ -18,5 +18,7 @@
       "@@/*": ["src/.umi/*"],
       "rc-segmented": ["src/index.tsx"]
     }
-  }
+  },
+  "include": ["src", "tests", "docs/examples"],
+  "exclude": [".umi*"]
 }
