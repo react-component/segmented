@@ -35,13 +35,16 @@ import { render } from 'react-dom';
 render(
   <Segmented
     options={['Antd', 'Antv', 'Egg.js']}
-    onChange={(e) => handleValueChange(e.target.value)}
+    onChange={(value) => handleValueChange(value)}
   />,
   mountNode,
 );
 ```
 
 ## API
+
+Please note that **onChange** API
+ changed on v2.0.0+
 
 | Property     | Type                                                           | Default      | Description                        |
 | --------- | --------- | --------- | --------- |
@@ -52,7 +55,7 @@ render(
 | value        | string \| number                                               |              | value of segmented                 |
 | defaultValue | string \| number                                               |              | defaultValue of segmented          |
 | value | string \| number                                               |              | currently selected value of segmented          |
-| onChange     | (e: any) => void                                               |              | defaultValue of segmented          |
+| onChange     | (value: string \| number) => void                                               |              | defaultValue of segmented          |
 | disabled     | boolean                                                        | false        | disabled status of segmented       |
 
 ### SegmentedOption

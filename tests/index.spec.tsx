@@ -76,7 +76,7 @@ describe('rc-segmented', () => {
     const wrapper = mount(
       <Segmented
         options={['iOS', 'Android', 'Web']}
-        onChange={(e) => handleValueChange(e.target.value)}
+        onChange={(value) => handleValueChange(value)}
       />,
     );
     expect(wrapper.render()).toMatchSnapshot();
@@ -108,7 +108,7 @@ describe('rc-segmented', () => {
     const wrapper = mount(
       <Segmented
         options={[1, 2, 3, 4, 5]}
-        onChange={(e) => handleValueChange(e.target.value)}
+        onChange={(value) => handleValueChange(value)}
       />,
     );
     expect(wrapper.render()).toMatchSnapshot();
@@ -133,7 +133,7 @@ describe('rc-segmented', () => {
     const wrapper = mount(
       <Segmented
         options={['iOS', { label: 'Android', value: 'Android' }, 'Web']}
-        onChange={(e) => handleValueChange(e.target.value)}
+        onChange={(value) => handleValueChange(value)}
       />,
     );
     expect(wrapper.render()).toMatchSnapshot();
@@ -157,7 +157,7 @@ describe('rc-segmented', () => {
           { label: 'Android', value: 'Android', disabled: true },
           'Web',
         ]}
-        onChange={(e) => handleValueChange(e.target.value)}
+        onChange={(value) => handleValueChange(value)}
       />,
     );
     expect(wrapper.render()).toMatchSnapshot();
@@ -197,7 +197,7 @@ describe('rc-segmented', () => {
       <Segmented
         options={['iOS', 'Android', 'Web']}
         disabled
-        onChange={(e) => handleValueChange(e.target.value)}
+        onChange={(value) => handleValueChange(value)}
       />,
     );
     expect(wrapper.render()).toMatchSnapshot();
@@ -248,7 +248,8 @@ describe('rc-segmented', () => {
       />,
     );
 
-    expect(wrapper.find(Segmented).getElement().ref).toBe(ref);
+    const segmentedEl = wrapper.find(Segmented).getElement();
+    expect((segmentedEl as any).ref).toBe(ref);
   });
 
   it('render segmented with controlled mode', () => {
@@ -262,9 +263,9 @@ describe('rc-segmented', () => {
           <Segmented
             options={['iOS', 'Android', 'Web3']}
             value={this.state.value}
-            onChange={(e) =>
+            onChange={(value) =>
               this.setState({
-                value: e.target.value,
+                value,
               })
             }
           />
@@ -320,7 +321,7 @@ describe('rc-segmented', () => {
     const wrapper = mount(
       <Segmented
         options={['iOS', 'Android', 'Web3']}
-        onChange={(e) => handleValueChange(e.target.value)}
+        onChange={(value) => handleValueChange(value)}
       />,
     );
     expect(wrapper.render()).toMatchSnapshot();
@@ -404,7 +405,7 @@ describe('rc-segmented', () => {
       <Segmented
         options={[null, undefined, ''] as any}
         disabled
-        onChange={(e) => handleValueChange(e.target.value)}
+        onChange={(value) => handleValueChange(value)}
       />,
     );
     expect(wrapper.render()).toMatchSnapshot();

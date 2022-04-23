@@ -12,5 +12,5 @@ export function mount<
   P = C['props'],
   S = C['state'],
 >(...args: MountParam) {
-  return enzymeMount(...args) as WrapperType<P, S, C>;
+  return enzymeMount(...args) as unknown as WrapperType<P, S, C>;
 }

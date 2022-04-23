@@ -17,9 +17,9 @@ export default class Demo extends React.Component<
         <Segmented
           options={['iOS', 'Android', 'Web3']}
           value={this.state.value}
-          onChange={(e) =>
+          onChange={(value) =>
             this.setState({
-              value: e.target.value,
+              value,
             })
           }
         />
@@ -27,9 +27,9 @@ export default class Demo extends React.Component<
         <Segmented
           options={['iOS', 'Android', 'Web3']}
           value={this.state.value}
-          onChange={(e) =>
+          onChange={(value) =>
             this.setState({
-              value: e.target.value,
+              value,
             })
           }
         />

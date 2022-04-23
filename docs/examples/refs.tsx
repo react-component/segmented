@@ -9,7 +9,12 @@ class ClassComponentWithStringRef extends React.Component {
   }
 
   render() {
-    return <Segmented options={['iOS', 'Android', 'Web']} ref="segmentedRef" />;
+    return (
+      <Segmented
+        options={['iOS', 'Android', 'Web']}
+        ref={'segmentedRef' as any}
+      />
+    );
   }
 }
 
@@ -34,7 +39,7 @@ class ClassComponentWithCreateRef extends React.Component<
   Record<string, never>,
   Record<string, never>
 > {
-  segmentedRef = React.createRef();
+  segmentedRef = React.createRef<HTMLDivElement>();
 
   componentDidMount() {
     console.log(this.segmentedRef.current, 'ref');
@@ -48,7 +53,7 @@ class ClassComponentWithCreateRef extends React.Component<
 }
 
 function FunctionalComponent() {
-  const segmentedRef = React.useRef();
+  const segmentedRef = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
     console.log(segmentedRef.current, 'ref');
   }, []);
