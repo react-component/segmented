@@ -20,9 +20,13 @@
   align-items: stretch;
   justify-items: flex-start;
 
-  background-color: rgba(0, 0, 0, 0.04);
   border-radius: 2px;
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.04);
+
+  &-wrap {
+    display: inline-flex;
+    padding: 2px;
+    background-color: rgba(0, 0, 0, 0.04);
+  }
 
   &-item {
     position: relative;
@@ -49,6 +53,7 @@
 
     &-label {
       z-index: 2;
+      line-height: 24px;
     }
 
     &-input {

@@ -67,6 +67,7 @@ function normalizeOptions(options: SegmentedOptions): SegmentedLabeledOption[] {
 const calcThumbStyle = (targetElement: HTMLElement): React.CSSProperties => ({
   transform: `translateX(${targetElement.offsetLeft}px)`,
   width: targetElement.clientWidth,
+  height: targetElement.clientHeight,
 });
 
 const InternalSegmentedOption: React.FC<{
@@ -261,52 +262,54 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     const divProps = omit(restProps, ['children']);
 
     return (
-      <div
-        {...divProps}
-        className={classNames(
-          prefixCls,
-          {
-            [`${prefixCls}-rtl`]: direction === 'rtl',
-            [`${prefixCls}-disabled`]: disabled,
-          },
-          className,
-        )}
-        ref={mergedRef}
-      >
-        <CSSMotion
-          visible={thumbShow}
-          motionName={`${prefixCls}-${motionName}`}
-          motionDeadline={300}
-          onEnterStart={handleThumbEnterStart}
-          onEnterActive={handleThumbEnterActive}
-          onEnterEnd={handleThumbEnterEnd}
+      <div className={`${prefixCls}-wrap`}>
+        <div
+          {...divProps}
+          className={classNames(
+            prefixCls,
+            {
+              [`${prefixCls}-rtl`]: direction === 'rtl',
+              [`${prefixCls}-disabled`]: disabled,
+            },
+            className,
+          )}
+          ref={mergedRef}
         >
-          {({ className: motionClassName, style: motionStyle }) => {
-            return (
-              <div
-                style={motionStyle}
-                className={classNames(`${prefixCls}-thumb`, motionClassName)}
-              />
-            );
-          }}
-        </CSSMotion>
-        {segmentedOptions.map((segmentedOption) => (
-          <InternalSegmentedOption
-            key={segmentedOption.value}
-            prefixCls={prefixCls}
-            className={classNames(
-              segmentedOption.className,
-              `${prefixCls}-item`,
-              {
-                [`${prefixCls}-item-selected`]:
-                  segmentedOption.value === visualSelected,
-              },
-            )}
-            checked={segmentedOption.value === selected}
-            onChange={handleChange}
-            {...segmentedOption}
-          />
-        ))}
+          <CSSMotion
+            visible={thumbShow}
+            motionName={`${prefixCls}-${motionName}`}
+            motionDeadline={300}
+            onEnterStart={handleThumbEnterStart}
+            onEnterActive={handleThumbEnterActive}
+            onEnterEnd={handleThumbEnterEnd}
+          >
+            {({ className: motionClassName, style: motionStyle }) => {
+              return (
+                <div
+                  style={motionStyle}
+                  className={classNames(`${prefixCls}-thumb`, motionClassName)}
+                />
+              );
+            }}
+          </CSSMotion>
+          {segmentedOptions.map((segmentedOption) => (
+            <InternalSegmentedOption
+              key={segmentedOption.value}
+              prefixCls={prefixCls}
+              className={classNames(
+                segmentedOption.className,
+                `${prefixCls}-item`,
+                {
+                  [`${prefixCls}-item-selected`]:
+                    segmentedOption.value === visualSelected,
+                },
+              )}
+              checked={segmentedOption.value === selected}
+              onChange={handleChange}
+              {...segmentedOption}
+            />
+          ))}
+        </div>
       </div>
     );
   },
