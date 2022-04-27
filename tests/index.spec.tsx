@@ -1,7 +1,5 @@
 import React from 'react';
-import { act } from 'react-dom/test-utils';
-import { mount } from './wrapper';
-
+import { render, act, fireEvent } from '@testing-library/react';
 import Segmented from '../src';
 import type { SegmentedValue } from '../src';
 
@@ -12,32 +10,47 @@ jest.mock('rc-motion/lib/util/motion', () => {
   };
 });
 
-jest.useFakeTimers();
-
 describe('rc-segmented', () => {
+  function expectMatchChecked(container: HTMLElement, checkedList: boolean[]) {
+    const inputList = Array.from(
+      container.querySelectorAll<HTMLInputElement>('.rc-segmented-item-input'),
+    );
+    expect(inputList).toHaveLength(checkedList.length);
+
+    inputList.forEach((input, i) => {
+      const checked = checkedList[i];
+
+      expect(input.checked).toBe(checked);
+    });
+  }
+
+  beforeEach(() => {
+    jest.useFakeTimers();
+  });
+
+  afterEach(() => {
+    jest.useRealTimers();
+  });
+
   it('render empty segmented', () => {
-    const wrapper = mount(<Segmented options={[]} />);
-    expect(wrapper.render()).toMatchSnapshot();
+    const { asFragment } = render(<Segmented options={[]} />);
+    expect(asFragment().firstChild).toMatchSnapshot();
   });
 
   it('render segmented ok', () => {
-    const wrapper = mount(
+    const { container, asFragment } = render(
       <Segmented
         options={[{ label: 'iOS', value: 'iOS' }, 'Android', 'Web']}
       />,
     );
 
-    expect(wrapper.render()).toMatchSnapshot();
+    expect(asFragment().firstChild).toMatchSnapshot();
 
-    expect(
-      wrapper
-        .find('.rc-segmented-item-input')
-        .map((el) => (el.getDOMNode() as HTMLInputElement).checked),
-    ).toEqual([true, false, false]);
+    expectMatchChecked(container, [true, false, false]);
   });
 
   it('render label with ReactNode', () => {
-    const wrapper = mount(
+    const { container, asFragment } = render(
       <Segmented
         options={[
           { label: 'iOS', value: 'iOS' },
@@ -47,110 +60,78 @@ describe('rc-segmented', () => {
       />,
     );
 
-    expect(wrapper.render()).toMatchSnapshot();
+    expect(asFragment().firstChild).toMatchSnapshot();
+    expectMatchChecked(container, [true, false, false]);
 
-    expect(
-      wrapper
-        .find('.rc-segmented-item-input')
-        .map((el) => (el.getDOMNode() as HTMLInputElement).checked),
-    ).toEqual([true, false, false]);
-
-    expect(wrapper.find('#android').at(0).text()).toContain('Android');
-    expect(wrapper.find('h2').at(0).text()).toContain('Web');
+    expect(container.querySelector('#android')?.textContent).toContain(
+      'Android',
+    );
+    expect(container.querySelector('h2')?.textContent).toContain('Web');
   });
 
   it('render segmented with defaultValue', () => {
-    const wrapper = mount(
+    const { container } = render(
       <Segmented options={['iOS', 'Android', 'Web']} defaultValue="Web" />,
     );
 
-    expect(
-      wrapper
-        .find('.rc-segmented-item-input')
-        .map((el) => (el.getDOMNode() as HTMLInputElement).checked),
-    ).toEqual([false, false, true]);
+    expectMatchChecked(container, [false, false, true]);
   });
 
   it('render segmented with options', () => {
     const handleValueChange = jest.fn();
-    const wrapper = mount(
+    const { container, asFragment } = render(
       <Segmented
         options={['iOS', 'Android', 'Web']}
         onChange={(value) => handleValueChange(value)}
       />,
     );
-    expect(wrapper.render()).toMatchSnapshot();
+    expect(asFragment().firstChild).toMatchSnapshot();
+    expectMatchChecked(container, [true, false, false]);
 
-    expect(
-      wrapper
-        .find('.rc-segmented-item-input')
-        .map((el) => (el.getDOMNode() as HTMLInputElement).checked),
-    ).toEqual([true, false, false]);
-    expect(
-      wrapper
-        .find('.rc-segmented-item')
-        .at(0)
-        .hasClass('rc-segmented-item-selected'),
-    ).toBeTruthy();
+    expect(container.querySelectorAll('.rc-segmented-item')[0]).toHaveClass(
+      'rc-segmented-item-selected',
+    );
 
-    wrapper.find('.rc-segmented-item-input').at(2).simulate('change');
+    fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[2]);
     expect(handleValueChange).toBeCalledWith('Web');
-
-    expect(
-      wrapper
-        .find('.rc-segmented-item-input')
-        .map((el) => (el.getDOMNode() as HTMLInputElement).checked),
-    ).toEqual([false, false, true]);
+    expectMatchChecked(container, [false, false, true]);
   });
 
   it('render segmented with options: 1', () => {
     const handleValueChange = jest.fn();
-    const wrapper = mount(
+    const { container, asFragment } = render(
       <Segmented
         options={[1, 2, 3, 4, 5]}
         onChange={(value) => handleValueChange(value)}
       />,
     );
-    expect(wrapper.render()).toMatchSnapshot();
-    expect(
-      wrapper
-        .find('.rc-segmented-item-input')
-        .map((el) => (el.getDOMNode() as HTMLInputElement).checked),
-    ).toEqual([true, false, false, false, false]);
+    expect(asFragment().firstChild).toMatchSnapshot();
+    expectMatchChecked(container, [true, false, false, false, false]);
 
-    wrapper.find('.rc-segmented-item-input').last().simulate('change');
+    fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[4]);
     expect(handleValueChange).toBeCalledWith(5);
-
-    expect(
-      wrapper
-        .find('.rc-segmented-item-input')
-        .map((el) => (el.getDOMNode() as HTMLInputElement).checked),
-    ).toEqual([false, false, false, false, true]);
+    expectMatchChecked(container, [false, false, false, false, true]);
   });
 
   it('render segmented with options: 2', () => {
     const handleValueChange = jest.fn();
-    const wrapper = mount(
+    const { container, asFragment } = render(
       <Segmented
         options={['iOS', { label: 'Android', value: 'Android' }, 'Web']}
         onChange={(value) => handleValueChange(value)}
       />,
     );
-    expect(wrapper.render()).toMatchSnapshot();
+    expect(asFragment().firstChild).toMatchSnapshot();
 
-    wrapper.find('.rc-segmented-item-input').at(1).simulate('change');
+    fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[1]);
     expect(handleValueChange).toBeCalledWith('Android');
 
-    expect(
-      wrapper
-        .find('.rc-segmented-item-input')
-        .map((el) => (el.getDOMNode() as HTMLInputElement).checked),
-    ).toEqual([false, true, false]);
+    expectMatchChecked(container, [false, true, false]);
   });
 
   it('render segmented with options: disabled', () => {
     const handleValueChange = jest.fn();
-    const wrapper = mount(
+    const { container, asFragment } = render(
       <Segmented
         options={[
           'iOS',
@@ -160,72 +141,53 @@ describe('rc-segmented', () => {
         onChange={(value) => handleValueChange(value)}
       />,
     );
-    expect(wrapper.render()).toMatchSnapshot();
+    expect(asFragment().firstChild).toMatchSnapshot();
     expect(
-      wrapper
-        .find('label.rc-segmented-item')
-        .at(1)
-        .hasClass('rc-segmented-item-disabled'),
-    ).toBeTruthy();
+      container.querySelectorAll('label.rc-segmented-item')[1],
+    ).toHaveClass('rc-segmented-item-disabled');
     expect(
-      wrapper.find('.rc-segmented-item-input').at(1).prop('disabled'),
+      container.querySelectorAll<HTMLInputElement>(
+        '.rc-segmented-item-input',
+      )[1].disabled,
     ).toBeTruthy();
 
-    wrapper.find('.rc-segmented-item-input').at(1).simulate('change');
+    fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[1]);
     expect(handleValueChange).not.toBeCalled();
 
-    expect(
-      wrapper
-        .find('.rc-segmented-item-input')
-        .map((el) => (el.getDOMNode() as HTMLInputElement).checked),
-    ).toEqual([true, false, false]);
+    expectMatchChecked(container, [true, false, false]);
 
-    wrapper.find('.rc-segmented-item-input').at(2).simulate('change');
+    fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[2]);
     expect(handleValueChange).toBeCalledWith('Web');
     expect(handleValueChange).toBeCalledTimes(1);
 
-    expect(
-      wrapper
-        .find('.rc-segmented-item-input')
-        .map((el) => (el.getDOMNode() as HTMLInputElement).checked),
-    ).toEqual([false, false, true]);
+    expectMatchChecked(container, [false, false, true]);
   });
 
   it('render segmented: disabled', () => {
     const handleValueChange = jest.fn();
-    const wrapper = mount(
+    const { container, asFragment } = render(
       <Segmented
         options={['iOS', 'Android', 'Web']}
         disabled
         onChange={(value) => handleValueChange(value)}
       />,
     );
-    expect(wrapper.render()).toMatchSnapshot();
-    expect(
-      wrapper.find('.rc-segmented').hasClass('rc-segmented-disabled'),
-    ).toBeTruthy();
+    expect(asFragment().firstChild).toMatchSnapshot();
+    expect(container.querySelector('.rc-segmented')).toHaveClass(
+      'rc-segmented-disabled',
+    );
 
-    wrapper.find('.rc-segmented-item-input').at(1).simulate('change');
+    fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[1]);
     expect(handleValueChange).not.toBeCalled();
+    expectMatchChecked(container, [true, false, false]);
 
-    expect(
-      wrapper
-        .find('.rc-segmented-item-input')
-        .map((el) => (el.getDOMNode() as HTMLInputElement).checked),
-    ).toEqual([true, false, false]);
-
-    wrapper.find('.rc-segmented-item-input').at(2).simulate('change');
+    fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[2]);
     expect(handleValueChange).not.toBeCalled();
-
-    expect(
-      wrapper
-        .find('.rc-segmented-item-input')
-        .map((el) => (el.getDOMNode() as HTMLInputElement).checked),
-    ).toEqual([true, false, false]);
+    expectMatchChecked(container, [true, false, false]);
   });
 
   it('render segmented with className and other html attributes', () => {
-    const wrapper = mount(
+    const { container } = render(
       <Segmented
         options={['iOS', 'Android', 'Web']}
         defaultValue="Web"
@@ -234,13 +196,13 @@ describe('rc-segmented', () => {
       />,
     );
 
-    expect(wrapper.hasClass('mock-cls')).toBeTruthy();
-    expect(wrapper.prop('data-test-id')).toBe('hello');
+    expect(container.firstChild).toHaveClass('mock-cls');
+    expect(container.firstChild).toHaveAttribute('data-test-id', 'hello');
   });
 
   it('render segmented with ref', () => {
     const ref = React.createRef<HTMLDivElement>();
-    const wrapper = mount(
+    const { container } = render(
       <Segmented
         options={['iOS', 'Android', 'Web']}
         defaultValue="Web"
@@ -248,176 +210,179 @@ describe('rc-segmented', () => {
       />,
     );
 
-    const segmentedEl = wrapper.find(Segmented).getElement();
-    expect((segmentedEl as any).ref).toBe(ref);
+    expect(ref.current).toBe(container.querySelector('.rc-segmented'));
   });
 
   it('render segmented with controlled mode', () => {
-    class Demo extends React.Component<{}, { value: SegmentedValue }> {
-      state = {
-        value: 'Web3',
-      };
+    const Demo = () => {
+      const options = ['iOS', 'Android', 'Web3'];
 
-      render() {
-        return (
-          <Segmented
-            options={['iOS', 'Android', 'Web3']}
-            value={this.state.value}
-            onChange={(value) =>
-              this.setState({
-                value,
-              })
-            }
+      const [value, setValue] = React.useState<any>('Web3');
+
+      return (
+        <>
+          <Segmented options={options} value={value} onChange={setValue} />
+          <div className="value">{value}</div>
+          <input
+            className="control"
+            onChange={(e) => {
+              setValue(e.target.value);
+            }}
           />
-        );
-      }
-    }
-    const wrapper = mount<Demo>(<Demo />);
-    wrapper
-      .find('Segmented')
-      .find('.rc-segmented-item-input')
-      .at(0)
-      .simulate('change');
-    expect(wrapper.state().value).toBe('iOS');
+        </>
+      );
+    };
+    const { container } = render(<Demo />);
+    fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[0]);
+    expect(container.querySelector('.value')?.textContent).toBe('iOS');
 
-    wrapper
-      .find('Segmented')
-      .find('.rc-segmented-item-input')
-      .at(1)
-      .simulate('change');
-    expect(wrapper.state().value).toBe('Android');
+    fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[1]);
+    expect(container.querySelector('.value')?.textContent).toBe('Android');
 
     // change state directly
-    wrapper.find(Demo).setState({ value: 'Web3' });
+    fireEvent.change(container.querySelector('.control')!, {
+      target: { value: 'Web3' },
+    });
+    expect(container.querySelector('.value')?.textContent).toBe('Web3');
 
-    // Motion end
-    wrapper.triggerMotionEvent();
+    // Motion to active
     act(() => {
       jest.runAllTimers();
-      wrapper.update();
+    });
+
+    // Motion end
+    fireEvent.animationEnd(container.querySelector('.rc-segmented-thumb')!);
+    act(() => {
+      jest.runAllTimers();
     });
 
     expect(
-      wrapper.find('.rc-segmented-item-selected').contains('Web3'),
-    ).toBeTruthy();
+      container.querySelector('.rc-segmented-item-selected')?.textContent,
+    ).toContain('Web3');
 
     // Motion end
-    wrapper.triggerMotionEvent();
+    fireEvent.animationEnd(container.querySelector('.rc-segmented-thumb')!);
     act(() => {
       jest.runAllTimers();
-      wrapper.update();
     });
 
     // change it strangely
-    wrapper.find(Demo).setState({ value: 'Web4' });
+    fireEvent.change(container.querySelector('.control')!, {
+      target: { value: 'Web4' },
+    });
+
     // invalid changes
     expect(
-      wrapper.find('.rc-segmented-item-selected').contains('Web3'),
-    ).toBeTruthy();
+      container.querySelector('.rc-segmented-item-selected')?.textContent,
+    ).toContain('Web3');
   });
 
   it('render segmented with CSSMotion', () => {
     const handleValueChange = jest.fn();
-    const wrapper = mount(
+    const { container, asFragment } = render(
       <Segmented
         options={['iOS', 'Android', 'Web3']}
         onChange={(value) => handleValueChange(value)}
       />,
     );
-    expect(wrapper.render()).toMatchSnapshot();
+    expect(asFragment().firstChild).toMatchSnapshot();
 
-    expect(
-      wrapper
-        .find('.rc-segmented-item-input')
-        .map((el) => (el.getDOMNode() as HTMLInputElement).checked),
-    ).toEqual([true, false, false]);
-    expect(
-      wrapper
-        .find('.rc-segmented-item')
-        .at(0)
-        .hasClass('rc-segmented-item-selected'),
-    ).toBeTruthy();
+    expectMatchChecked(container, [true, false, false]);
+    expect(container.querySelectorAll('.rc-segmented-item')[0]).toHaveClass(
+      'rc-segmented-item-selected',
+    );
 
-    wrapper.find('.rc-segmented-item-input').at(2).simulate('change');
+    fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[2]);
     expect(handleValueChange).toBeCalledWith('Web3');
+    expectMatchChecked(container, [false, false, true]);
 
-    expect(
-      wrapper
-        .find('.rc-segmented-item-input')
-        .map((el) => (el.getDOMNode() as HTMLInputElement).checked),
-    ).toEqual([false, false, true]);
-
-    const thumb = wrapper.find('.rc-segmented-thumb').at(0);
-    expect(thumb.hasClass('rc-segmented-thumb-motion'));
+    expect(container.querySelectorAll('.rc-segmented-thumb')[0]).toHaveClass(
+      'rc-segmented-thumb-motion',
+    );
 
     // thumb appeared at `iOS`
-    const thumbDom = wrapper
-      .find('.rc-segmented-thumb')
-      .at(0)
-      .getDOMNode() as HTMLDivElement;
-    expect(thumbDom.style.transform).toBe('translateX(0px)');
-    expect(thumbDom.style.width).toBe('62px');
+    expect(container.querySelectorAll('.rc-segmented-thumb')[0]).toHaveStyle({
+      transform: 'translateX(0px)',
+      width: '62px',
+    });
 
-    // Motion end
-    wrapper.triggerMotionEvent();
+    // Motion => active
     act(() => {
       jest.runAllTimers();
-      wrapper.update();
     });
+
+    // Motion enter end
+    fireEvent.animationEnd(container.querySelector('.rc-segmented-thumb')!);
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    // Motion leave end
+    fireEvent.animationEnd(container.querySelector('.rc-segmented-thumb')!);
+    act(() => {
+      jest.runAllTimers();
+    });
+
     // thumb should disappear
-    expect(wrapper.find('.rc-segmented-thumb').length).toBe(0);
+    expect(container.querySelector('.rc-segmented-thumb')).toBeFalsy();
 
     // change selection again
-    wrapper.find('.rc-segmented-item-input').at(1).simulate('change');
+    fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[1]);
     expect(handleValueChange).toBeCalledWith('Android');
-
-    expect(
-      wrapper
-        .find('.rc-segmented-item-input')
-        .map((el) => (el.getDOMNode() as HTMLInputElement).checked),
-    ).toEqual([false, true, false]);
+    expectMatchChecked(container, [false, true, false]);
 
     // thumb should move
-    const thumb1 = wrapper.find('.rc-segmented-thumb').at(0);
-    expect(thumb1.hasClass('rc-segmented-thumb-motion'));
+    expect(container.querySelector('.rc-segmented-thumb')).toHaveClass(
+      'rc-segmented-thumb-motion',
+    );
 
     // thumb appeared at `Web3`
-    const thumbDom1 = wrapper
-      .find('.rc-segmented-thumb')
-      .at(0)
-      .getDOMNode() as HTMLDivElement;
-    expect(thumbDom1.style.transform).toBe('translateX(180px)');
-    expect(thumbDom1.style.width).toBe('76px');
+    expect(container.querySelector('.rc-segmented-thumb')).toHaveStyle({
+      transform: 'translateX(180px)',
+      width: '76px',
+    });
 
-    // Motion end
-    wrapper.triggerMotionEvent();
+    // Motion enter end
     act(() => {
       jest.runAllTimers();
-      wrapper.update();
     });
+    fireEvent.animationEnd(container.querySelector('.rc-segmented-thumb')!);
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    // Motion leave end
+    fireEvent.animationEnd(container.querySelector('.rc-segmented-thumb')!);
+    act(() => {
+      jest.runAllTimers();
+    });
+
     // thumb should disappear
-    expect(wrapper.find('.rc-segmented-thumb').length).toBe(0);
+    expect(container.querySelector('.rc-segmented-thumb')).toBeFalsy();
   });
 
   it('render segmented with options null/undefined', () => {
     const handleValueChange = jest.fn();
-    const wrapper = mount(
+    const { asFragment, container } = render(
       <Segmented
         options={[null, undefined, ''] as any}
         disabled
         onChange={(value) => handleValueChange(value)}
       />,
     );
-    expect(wrapper.render()).toMatchSnapshot();
+    expect(asFragment().firstChild).toMatchSnapshot();
+
     expect(
-      wrapper
-        .find('.rc-segmented-item-label')
-        .map((n) => n.getDOMNode().textContent),
+      Array.from(
+        container.querySelectorAll<HTMLLabelElement>(
+          '.rc-segmented-item-label',
+        ),
+      ).map((n) => n.textContent),
     ).toEqual(['', '', '']);
   });
 
   it('render segmented with title', () => {
-    const wrapper = mount(
+    const { asFragment, container } = render(
       <Segmented
         options={[
           'Web',
@@ -442,11 +407,14 @@ describe('rc-segmented', () => {
         ]}
       />,
     );
-    expect(wrapper.render()).toMatchSnapshot();
+    expect(asFragment().firstChild).toMatchSnapshot();
+
     expect(
-      wrapper
-        .find('.rc-segmented-item-label')
-        .map((n) => (n.getDOMNode() as HTMLElement).title),
+      Array.from(
+        container.querySelectorAll<HTMLLabelElement>(
+          '.rc-segmented-item-label',
+        ),
+      ).map((n) => n.title),
     ).toEqual(['Web', 'hello1', '', 'hello1.5', '']);
   });
 });
