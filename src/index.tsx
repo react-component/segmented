@@ -67,7 +67,6 @@ function normalizeOptions(options: SegmentedOptions): SegmentedLabeledOption[] {
 const calcThumbStyle = (targetElement: HTMLElement): React.CSSProperties => ({
   transform: `translateX(${targetElement.offsetLeft}px)`,
   width: targetElement.clientWidth,
-  height: targetElement.clientHeight,
 });
 
 const InternalSegmentedOption: React.FC<{
