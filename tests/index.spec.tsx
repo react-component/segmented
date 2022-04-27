@@ -210,7 +210,7 @@ describe('rc-segmented', () => {
       />,
     );
 
-    expect(ref.current).toBe(container.querySelector('.rc-segmented'));
+    expect(ref.current).toBe(container.querySelector('.rc-segmented-wrapper'));
   });
 
   it('render segmented with controlled mode', () => {

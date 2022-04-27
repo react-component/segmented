@@ -264,6 +264,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
 
     return (
       <div
+        {...divProps}
         className={classNames(
           wrapperCls,
           {
@@ -275,7 +276,6 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
         ref={mergedRef}
       >
         <div
-          {...divProps}
           className={classNames(prefixCls, {
             [`${prefixCls}-disabled`]: disabled,
           })}

@@ -124,51 +124,55 @@ exports[`rc-segmented render segmented ok 1`] = `
 
 exports[`rc-segmented render segmented with CSSMotion 1`] = `
 <div
-  class="rc-segmented"
+  class="rc-segmented-wrapper"
 >
-  <label
-    class="rc-segmented-item rc-segmented-item-selected"
+  <div
+    class="rc-segmented"
   >
-    <input
-      checked=""
-      class="rc-segmented-item-input"
-      type="radio"
-    />
-    <div
-      class="rc-segmented-item-label"
-      title="iOS"
+    <label
+      class="rc-segmented-item rc-segmented-item-selected"
     >
-      iOS
-    </div>
-  </label>
-  <label
-    class="rc-segmented-item"
-  >
-    <input
-      class="rc-segmented-item-input"
-      type="radio"
-    />
-    <div
-      class="rc-segmented-item-label"
-      title="Android"
+      <input
+        checked=""
+        class="rc-segmented-item-input"
+        type="radio"
+      />
+      <div
+        class="rc-segmented-item-label"
+        title="iOS"
+      >
+        iOS
+      </div>
+    </label>
+    <label
+      class="rc-segmented-item"
     >
-      Android
-    </div>
-  </label>
-  <label
-    class="rc-segmented-item"
-  >
-    <input
-      class="rc-segmented-item-input"
-      type="radio"
-    />
-    <div
-      class="rc-segmented-item-label"
-      title="Web3"
+      <input
+        class="rc-segmented-item-input"
+        type="radio"
+      />
+      <div
+        class="rc-segmented-item-label"
+        title="Android"
+      >
+        Android
+      </div>
+    </label>
+    <label
+      class="rc-segmented-item"
     >
-      Web3
-    </div>
-  </label>
+      <input
+        class="rc-segmented-item-input"
+        type="radio"
+      />
+      <div
+        class="rc-segmented-item-label"
+        title="Web3"
+      >
+        Web3
+      </div>
+    </label>
+  </div>
 </div>
 `;
 
@@ -234,11 +238,12 @@ exports[`rc-segmented render segmented with options null/undefined 1`] = `
     class="rc-segmented rc-segmented-disabled"
   >
     <label
-      class="rc-segmented-item rc-segmented-item-selected"
+      class="rc-segmented-item rc-segmented-item-selected rc-segmented-item-disabled"
     >
       <input
         checked=""
         class="rc-segmented-item-input"
+        disabled=""
         type="radio"
       />
       <div
@@ -246,10 +251,11 @@ exports[`rc-segmented render segmented with options null/undefined 1`] = `
       />
     </label>
     <label
-      class="rc-segmented-item"
+      class="rc-segmented-item rc-segmented-item-disabled"
     >
       <input
         class="rc-segmented-item-input"
+        disabled=""
         type="radio"
       />
       <div
@@ -257,10 +263,11 @@ exports[`rc-segmented render segmented with options null/undefined 1`] = `
       />
     </label>
     <label
-      class="rc-segmented-item"
+      class="rc-segmented-item rc-segmented-item-disabled"
     >
       <input
         class="rc-segmented-item-input"
+        disabled=""
         type="radio"
       />
       <div
@@ -546,85 +553,6 @@ exports[`rc-segmented render segmented with title 1`] = `
 </div>
 `;
 
-exports[`rc-segmented render segmented with title 1`] = `
-<div
-  class="rc-segmented"
->
-  <label
-    class="rc-segmented-item rc-segmented-item-selected"
-  >
-    <input
-      checked=""
-      class="rc-segmented-item-input"
-      type="radio"
-    />
-    <div
-      class="rc-segmented-item-label"
-      title="Web"
-    >
-      Web
-    </div>
-  </label>
-  <label
-    class="rc-segmented-item"
-  >
-    <input
-      class="rc-segmented-item-input"
-      type="radio"
-    />
-    <div
-      class="rc-segmented-item-label"
-      title="hello1"
-    >
-      hello1
-    </div>
-  </label>
-  <label
-    class="rc-segmented-item"
-  >
-    <input
-      class="rc-segmented-item-input"
-      type="radio"
-    />
-    <div
-      class="rc-segmented-item-label"
-    >
-      <div>
-        test1
-      </div>
-    </div>
-  </label>
-  <label
-    class="rc-segmented-item"
-  >
-    <input
-      class="rc-segmented-item-input"
-      type="radio"
-    />
-    <div
-      class="rc-segmented-item-label"
-      title="hello1.5"
-    >
-      hello1
-    </div>
-  </label>
-  <label
-    class="rc-segmented-item"
-  >
-    <input
-      class="rc-segmented-item-input"
-      type="radio"
-    />
-    <div
-      class="rc-segmented-item-label"
-      title=""
-    >
-      foo1
-    </div>
-  </label>
-</div>
-`;
-
 exports[`rc-segmented render segmented: disabled 1`] = `
 <div
   class="rc-segmented-wrapper rc-segmented-wrapper-disabled"
@@ -633,11 +561,12 @@ exports[`rc-segmented render segmented: disabled 1`] = `
     class="rc-segmented rc-segmented-disabled"
   >
     <label
-      class="rc-segmented-item rc-segmented-item-selected"
+      class="rc-segmented-item rc-segmented-item-selected rc-segmented-item-disabled"
     >
       <input
         checked=""
         class="rc-segmented-item-input"
+        disabled=""
         type="radio"
       />
       <div
@@ -648,10 +577,11 @@ exports[`rc-segmented render segmented: disabled 1`] = `
       </div>
     </label>
     <label
-      class="rc-segmented-item"
+      class="rc-segmented-item rc-segmented-item-disabled"
     >
       <input
         class="rc-segmented-item-input"
+        disabled=""
         type="radio"
       />
       <div
@@ -662,10 +592,11 @@ exports[`rc-segmented render segmented: disabled 1`] = `
       </div>
     </label>
     <label
-      class="rc-segmented-item"
+      class="rc-segmented-item rc-segmented-item-disabled"
     >
       <input
         class="rc-segmented-item-input"
+        disabled=""
         type="radio"
       />
       <div
