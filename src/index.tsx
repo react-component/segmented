@@ -312,6 +312,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
               checked={segmentedOption.value === selected}
               onChange={handleChange}
               {...segmentedOption}
+              disabled={!!disabled || !!segmentedOption.disabled}
             />
           ))}
         </div>
