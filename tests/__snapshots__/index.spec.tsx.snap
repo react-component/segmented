@@ -160,85 +160,6 @@ exports[`rc-segmented render segmented with CSSMotion 1`] = `
 </div>
 `;
 
-exports[`rc-segmented render segmented with title 1`] = `
-<div
-  class="rc-segmented"
->
-  <label
-    class="rc-segmented-item rc-segmented-item-selected"
-  >
-    <input
-      checked=""
-      class="rc-segmented-item-input"
-      type="radio"
-    />
-    <div
-      class="rc-segmented-item-label"
-      title="Web"
-    >
-      Web
-    </div>
-  </label>
-  <label
-    class="rc-segmented-item"
-  >
-    <input
-      class="rc-segmented-item-input"
-      type="radio"
-    />
-    <div
-      class="rc-segmented-item-label"
-      title="hello1"
-    >
-      hello1
-    </div>
-  </label>
-  <label
-    class="rc-segmented-item"
-  >
-    <input
-      class="rc-segmented-item-input"
-      type="radio"
-    />
-    <div
-      class="rc-segmented-item-label"
-    >
-      <div>
-        test1
-      </div>
-    </div>
-  </label>
-  <label
-    class="rc-segmented-item"
-  >
-    <input
-      class="rc-segmented-item-input"
-      type="radio"
-    />
-    <div
-      class="rc-segmented-item-label"
-      title="hello1.5"
-    >
-      hello1
-    </div>
-  </label>
-  <label
-    class="rc-segmented-item"
-  >
-    <input
-      class="rc-segmented-item-input"
-      type="radio"
-    />
-    <div
-      class="rc-segmented-item-label"
-      title=""
-    >
-      foo1
-    </div>
-  </label>
-</div>
-`;
-
 exports[`rc-segmented render segmented with options 1`] = `
 <div
   class="rc-segmented"
@@ -505,6 +426,85 @@ exports[`rc-segmented render segmented with options: disabled 1`] = `
       title="Web"
     >
       Web
+    </div>
+  </label>
+</div>
+`;
+
+exports[`rc-segmented render segmented with title 1`] = `
+<div
+  class="rc-segmented"
+>
+  <label
+    class="rc-segmented-item rc-segmented-item-selected"
+  >
+    <input
+      checked=""
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <div
+      class="rc-segmented-item-label"
+      title="Web"
+    >
+      Web
+    </div>
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <div
+      class="rc-segmented-item-label"
+      title="hello1"
+    >
+      hello1
+    </div>
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <div
+      class="rc-segmented-item-label"
+    >
+      <div>
+        test1
+      </div>
+    </div>
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <div
+      class="rc-segmented-item-label"
+      title="hello1.5"
+    >
+      hello1
+    </div>
+  </label>
+  <label
+    class="rc-segmented-item"
+  >
+    <input
+      class="rc-segmented-item-input"
+      type="radio"
+    />
+    <div
+      class="rc-segmented-item-label"
+      title=""
+    >
+      foo1
     </div>
   </label>
 </div>
