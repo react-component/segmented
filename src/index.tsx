@@ -260,20 +260,25 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     };
 
     const divProps = omit(restProps, ['children']);
+    const wrapperCls = `${prefixCls}-wrapper`;
 
     return (
-      <div className={`${prefixCls}-wrap`}>
+      <div
+        className={classNames(
+          wrapperCls,
+          {
+            [`${wrapperCls}-rtl`]: direction === 'rtl',
+            [`${wrapperCls}-disabled`]: disabled,
+          },
+          className,
+        )}
+        ref={mergedRef}
+      >
         <div
           {...divProps}
-          className={classNames(
-            prefixCls,
-            {
-              [`${prefixCls}-rtl`]: direction === 'rtl',
-              [`${prefixCls}-disabled`]: disabled,
-            },
-            className,
-          )}
-          ref={mergedRef}
+          className={classNames(prefixCls, {
+            [`${prefixCls}-disabled`]: disabled,
+          })}
         >
           <CSSMotion
             visible={thumbShow}

@@ -2,7 +2,7 @@
 
 exports[`rc-segmented render empty segmented 1`] = `
 <div
-  class="rc-segmented-wrap"
+  class="rc-segmented-wrapper"
 >
   <div
     class="rc-segmented"
@@ -12,7 +12,7 @@ exports[`rc-segmented render empty segmented 1`] = `
 
 exports[`rc-segmented render label with ReactNode 1`] = `
 <div
-  class="rc-segmented-wrap"
+  class="rc-segmented-wrapper"
 >
   <div
     class="rc-segmented"
@@ -70,7 +70,7 @@ exports[`rc-segmented render label with ReactNode 1`] = `
 
 exports[`rc-segmented render segmented ok 1`] = `
 <div
-  class="rc-segmented-wrap"
+  class="rc-segmented-wrapper"
 >
   <div
     class="rc-segmented"
@@ -174,7 +174,7 @@ exports[`rc-segmented render segmented with CSSMotion 1`] = `
 
 exports[`rc-segmented render segmented with options 1`] = `
 <div
-  class="rc-segmented-wrap"
+  class="rc-segmented-wrapper"
 >
   <div
     class="rc-segmented"
@@ -228,7 +228,7 @@ exports[`rc-segmented render segmented with options 1`] = `
 
 exports[`rc-segmented render segmented with options null/undefined 1`] = `
 <div
-  class="rc-segmented-wrap"
+  class="rc-segmented-wrapper rc-segmented-wrapper-disabled"
 >
   <div
     class="rc-segmented rc-segmented-disabled"
@@ -274,7 +274,7 @@ exports[`rc-segmented render segmented with options null/undefined 1`] = `
 
 exports[`rc-segmented render segmented with options: 1 1`] = `
 <div
-  class="rc-segmented-wrap"
+  class="rc-segmented-wrapper"
 >
   <div
     class="rc-segmented"
@@ -356,7 +356,7 @@ exports[`rc-segmented render segmented with options: 1 1`] = `
 
 exports[`rc-segmented render segmented with options: 2 1`] = `
 <div
-  class="rc-segmented-wrap"
+  class="rc-segmented-wrapper"
 >
   <div
     class="rc-segmented"
@@ -410,7 +410,7 @@ exports[`rc-segmented render segmented with options: 2 1`] = `
 
 exports[`rc-segmented render segmented with options: disabled 1`] = `
 <div
-  class="rc-segmented-wrap"
+  class="rc-segmented-wrapper"
 >
   <div
     class="rc-segmented"
@@ -465,7 +465,7 @@ exports[`rc-segmented render segmented with options: disabled 1`] = `
 
 exports[`rc-segmented render segmented with title 1`] = `
 <div
-  class="rc-segmented-wrap"
+  class="rc-segmented-wrapper"
 >
   <div
     class="rc-segmented"
@@ -627,7 +627,7 @@ exports[`rc-segmented render segmented with title 1`] = `
 
 exports[`rc-segmented render segmented: disabled 1`] = `
 <div
-  class="rc-segmented-wrap"
+  class="rc-segmented-wrapper rc-segmented-wrapper-disabled"
 >
   <div
     class="rc-segmented rc-segmented-disabled"
