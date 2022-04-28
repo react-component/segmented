@@ -1,9 +1,10 @@
 import * as React from 'react';
 import classNames from 'classnames';
-import CSSMotion from 'rc-motion';
+// import CSSMotion from 'rc-motion';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import { composeRef } from 'rc-util/lib/ref';
 import omit from 'rc-util/lib/omit';
+import MotionThumb from './MotionThumb';
 
 export type SegmentedValue = string | number;
 
@@ -64,10 +65,10 @@ function normalizeOptions(options: SegmentedOptions): SegmentedLabeledOption[] {
   });
 }
 
-const calcThumbStyle = (targetElement: HTMLElement): React.CSSProperties => ({
-  transform: `translateX(${targetElement.offsetLeft}px)`,
-  width: targetElement.clientWidth,
-});
+// const calcThumbStyle = (targetElement: HTMLElement): React.CSSProperties => ({
+//   transform: `translateX(${targetElement.offsetLeft}px)`,
+//   width: targetElement.clientWidth,
+// });
 
 const InternalSegmentedOption: React.FC<{
   prefixCls: string;
@@ -119,11 +120,6 @@ const InternalSegmentedOption: React.FC<{
   );
 };
 
-interface ThumbMoveStatus {
-  from: React.CSSProperties | null;
-  to: React.CSSProperties | null;
-}
-
 const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
   (props, ref) => {
     const {
@@ -142,11 +138,6 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     const containerRef = React.useRef<HTMLDivElement>(null);
     const mergedRef = composeRef<HTMLDivElement>(containerRef, ref);
 
-    const thumbMoveStatus = React.useRef<ThumbMoveStatus>({
-      from: null,
-      to: null,
-    });
-
     const segmentedOptions = React.useMemo(() => {
       return normalizeOptions(options);
     }, [options]);
@@ -156,66 +147,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       defaultValue,
     });
 
-    const [visualSelected, setVisualSelected] = React.useState<
-      SegmentedRawOption | undefined
-    >(selected);
-
     const [thumbShow, setThumbShow] = React.useState(false);
-
-    const doThumbAnimation = React.useCallback(
-      (selectedValue: SegmentedRawOption) => {
-        const segmentedItemIndex = segmentedOptions.findIndex(
-          (n) => n.value === selectedValue,
-        );
-
-        if (segmentedItemIndex < 0) {
-          return;
-        }
-
-        // find target element
-        const toElement = containerRef.current?.querySelector(
-          `.${prefixCls}-item:nth-child(${segmentedItemIndex + 1})`,
-        );
-
-        if (toElement) {
-          // find source element
-          const fromElement = containerRef.current?.querySelector(
-            `.${prefixCls}-item-selected`,
-          );
-
-          if (fromElement && toElement && thumbMoveStatus.current) {
-            // calculate for thumb moving animation
-            thumbMoveStatus.current.from = calcThumbStyle(
-              fromElement as HTMLElement,
-            );
-            thumbMoveStatus.current.to = calcThumbStyle(
-              toElement as HTMLElement,
-            );
-
-            // trigger css-motion starts
-            setThumbShow(true);
-          }
-        }
-      },
-      [prefixCls, segmentedOptions],
-    );
-
-    // get latest version of `visualSelected`
-    const latestVisualSelected = React.useRef(visualSelected);
-    React.useEffect(() => {
-      latestVisualSelected.current = visualSelected;
-    });
-
-    React.useEffect(() => {
-      // Syncing `visualSelected` when `selected` changed
-      // and do thumb animation
-      if (
-        (typeof selected === 'string' || typeof selected === 'number') &&
-        selected !== latestVisualSelected.current
-      ) {
-        doThumbAnimation(selected);
-      }
-    }, [selected]);
 
     const handleChange = (
       event: React.ChangeEvent<HTMLInputElement>,
@@ -228,34 +160,6 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       setSelected(val);
 
       onChange?.(val);
-    };
-
-    // --- motion event handlers for thumb move
-    const handleThumbEnterStart = () => {
-      const fromStyle = thumbMoveStatus.current.from;
-      if (fromStyle) {
-        setVisualSelected(undefined);
-        return fromStyle;
-      }
-    };
-
-    const handleThumbEnterActive = () => {
-      const toStyle = thumbMoveStatus.current.to;
-      if (toStyle) {
-        return toStyle;
-      }
-    };
-
-    const handleThumbEnterEnd = () => {
-      setThumbShow(false);
-      setVisualSelected(selected);
-
-      if (thumbMoveStatus.current) {
-        thumbMoveStatus.current = {
-          from: null,
-          to: null,
-        };
-      }
     };
 
     const divProps = omit(restProps, ['children']);
@@ -273,23 +177,21 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
         )}
         ref={mergedRef}
       >
-        <CSSMotion
-          visible={thumbShow}
+        <MotionThumb
+          prefixCls={prefixCls}
+          value={selected}
+          containerRef={containerRef}
           motionName={`${prefixCls}-${motionName}`}
-          motionDeadline={300}
-          onEnterStart={handleThumbEnterStart}
-          onEnterActive={handleThumbEnterActive}
-          onEnterEnd={handleThumbEnterEnd}
-        >
-          {({ className: motionClassName, style: motionStyle }) => {
-            return (
-              <div
-                style={motionStyle}
-                className={classNames(`${prefixCls}-thumb`, motionClassName)}
-              />
-            );
+          getValueIndex={(val) =>
+            segmentedOptions.findIndex((n) => n.value === val)
+          }
+          onMotionStart={() => {
+            setThumbShow(true);
           }}
-        </CSSMotion>
+          onMotionEnd={() => {
+            setThumbShow(false);
+          }}
+        />
         {segmentedOptions.map((segmentedOption) => (
           <InternalSegmentedOption
             key={segmentedOption.value}
@@ -299,7 +201,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
               `${prefixCls}-item`,
               {
                 [`${prefixCls}-item-selected`]:
-                  segmentedOption.value === visualSelected,
+                  segmentedOption.value === value && !thumbShow,
               },
             )}
             checked={segmentedOption.value === selected}
