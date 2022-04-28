@@ -1,9 +1,9 @@
 import * as React from 'react';
 import classNames from 'classnames';
-// import CSSMotion from 'rc-motion';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import { composeRef } from 'rc-util/lib/ref';
 import omit from 'rc-util/lib/omit';
+
 import MotionThumb from './MotionThumb';
 
 export type SegmentedValue = string | number;
@@ -209,6 +209,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
               checked={segmentedOption.value === rawValue}
               onChange={handleChange}
               {...segmentedOption}
+              disabled={!!disabled || !!segmentedOption.disabled}
             />
           ))}
         </div>
