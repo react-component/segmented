@@ -55,7 +55,7 @@
     "@types/classnames": "^2.2.9",
     "@types/jest": "^27.4.0",
     "@types/react": "^17.0.13",
-    "@types/react-dom": "^16.9.0",
+    "@types/react-dom": "^18.0.0",
     "@umijs/fabric": "^2.0.8",
     "@umijs/test": "^3.5.23",
     "coveralls": "^3.0.6",
