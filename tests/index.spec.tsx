@@ -172,8 +172,8 @@ describe('rc-segmented', () => {
       />,
     );
     expect(asFragment().firstChild).toMatchSnapshot();
-    expect(container.querySelector('.rc-segmented-wrapper')).toHaveClass(
-      'rc-segmented-wrapper-disabled',
+    expect(container.querySelector('.rc-segmented')).toHaveClass(
+      'rc-segmented-disabled',
     );
     expect(container.querySelector('.rc-segmented')).toHaveClass(
       'rc-segmented-disabled',
@@ -218,7 +218,7 @@ describe('rc-segmented', () => {
       />,
     );
 
-    expect(ref.current).toBe(container.querySelector('.rc-segmented-wrapper'));
+    expect(ref.current).toBe(container.querySelector('.rc-segmented'));
   });
 
   it('render segmented with controlled mode', () => {
@@ -434,8 +434,8 @@ describe('rc-segmented', () => {
       />,
     );
 
-    expect(container.querySelector('.rc-segmented-wrapper')).toHaveClass(
-      'rc-segmented-wrapper-rtl',
+    expect(container.querySelector('.rc-segmented')).toHaveClass(
+      'rc-segmented-rtl',
     );
 
     expectMatchChecked(container, [true, false, false]);
