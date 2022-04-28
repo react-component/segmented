@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, act, fireEvent } from '@testing-library/react';
 import Segmented from '../src';
-import type { SegmentedValue } from '../src';
 
 jest.mock('rc-motion/lib/util/motion', () => {
   return {
@@ -22,6 +21,15 @@ describe('rc-segmented', () => {
 
       expect(input.checked).toBe(checked);
     });
+  }
+
+  function exceptThumbHaveStyle(container: HTMLElement, matchStyle: object) {
+    const styleText = container
+      .querySelector('.rc-segmented-thumb')
+      ?.getAttribute('data-test-style');
+    const style = JSON.parse(styleText!) || {};
+
+    expect(style).toMatchObject(matchStyle);
   }
 
   beforeEach(() => {
@@ -260,105 +268,133 @@ describe('rc-segmented', () => {
       container.querySelector('.rc-segmented-item-selected')?.textContent,
     ).toContain('Web3');
 
-    // Motion end
-    fireEvent.animationEnd(container.querySelector('.rc-segmented-thumb')!);
-    act(() => {
-      jest.runAllTimers();
-    });
-
     // change it strangely
     fireEvent.change(container.querySelector('.control')!, {
       target: { value: 'Web4' },
     });
 
-    // invalid changes
-    expect(
-      container.querySelector('.rc-segmented-item-selected')?.textContent,
-    ).toContain('Web3');
+    // invalid changes: Should not active any item to make sure it's single source of truth
+    expect(container.querySelector('.rc-segmented-item-selected')).toBeFalsy();
   });
 
-  it('render segmented with CSSMotion', () => {
-    const handleValueChange = jest.fn();
-    const { container, asFragment } = render(
-      <Segmented
-        options={['iOS', 'Android', 'Web3']}
-        onChange={(value) => handleValueChange(value)}
-      />,
-    );
-    expect(asFragment().firstChild).toMatchSnapshot();
+  describe('render segmented with CSSMotion', () => {
+    it('basic', () => {
+      const handleValueChange = jest.fn();
+      const { container, asFragment } = render(
+        <Segmented
+          options={['iOS', 'Android', 'Web3']}
+          onChange={(value) => handleValueChange(value)}
+        />,
+      );
+      expect(asFragment().firstChild).toMatchSnapshot();
 
-    expectMatchChecked(container, [true, false, false]);
-    expect(container.querySelectorAll('.rc-segmented-item')[0]).toHaveClass(
-      'rc-segmented-item-selected',
-    );
+      expectMatchChecked(container, [true, false, false]);
+      expect(container.querySelectorAll('.rc-segmented-item')[0]).toHaveClass(
+        'rc-segmented-item-selected',
+      );
 
-    fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[2]);
-    expect(handleValueChange).toBeCalledWith('Web3');
-    expectMatchChecked(container, [false, false, true]);
+      // >>> Click: Web3
+      fireEvent.click(
+        container.querySelectorAll('.rc-segmented-item-input')[2],
+      );
+      expect(handleValueChange).toBeCalledWith('Web3');
+      expectMatchChecked(container, [false, false, true]);
 
-    expect(container.querySelectorAll('.rc-segmented-thumb')[0]).toHaveClass(
-      'rc-segmented-thumb-motion',
-    );
+      expect(container.querySelectorAll('.rc-segmented-thumb')[0]).toHaveClass(
+        'rc-segmented-thumb-motion',
+      );
 
-    // thumb appeared at `iOS`
-    expect(container.querySelectorAll('.rc-segmented-thumb')[0]).toHaveStyle({
-      transform: 'translateX(0px)',
-      width: '62px',
+      // thumb appeared at `iOS`
+      exceptThumbHaveStyle(container, {
+        '--thumb-start-left': '0px',
+        '--thumb-start-width': '62px',
+      });
+
+      // Motion => active
+      act(() => {
+        jest.runAllTimers();
+      });
+
+      // Motion enter end
+      fireEvent.animationEnd(container.querySelector('.rc-segmented-thumb')!);
+      act(() => {
+        jest.runAllTimers();
+      });
+
+      // thumb should disappear
+      expect(container.querySelector('.rc-segmented-thumb')).toBeFalsy();
+
+      // >>> Click: Android
+      fireEvent.click(
+        container.querySelectorAll('.rc-segmented-item-input')[1],
+      );
+      expect(handleValueChange).toBeCalledWith('Android');
+      expectMatchChecked(container, [false, true, false]);
+
+      // thumb should move
+      expect(container.querySelector('.rc-segmented-thumb')).toHaveClass(
+        'rc-segmented-thumb-motion',
+      );
+
+      // thumb appeared at `Web3`
+      exceptThumbHaveStyle(container, {
+        '--thumb-start-left': '180px',
+        '--thumb-start-width': '76px',
+      });
+
+      // Motion appear end
+      act(() => {
+        jest.runAllTimers();
+      });
+      exceptThumbHaveStyle(container, {
+        '--thumb-active-left': '62px',
+        '--thumb-active-width': '118px',
+      });
+      fireEvent.animationEnd(container.querySelector('.rc-segmented-thumb')!);
+      act(() => {
+        jest.runAllTimers();
+      });
+
+      // thumb should disappear
+      expect(container.querySelector('.rc-segmented-thumb')).toBeFalsy();
     });
 
-    // Motion => active
-    act(() => {
-      jest.runAllTimers();
+    it('quick switch', () => {
+      const { container } = render(
+        <Segmented
+          options={['IOS', 'Android', 'Web3']}
+          defaultValue="Android"
+        />,
+      );
+
+      // >>> Click: Web3
+      fireEvent.click(
+        container.querySelectorAll('.rc-segmented-item-input')[2],
+      );
+
+      // Motion to active
+      act(() => {
+        jest.runAllTimers();
+      });
+      expect(container.querySelector('.rc-segmented-thumb')).toHaveClass(
+        'rc-segmented-thumb-motion-appear-active',
+      );
+
+      exceptThumbHaveStyle(container, {
+        '--thumb-active-left': '180px',
+        '--thumb-active-width': '76px',
+      });
+
+      // >>> Click: IOS
+      fireEvent.click(
+        container.querySelectorAll('.rc-segmented-item-input')[0],
+      );
+
+      exceptThumbHaveStyle(container, {
+        '--thumb-active-left': '0px',
+        '--thumb-active-width': '62px',
+      });
     });
-
-    // Motion enter end
-    fireEvent.animationEnd(container.querySelector('.rc-segmented-thumb')!);
-    act(() => {
-      jest.runAllTimers();
-    });
-
-    // Motion leave end
-    fireEvent.animationEnd(container.querySelector('.rc-segmented-thumb')!);
-    act(() => {
-      jest.runAllTimers();
-    });
-
-    // thumb should disappear
-    expect(container.querySelector('.rc-segmented-thumb')).toBeFalsy();
-
-    // change selection again
-    fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[1]);
-    expect(handleValueChange).toBeCalledWith('Android');
-    expectMatchChecked(container, [false, true, false]);
-
-    // thumb should move
-    expect(container.querySelector('.rc-segmented-thumb')).toHaveClass(
-      'rc-segmented-thumb-motion',
-    );
-
-    // thumb appeared at `Web3`
-    expect(container.querySelector('.rc-segmented-thumb')).toHaveStyle({
-      transform: 'translateX(180px)',
-      width: '76px',
-    });
-
-    // Motion enter end
-    act(() => {
-      jest.runAllTimers();
-    });
-    fireEvent.animationEnd(container.querySelector('.rc-segmented-thumb')!);
-    act(() => {
-      jest.runAllTimers();
-    });
-
-    // Motion leave end
-    fireEvent.animationEnd(container.querySelector('.rc-segmented-thumb')!);
-    act(() => {
-      jest.runAllTimers();
-    });
-
-    // thumb should disappear
-    expect(container.querySelector('.rc-segmented-thumb')).toBeFalsy();
   });
 
   it('render segmented with options null/undefined', () => {

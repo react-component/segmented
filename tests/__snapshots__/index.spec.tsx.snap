@@ -110,7 +110,7 @@ exports[`rc-segmented render segmented ok 1`] = `
 </div>
 `;
 
-exports[`rc-segmented render segmented with CSSMotion 1`] = `
+exports[`rc-segmented render segmented with CSSMotion basic 1`] = `
 <div
   class="rc-segmented"
 >
