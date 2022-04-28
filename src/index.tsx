@@ -131,7 +131,10 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     } = props;
 
     const containerRef = React.useRef<HTMLDivElement>(null);
-    const mergedRef = composeRef<HTMLDivElement>(containerRef, ref);
+    const mergedRef = React.useMemo(
+      () => composeRef<HTMLDivElement>(containerRef, ref),
+      [containerRef, ref],
+    );
 
     const segmentedOptions = React.useMemo(() => {
       return normalizeOptions(options);
