@@ -5,6 +5,11 @@ import useLayoutEffect from 'rc-util/lib/hooks/useLayoutEffect';
 import { composeRef } from 'rc-util/lib/ref';
 import type { SegmentedValue } from '.';
 
+type ThumbReact = {
+  left: number;
+  width: number;
+} | null;
+
 export interface MotionThumbInterface {
   containerRef: React.RefObject<HTMLDivElement>;
   value: SegmentedValue;
@@ -17,13 +22,16 @@ export interface MotionThumbInterface {
 
 const calcThumbStyle = (
   targetElement: HTMLElement | null | undefined,
-): React.CSSProperties =>
+): ThumbReact =>
   targetElement
     ? {
-        transform: `translateX(${targetElement.offsetLeft}px)`,
+        left: targetElement.offsetLeft,
         width: targetElement.clientWidth,
       }
-    : {};
+    : null;
+
+const toPX = (value: number) =>
+  value !== undefined ? `${value}px` : undefined;
 
 export default function MotionThumb(props: MotionThumbInterface) {
   const {
@@ -40,25 +48,30 @@ export default function MotionThumb(props: MotionThumbInterface) {
   const [prevValue, setPrevValue] = React.useState(value);
 
   // =========================== Effect ===========================
-  const findValueElement = (val: SegmentedValue) =>
-    containerRef.current?.querySelector<HTMLDivElement>(
-      `.${prefixCls}-item:nth-child(${getValueIndex(val) + 1})`,
-    );
+  const findValueElement = (val: SegmentedValue) => {
+    const index = getValueIndex(val);
 
-  const [prevElement, setPrevElement] = React.useState<
-    HTMLDivElement | null | undefined
-  >();
-  const [nextElement, setNextElement] = React.useState<
-    HTMLDivElement | null | undefined
-  >();
+    const ele = containerRef.current?.querySelectorAll<HTMLDivElement>(
+      `.${prefixCls}-item`,
+    )[index];
+
+    return ele;
+  };
+
+  const [prevStyle, setPrevStyle] = React.useState<ThumbReact>(null);
+  const [nextStyle, setNextStyle] = React.useState<ThumbReact>(null);
 
   useLayoutEffect(() => {
     if (prevValue !== value) {
       const prev = findValueElement(prevValue);
       const next = findValueElement(value);
 
-      setPrevElement(prev);
-      setNextElement(next);
+      const calcPrevStyle = calcThumbStyle(prev);
+      const calcNextStyle = calcThumbStyle(next);
+
+      setPrevValue(value);
+      setPrevStyle(calcPrevStyle);
+      setNextStyle(calcNextStyle);
 
       if (prev && next) {
         onMotionStart();
@@ -70,23 +83,26 @@ export default function MotionThumb(props: MotionThumbInterface) {
 
   // =========================== Motion ===========================
   const onAppearStart = () => {
-    const style = calcThumbStyle(prevElement);
-    return style;
+    return {
+      transform: `translateX(var(--thumb-start-left))`,
+      width: `var(--thumb-start-width)`,
+    };
   };
   const onAppearActive = () => {
-    const style = calcThumbStyle(nextElement);
-    return style;
+    return {
+      transform: `translateX(var(--thumb-active-left))`,
+      width: `var(--thumb-active-width)`,
+    };
   };
   const onAppearEnd = () => {
-    setPrevElement(null);
-    setNextElement(null);
-    setPrevValue(value);
+    setPrevStyle(null);
+    setNextStyle(null);
     onMotionEnd();
   };
 
   // =========================== Render ===========================
   // No need motion when nothing exist in queue
-  if (!prevElement || !nextElement) {
+  if (!prevStyle || !nextStyle) {
     return null;
   }
 
@@ -103,7 +119,15 @@ export default function MotionThumb(props: MotionThumbInterface) {
         return (
           <div
             ref={composeRef(thumbRef, ref)}
-            style={motionStyle}
+            style={
+              {
+                ...motionStyle,
+                '--thumb-start-left': toPX(prevStyle?.left),
+                '--thumb-start-width': toPX(prevStyle?.width),
+                '--thumb-active-left': toPX(nextStyle?.left),
+                '--thumb-active-width': toPX(nextStyle?.width),
+              } as React.CSSProperties
+            }
             className={classNames(`${prefixCls}-thumb`, motionClassName)}
           />
         );
