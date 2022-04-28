@@ -13,7 +13,9 @@ Object.defineProperties(window.HTMLElement.prototype, {
   offsetLeft: {
     get() {
       let offsetLeft = 0;
-      const childList: HTMLElement[] = Array.from(this.parentNode.children);
+      const childList: HTMLElement[] = Array.from(
+        (this.parentNode as HTMLElement).querySelectorAll('.rc-segmented-item'),
+      );
       for (let i = 0; i < childList.length; i++) {
         const child = childList[i];
         const lastChild = childList[i - 1];
