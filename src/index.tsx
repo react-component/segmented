@@ -65,11 +65,6 @@ function normalizeOptions(options: SegmentedOptions): SegmentedLabeledOption[] {
   });
 }
 
-// const calcThumbStyle = (targetElement: HTMLElement): React.CSSProperties => ({
-//   transform: `translateX(${targetElement.offsetLeft}px)`,
-//   width: targetElement.clientWidth,
-// });
-
 const InternalSegmentedOption: React.FC<{
   prefixCls: string;
   className?: string;
@@ -142,11 +137,14 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       return normalizeOptions(options);
     }, [options]);
 
-    const [selected, setSelected] = useMergedState(segmentedOptions[0]?.value, {
-      value: props.value,
+    // Note: We should not auto switch value when value not exist in options
+    // which may break single source of truth.
+    const [rawValue, setRawValue] = useMergedState(segmentedOptions[0]?.value, {
+      value,
       defaultValue,
     });
 
+    // ======================= Change ========================
     const [thumbShow, setThumbShow] = React.useState(false);
 
     const handleChange = (
@@ -157,7 +155,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
         return;
       }
 
-      setSelected(val);
+      setRawValue(val);
 
       onChange?.(val);
     };
@@ -179,7 +177,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       >
         <MotionThumb
           prefixCls={prefixCls}
-          value={selected}
+          value={rawValue}
           containerRef={containerRef}
           motionName={`${prefixCls}-${motionName}`}
           getValueIndex={(val) =>
@@ -201,10 +199,10 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
               `${prefixCls}-item`,
               {
                 [`${prefixCls}-item-selected`]:
-                  segmentedOption.value === value && !thumbShow,
+                  segmentedOption.value === rawValue && !thumbShow,
               },
             )}
-            checked={segmentedOption.value === selected}
+            checked={segmentedOption.value === rawValue}
             onChange={handleChange}
             {...segmentedOption}
           />

@@ -40,8 +40,8 @@
     "lint": "eslint src/ --ext .ts,.tsx,.jsx,.js,.md",
     "prettier": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "pretty-quick": "pretty-quick",
-    "test": "father test",
-    "coverage": "father test --coverage"
+    "test": "umi-test",
+    "coverage": "umi-test --coverage"
   },
   "dependencies": {
     "@babel/runtime": "^7.11.1",
@@ -57,8 +57,10 @@
     "@types/react": "^17.0.13",
     "@types/react-dom": "^16.9.0",
     "@umijs/fabric": "^2.0.8",
+    "@umijs/test": "^3.5.23",
     "coveralls": "^3.0.6",
     "cross-env": "^7.0.2",
+    "cssstyle": "^2.3.0",
     "dumi": "^1.1.41-rc.0",
     "eslint": "^7.0.0",
     "father": "^2.13.4",

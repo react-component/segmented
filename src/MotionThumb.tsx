@@ -116,21 +116,26 @@ export default function MotionThumb(props: MotionThumbInterface) {
       onAppearEnd={onAppearEnd}
     >
       {({ className: motionClassName, style: motionStyle }, ref) => {
-        return (
-          <div
-            ref={composeRef(thumbRef, ref)}
-            style={
-              {
-                ...motionStyle,
-                '--thumb-start-left': toPX(prevStyle?.left),
-                '--thumb-start-width': toPX(prevStyle?.width),
-                '--thumb-active-left': toPX(nextStyle?.left),
-                '--thumb-active-width': toPX(nextStyle?.width),
-              } as React.CSSProperties
-            }
-            className={classNames(`${prefixCls}-thumb`, motionClassName)}
-          />
-        );
+        const mergedStyle = {
+          ...motionStyle,
+          '--thumb-start-left': toPX(prevStyle?.left),
+          '--thumb-start-width': toPX(prevStyle?.width),
+          '--thumb-active-left': toPX(nextStyle?.left),
+          '--thumb-active-width': toPX(nextStyle?.width),
+        } as React.CSSProperties;
+
+        // It's little ugly which should be refactor when @umi/test update to latest jsdom
+        const motionProps = {
+          ref: composeRef(thumbRef, ref),
+          style: mergedStyle,
+          className: classNames(`${prefixCls}-thumb`, motionClassName),
+        };
+
+        if (process.env.NODE_ENV === 'test') {
+          (motionProps as any)['data-test-style'] = JSON.stringify(mergedStyle);
+        }
+
+        return <div {...motionProps} />;
       }}
     </CSSMotion>
   );
