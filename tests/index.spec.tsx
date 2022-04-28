@@ -184,6 +184,15 @@ describe('rc-segmented', () => {
     expect(container.querySelector('.rc-segmented')).toHaveClass(
       'rc-segmented-disabled',
     );
+    expect(container.querySelector('.rc-segmented')).toHaveClass(
+      'rc-segmented-disabled',
+    );
+
+    [0, 1, 2].forEach((i) => {
+      expect(
+        container.querySelectorAll('label.rc-segmented-item')[i],
+      ).toHaveClass('rc-segmented-item-disabled');
+    });
 
     fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[1]);
     expect(handleValueChange).not.toBeCalled();
@@ -452,5 +461,20 @@ describe('rc-segmented', () => {
         ),
       ).map((n) => n.title),
     ).toEqual(['Web', 'hello1', '', 'hello1.5', '']);
+  });
+
+  it('render with rtl', () => {
+    const { container } = render(
+      <Segmented
+        direction="rtl"
+        options={[{ label: 'iOS', value: 'iOS' }, 'Android', 'Web']}
+      />,
+    );
+
+    expect(container.querySelector('.rc-segmented')).toHaveClass(
+      'rc-segmented-rtl',
+    );
+
+    expectMatchChecked(container, [true, false, false]);
   });
 });

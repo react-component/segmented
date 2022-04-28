@@ -14,15 +14,19 @@
 }
 
 .@{segmented-prefix-cls} {
-  position: relative;
-
-  display: inline-flex;
-  align-items: stretch;
-  justify-items: flex-start;
-
+  display: inline-block;
+  padding: 2px;
   background-color: rgba(0, 0, 0, 0.04);
-  border-radius: 2px;
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.04);
+
+  &-group {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    justify-items: flex-start;
+
+    width: 100%;
+    border-radius: 2px;
+  }
 
   &-item {
     position: relative;
@@ -49,6 +53,7 @@
 
     &-label {
       z-index: 2;
+      line-height: 24px;
     }
 
     &-input {
