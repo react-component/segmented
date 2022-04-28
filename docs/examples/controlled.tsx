@@ -23,7 +23,7 @@ export default class Demo extends React.Component<
             })
           }
         />
-        {/* &nbsp;&nbsp;
+        &nbsp;&nbsp;
         <Segmented
           options={['iOS', 'Android', 'Web3']}
           value={this.state.value}
@@ -32,7 +32,7 @@ export default class Demo extends React.Component<
               value,
             })
           }
-        /> */}
+        />
       </React.StrictMode>
     );
   }
