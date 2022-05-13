@@ -188,10 +188,10 @@ describe('rc-segmented', () => {
       'rc-segmented-disabled',
     );
 
-    [0, 1, 2].forEach((i) => {
+    container.querySelectorAll('label.rc-segmented-item').forEach((node) => {
       expect(
-        container.querySelectorAll('label.rc-segmented-item')[i],
-      ).toHaveClass('rc-segmented-item-disabled');
+        node.classList.contains('rc-segmented-item-disabled'),
+      ).toBeTruthy();
     });
 
     fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[1]);
