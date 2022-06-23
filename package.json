@@ -57,7 +57,7 @@
     "@types/react": "^17.0.13",
     "@types/react-dom": "^16.9.0",
     "@umijs/fabric": "^2.0.8",
-    "@umijs/test": "^3.5.23",
+    "@umijs/test": "^4.0.1",
     "coveralls": "^3.0.6",
     "cross-env": "^7.0.2",
     "cssstyle": "^2.3.0",
