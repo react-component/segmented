@@ -61,7 +61,7 @@
     "coveralls": "^3.0.6",
     "cross-env": "^7.0.2",
     "cssstyle": "^2.3.0",
-    "dumi": "^1.1.41-rc.0",
+    "dumi": "^2.0.9",
     "eslint": "^7.0.0",
     "father": "^2.13.4",
     "father-build": "^1.18.6",
