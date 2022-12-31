@@ -10,7 +10,7 @@
 [codecov-url]: https://codecov.io/gh/react-component/segmented/branch/master
 [download-image]: https://img.shields.io/npm/dm/rc-segmented.svg?style=flat-square
 [download-url]: https://npmjs.org/package/rc-segmented
-[bundlephobia-url]: https://bundlephobia.com/result?p=rc-segmented
+[bundlephobia-url]: https://bundlephobia.com/package/rc-segmented
 [bundlephobia-image]: https://badgen.net/bundlephobia/minzip/rc-segmented
 
 React Segmented Control.
