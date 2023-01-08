@@ -41,6 +41,7 @@
     "lint": "eslint src/ --ext .ts,.tsx,.jsx,.js,.md",
     "prettier": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "pretty-quick": "pretty-quick",
+    "prepare": "dumi setup",
     "test": "jest",
     "coverage": "jest --coverage"
   },
