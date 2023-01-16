@@ -1,5 +1,5 @@
+import { act, fireEvent, render } from '@testing-library/react';
 import * as React from 'react';
-import { render, act, fireEvent } from '@testing-library/react';
 import Segmented from '../src';
 
 jest.mock('rc-motion/lib/util/motion', () => {
@@ -250,6 +250,9 @@ describe('rc-segmented', () => {
       );
     };
     const { container } = render(<Demo />);
+    Object.defineProperty(HTMLElement.prototype, 'offsetParent', {
+      get: () => container,
+    });
     fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[0]);
     expect(container.querySelector('.value')?.textContent).toBe('iOS');
 
