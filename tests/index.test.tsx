@@ -1,5 +1,5 @@
+import { act, fireEvent, render } from '@testing-library/react';
 import * as React from 'react';
-import { render, act, fireEvent } from '@testing-library/react';
 import Segmented from '../src';
 
 jest.mock('rc-motion/lib/util/motion', () => {
@@ -231,6 +231,12 @@ describe('rc-segmented', () => {
   });
 
   it('render segmented with controlled mode', () => {
+    const offsetParentSpy = jest
+      .spyOn(HTMLElement.prototype, 'offsetParent', 'get')
+      .mockImplementation(() => {
+        return container;
+      });
+
     const Demo = () => {
       const options = ['iOS', 'Android', 'Web3'];
 
@@ -250,6 +256,7 @@ describe('rc-segmented', () => {
       );
     };
     const { container } = render(<Demo />);
+
     fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[0]);
     expect(container.querySelector('.value')?.textContent).toBe('iOS');
 
@@ -284,10 +291,17 @@ describe('rc-segmented', () => {
 
     // invalid changes: Should not active any item to make sure it's single source of truth
     expect(container.querySelector('.rc-segmented-item-selected')).toBeFalsy();
+
+    offsetParentSpy.mockRestore();
   });
 
   describe('render segmented with CSSMotion', () => {
     it('basic', () => {
+      const offsetParentSpy = jest
+        .spyOn(HTMLElement.prototype, 'offsetParent', 'get')
+        .mockImplementation(() => {
+          return container;
+        });
       const handleValueChange = jest.fn();
       const { container, asFragment } = render(
         <Segmented
@@ -366,9 +380,16 @@ describe('rc-segmented', () => {
 
       // thumb should disappear
       expect(container.querySelector('.rc-segmented-thumb')).toBeFalsy();
+
+      offsetParentSpy.mockRestore();
     });
 
     it('quick switch', () => {
+      const offsetParentSpy = jest
+        .spyOn(HTMLElement.prototype, 'offsetParent', 'get')
+        .mockImplementation(() => {
+          return container;
+        });
       const { container } = render(
         <Segmented
           options={['IOS', 'Android', 'Web3']}
@@ -403,6 +424,31 @@ describe('rc-segmented', () => {
         '--thumb-active-left': '0px',
         '--thumb-active-width': '62px',
       });
+
+      offsetParentSpy.mockRestore();
+    });
+
+    it('stop animation early in hidden parent', () => {
+      const offsetParentSpy = jest
+        .spyOn(HTMLElement.prototype, 'offsetParent', 'get')
+        .mockImplementation(() => null);
+      const Demo = () => {
+        const [value, setValue] = React.useState<string>('iOS');
+        React.useEffect(() => setValue('Web3'), []);
+        return <Segmented options={['iOS', 'Android', 'Web3']} value={value} />;
+      };
+
+      const { container } = render(<Demo />);
+
+      // stop animation early and place "selected" class
+      expect(container.querySelectorAll('.rc-segmented-item')[2]).toHaveClass(
+        'rc-segmented-item-selected',
+      );
+
+      // thumb should disappear
+      expect(container.querySelector('.rc-segmented-thumb')).toBeFalsy();
+
+      offsetParentSpy.mockRestore();
     });
   });
 
