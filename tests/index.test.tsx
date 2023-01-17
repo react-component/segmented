@@ -433,7 +433,7 @@ describe('rc-segmented', () => {
         .spyOn(HTMLElement.prototype, 'offsetParent', 'get')
         .mockImplementation(() => null);
       const Demo = () => {
-        const [value, setValue] = React.useState<any>('iOS');
+        const [value, setValue] = React.useState<string>('iOS');
         React.useEffect(() => setValue('Web3'), []);
         return <Segmented options={['iOS', 'Android', 'Web3']} value={value} />;
       };
