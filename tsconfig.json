@@ -15,10 +15,9 @@
     "types": ["jest", "node"],
     "paths": {
       "@/*": ["src/*"],
-      "@@/*": ["src/.umi/*"],
+      "@@/*": [".dumi/tmp/*"],
       "rc-segmented": ["src/index.tsx"]
     }
   },
-  "include": ["src", "tests", "docs/examples"],
-  "exclude": [".umi*"]
+  "include": [".dumi/**/*", ".dumirc.ts", "src", "tests", "docs/examples"],
 }

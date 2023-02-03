@@ -62,7 +62,7 @@ export default function MotionThumb(props: MotionThumbInterface) {
       `.${prefixCls}-item`,
     )[index];
 
-    return ele;
+    return ele?.offsetParent && ele;
   };
 
   const [prevStyle, setPrevStyle] = React.useState<ThumbReact>(null);
