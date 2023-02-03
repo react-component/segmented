@@ -477,4 +477,28 @@ describe('rc-segmented', () => {
 
     expectMatchChecked(container, [true, false, false]);
   });
+
+  it('click can work as expected with rtl', () => {
+    const handleValueChange = jest.fn();
+    const { container } = render(
+      <Segmented
+        direction="rtl"
+        options={[{ label: 'iOS', value: 'iOS' }, 'Android', 'Web']}
+        onChange={(value) => handleValueChange(value)}
+      />,
+    );
+
+    fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[1]);
+    expectMatchChecked(container, [false, true, false]);
+
+    // Motion to active
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    exceptThumbHaveStyle(container, {
+      '--thumb-active-left': '-22px',
+      '--thumb-active-width': '118px',
+    });
+  });
 });

@@ -184,6 +184,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
             value={rawValue}
             containerRef={containerRef}
             motionName={`${prefixCls}-${motionName}`}
+            direction={direction}
             getValueIndex={(val) =>
               segmentedOptions.findIndex((n) => n.value === val)
             }
