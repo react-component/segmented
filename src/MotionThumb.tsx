@@ -1,8 +1,8 @@
-import * as React from 'react';
-import CSSMotion from 'rc-motion';
 import classNames from 'classnames';
+import CSSMotion from 'rc-motion';
 import useLayoutEffect from 'rc-util/lib/hooks/useLayoutEffect';
 import { composeRef } from 'rc-util/lib/ref';
+import * as React from 'react';
 import type { SegmentedValue } from '.';
 
 type ThumbReact = {
@@ -29,7 +29,7 @@ const calcThumbStyle = (
     ? {
         left: targetElement.offsetLeft,
         right:
-          targetElement.parentElement?.clientWidth! -
+          (targetElement.parentElement?.clientWidth as number) -
           targetElement.clientWidth -
           targetElement.offsetLeft,
         width: targetElement.clientWidth,
