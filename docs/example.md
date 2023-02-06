@@ -28,3 +28,7 @@ nav:
 ## refs
 
 <code src="./demo/refs.tsx"></code>
+
+## rtl
+
+<code src="./demo/rtl.tsx"></code>

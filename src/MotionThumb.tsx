@@ -1,12 +1,13 @@
-import * as React from 'react';
-import CSSMotion from 'rc-motion';
 import classNames from 'classnames';
+import CSSMotion from 'rc-motion';
 import useLayoutEffect from 'rc-util/lib/hooks/useLayoutEffect';
 import { composeRef } from 'rc-util/lib/ref';
+import * as React from 'react';
 import type { SegmentedValue } from '.';
 
 type ThumbReact = {
   left: number;
+  right: number;
   width: number;
 } | null;
 
@@ -18,6 +19,7 @@ export interface MotionThumbInterface {
   motionName: string;
   onMotionStart: VoidFunction;
   onMotionEnd: VoidFunction;
+  direction?: 'ltr' | 'rtl';
 }
 
 const calcThumbStyle = (
@@ -26,6 +28,10 @@ const calcThumbStyle = (
   targetElement
     ? {
         left: targetElement.offsetLeft,
+        right:
+          (targetElement.parentElement!.clientWidth as number) -
+          targetElement.clientWidth -
+          targetElement.offsetLeft,
         width: targetElement.clientWidth,
       }
     : null;
@@ -42,6 +48,7 @@ export default function MotionThumb(props: MotionThumbInterface) {
     motionName,
     onMotionStart,
     onMotionEnd,
+    direction,
   } = props;
 
   const thumbRef = React.useRef<HTMLDivElement>(null);
@@ -81,6 +88,21 @@ export default function MotionThumb(props: MotionThumbInterface) {
     }
   }, [value]);
 
+  const thumbStart = React.useMemo(
+    () =>
+      direction === 'rtl'
+        ? toPX(-(prevStyle?.right as number))
+        : toPX(prevStyle?.left as number),
+    [direction, prevStyle],
+  );
+  const thumbActive = React.useMemo(
+    () =>
+      direction === 'rtl'
+        ? toPX(-(nextStyle?.right as number))
+        : toPX(nextStyle?.left as number),
+    [direction, nextStyle],
+  );
+
   // =========================== Motion ===========================
   const onAppearStart = () => {
     return {
@@ -118,9 +140,9 @@ export default function MotionThumb(props: MotionThumbInterface) {
       {({ className: motionClassName, style: motionStyle }, ref) => {
         const mergedStyle = {
           ...motionStyle,
-          '--thumb-start-left': toPX(prevStyle?.left),
+          '--thumb-start-left': thumbStart,
           '--thumb-start-width': toPX(prevStyle?.width),
-          '--thumb-active-left': toPX(nextStyle?.left),
+          '--thumb-active-left': thumbActive,
           '--thumb-active-width': toPX(nextStyle?.width),
         } as React.CSSProperties;
 

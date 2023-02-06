@@ -27,7 +27,7 @@ describe('rc-segmented', () => {
     const styleText = container
       .querySelector('.rc-segmented-thumb')
       ?.getAttribute('data-test-style');
-    const style = JSON.parse(styleText!) || {};
+    const style = styleText ? JSON.parse(styleText!) : {};
 
     expect(style).toMatchObject(matchStyle);
   }
@@ -522,5 +522,37 @@ describe('rc-segmented', () => {
     );
 
     expectMatchChecked(container, [true, false, false]);
+  });
+
+  it('click can work as expected with rtl', () => {
+    const offsetParentSpy = jest
+      .spyOn(HTMLElement.prototype, 'offsetParent', 'get')
+      .mockImplementation(() => {
+        return container;
+      });
+    const handleValueChange = jest.fn();
+    const { container } = render(
+      <Segmented
+        direction="rtl"
+        options={['iOS', 'Android', 'Web']}
+        onChange={(value) => handleValueChange(value)}
+      />,
+    );
+
+    fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[1]);
+    expectMatchChecked(container, [false, true, false]);
+    expect(handleValueChange).toBeCalledWith('Android');
+
+    // Motion to active
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    exceptThumbHaveStyle(container, {
+      '--thumb-active-left': '-22px',
+      '--thumb-active-width': '118px',
+    });
+
+    offsetParentSpy.mockRestore();
   });
 });

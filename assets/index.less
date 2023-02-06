@@ -79,8 +79,8 @@
     .segmented-item-selected();
 
     position: absolute;
-    top: 0;
-    left: 0;
+    // top: 0;
+    // left: 0;
     width: 0;
     height: 100%;
     padding: 4px 0;
@@ -92,5 +92,9 @@
     transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
       width 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
     will-change: transform, width;
+  }
+
+  &-rtl {
+    direction: rtl;
   }
 }
