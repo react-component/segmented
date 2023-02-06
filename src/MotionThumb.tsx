@@ -29,7 +29,7 @@ const calcThumbStyle = (
     ? {
         left: targetElement.offsetLeft,
         right:
-          (targetElement.parentElement?.clientWidth as number) -
+          (targetElement.parentElement!.clientWidth as number) -
           targetElement.clientWidth -
           targetElement.offsetLeft,
         width: targetElement.clientWidth,
