@@ -116,7 +116,7 @@ export default function MotionThumb(props: MotionThumbInterface) {
       width: `var(--thumb-active-width)`,
     };
   };
-  const onAppearEnd = () => {
+  const onVisibleChanged = () => {
     setPrevStyle(null);
     setNextStyle(null);
     onMotionEnd();
@@ -135,7 +135,7 @@ export default function MotionThumb(props: MotionThumbInterface) {
       motionAppear
       onAppearStart={onAppearStart}
       onAppearActive={onAppearActive}
-      onAppearEnd={onAppearEnd}
+      onVisibleChanged={onVisibleChanged}
     >
       {({ className: motionClassName, style: motionStyle }, ref) => {
         const mergedStyle = {
