@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkrc_segmented=self.webpackChunkrc_segmented||[]).push([[448],{65149:function(v,n,e){e.r(n),e.d(n,{default:function(){return m}});var t=e(14570),r=e(67294),d=function(){var o=(0,t.UO)(),s=o.id,u=(0,t.WF)(),c=u.demos,f=c[s]||{},a=f.component;return a&&(0,r.createElement)(a)},m=d}}]);
