@@ -197,6 +197,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
           />
           {segmentedOptions.map((segmentedOption) => (
             <InternalSegmentedOption
+              {...segmentedOption}
               key={segmentedOption.value}
               prefixCls={prefixCls}
               className={classNames(
@@ -209,7 +210,6 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
               )}
               checked={segmentedOption.value === rawValue}
               onChange={handleChange}
-              {...segmentedOption}
               disabled={!!disabled || !!segmentedOption.disabled}
             />
           ))}
