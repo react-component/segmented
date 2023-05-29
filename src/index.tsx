@@ -142,10 +142,13 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
 
     // Note: We should not auto switch value when value not exist in options
     // which may break single source of truth.
-    const [rawValue, setRawValue] = useMergedState(segmentedOptions[0]?.value, {
-      value,
-      defaultValue,
-    });
+    const [rawValue, setRawValue] = useMergedState(
+      props.hasOwnProperty('value') ? value : segmentedOptions[0]?.value,
+      {
+        value,
+        defaultValue,
+      },
+    );
 
     // ======================= Change ========================
     const [thumbShow, setThumbShow] = React.useState(false);
