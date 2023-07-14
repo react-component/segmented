@@ -1,7 +1,7 @@
-import '../../assets/style.less';
-import React from 'react';
 import Segmented from 'rc-segmented';
-
+import React from 'react';
+import '../../assets/style.less';
+type Options = 'iOS' | 'Android' | 'Web';
 export default function App() {
   return (
     <div>
@@ -21,7 +21,7 @@ export default function App() {
         <Segmented options={['iOS', 'Android', 'Web']} disabled />
       </div>
       <div className="wrapper">
-        <Segmented
+        <Segmented<Options>
           options={[
             'iOS',
             { label: 'Android', value: 'Android', disabled: true },

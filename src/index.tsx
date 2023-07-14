@@ -1,41 +1,62 @@
-import * as React from 'react';
 import classNames from 'classnames';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
-import { composeRef } from 'rc-util/lib/ref';
 import omit from 'rc-util/lib/omit';
+import { composeRef } from 'rc-util/lib/ref';
+import * as React from 'react';
 
 import MotionThumb from './MotionThumb';
 
-export type SegmentedValue = string | number;
+export type SegmentedRawValue = string | number;
 
-export type SegmentedRawOption = SegmentedValue;
+export type SegmentedValue<T extends SegmentedRawValue = SegmentedRawValue> = T;
 
-export interface SegmentedLabeledOption {
+export type SegmentedRawOption<T extends SegmentedRawValue> = SegmentedValue<T>;
+
+export interface SegmentedLabeledOption<T extends SegmentedRawValue> {
   className?: string;
   disabled?: boolean;
   label: React.ReactNode;
-  value: SegmentedRawOption;
+  value: SegmentedRawOption<T>;
   /**
    * html `title` property for label
    */
   title?: string;
 }
 
-type SegmentedOptions = (SegmentedRawOption | SegmentedLabeledOption)[];
+type SegmentedOptions<T extends SegmentedRawValue> = (
+  | SegmentedRawOption<T>
+  | SegmentedLabeledOption<T>
+)[];
 
-export interface SegmentedProps
+type InternalSegmentedOptionProps<T extends SegmentedRawValue> = {
+  prefixCls: string;
+  className?: string;
+  disabled?: boolean;
+  checked: boolean;
+  label: React.ReactNode;
+  title?: string;
+  value: SegmentedRawOption<T>;
+  onChange: (
+    e: React.ChangeEvent<HTMLInputElement>,
+    value: SegmentedRawOption<T>,
+  ) => void;
+};
+
+export interface SegmentedProps<T extends SegmentedRawValue>
   extends Omit<React.HTMLProps<HTMLDivElement>, 'onChange'> {
-  options: SegmentedOptions;
-  defaultValue?: SegmentedValue;
-  value?: SegmentedValue;
-  onChange?: (value: SegmentedValue) => void;
+  options: SegmentedOptions<T>;
+  defaultValue?: SegmentedValue<T>;
+  value?: SegmentedValue<T>;
+  onChange?: (value: SegmentedValue<T>) => void;
   disabled?: boolean;
   prefixCls?: string;
   direction?: 'ltr' | 'rtl';
   motionName?: string;
 }
 
-function getValidTitle(option: SegmentedLabeledOption) {
+function getValidTitle<T extends SegmentedRawValue>(
+  option: SegmentedLabeledOption<T>,
+) {
   if (typeof option.title !== 'undefined') {
     return option.title;
   }
@@ -46,7 +67,9 @@ function getValidTitle(option: SegmentedLabeledOption) {
   }
 }
 
-function normalizeOptions(options: SegmentedOptions): SegmentedLabeledOption[] {
+function normalizeOptions<T extends SegmentedRawValue>(
+  options: SegmentedOptions<T>,
+): SegmentedLabeledOption<T>[] {
   return options.map((option) => {
     if (typeof option === 'object' && option !== null) {
       const validTitle = getValidTitle(option);
@@ -65,19 +88,9 @@ function normalizeOptions(options: SegmentedOptions): SegmentedLabeledOption[] {
   });
 }
 
-const InternalSegmentedOption: React.FC<{
-  prefixCls: string;
-  className?: string;
-  disabled?: boolean;
-  checked: boolean;
-  label: React.ReactNode;
-  title?: string;
-  value: SegmentedRawOption;
-  onChange: (
-    e: React.ChangeEvent<HTMLInputElement>,
-    value: SegmentedRawOption,
-  ) => void;
-}> = ({
+const InternalSegmentedOption: React.FC<InternalSegmentedOptionProps<any>> = <
+  T extends SegmentedRawValue,
+>({
   prefixCls,
   className,
   disabled,
@@ -86,7 +99,7 @@ const InternalSegmentedOption: React.FC<{
   title,
   value,
   onChange,
-}) => {
+}: InternalSegmentedOptionProps<T>) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (disabled) {
       return;
@@ -115,8 +128,11 @@ const InternalSegmentedOption: React.FC<{
   );
 };
 
-const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
-  (props, ref) => {
+const Segmented = React.forwardRef(
+  <T extends SegmentedRawValue>(
+    props: React.PropsWithChildren<SegmentedProps<T>>,
+    ref: React.Ref<HTMLDivElement>,
+  ) => {
     const {
       prefixCls = 'rc-segmented',
       direction,
@@ -152,7 +168,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
 
     const handleChange = (
       event: React.ChangeEvent<HTMLInputElement>,
-      val: SegmentedRawOption,
+      val: SegmentedRawOption<any>,
     ) => {
       if (disabled) {
         return;
@@ -225,4 +241,10 @@ Segmented.defaultProps = {
   options: [],
 };
 
-export default Segmented;
+const TypeSegmented = Segmented as unknown as <T extends SegmentedRawValue>(
+  props: React.PropsWithChildren<SegmentedProps<T>> & {
+    ref?: React.Ref<HTMLDivElement>;
+  },
+) => React.ReactElement;
+
+export default TypeSegmented;

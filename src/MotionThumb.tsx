@@ -3,7 +3,7 @@ import CSSMotion from 'rc-motion';
 import useLayoutEffect from 'rc-util/lib/hooks/useLayoutEffect';
 import { composeRef } from 'rc-util/lib/ref';
 import * as React from 'react';
-import type { SegmentedValue } from '.';
+import type { SegmentedRawValue, SegmentedValue } from '.';
 
 type ThumbReact = {
   left: number;
@@ -11,10 +11,10 @@ type ThumbReact = {
   width: number;
 } | null;
 
-export interface MotionThumbInterface {
+export interface MotionThumbInterface<T extends SegmentedRawValue> {
   containerRef: React.RefObject<HTMLDivElement>;
-  value: SegmentedValue;
-  getValueIndex: (value: SegmentedValue) => number;
+  value: SegmentedValue<T>;
+  getValueIndex: (value: SegmentedValue<T>) => number;
   prefixCls: string;
   motionName: string;
   onMotionStart: VoidFunction;
@@ -39,7 +39,9 @@ const calcThumbStyle = (
 const toPX = (value: number) =>
   value !== undefined ? `${value}px` : undefined;
 
-export default function MotionThumb(props: MotionThumbInterface) {
+export default function MotionThumb<T extends SegmentedRawValue>(
+  props: MotionThumbInterface<T>,
+) {
   const {
     prefixCls,
     containerRef,
@@ -55,7 +57,7 @@ export default function MotionThumb(props: MotionThumbInterface) {
   const [prevValue, setPrevValue] = React.useState(value);
 
   // =========================== Effect ===========================
-  const findValueElement = (val: SegmentedValue) => {
+  const findValueElement = (val: SegmentedValue<T>) => {
     const index = getValueIndex(val);
 
     const ele = containerRef.current?.querySelectorAll<HTMLDivElement>(
