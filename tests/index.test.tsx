@@ -2,6 +2,7 @@ import { act, fireEvent, render } from '@testing-library/react';
 import * as React from 'react';
 import Segmented from '../src';
 
+type Options = 'iOS' | 'Android' | 'Web';
 jest.mock('rc-motion/lib/util/motion', () => {
   return {
     ...jest.requireActual('rc-motion/lib/util/motion'),
@@ -47,7 +48,7 @@ describe('rc-segmented', () => {
 
   it('render segmented ok', () => {
     const { container, asFragment } = render(
-      <Segmented
+      <Segmented<Options>
         options={[{ label: 'iOS', value: 'iOS' }, 'Android', 'Web']}
       />,
     );
@@ -124,7 +125,7 @@ describe('rc-segmented', () => {
   it('render segmented with options: 2', () => {
     const handleValueChange = jest.fn();
     const { container, asFragment } = render(
-      <Segmented
+      <Segmented<Options>
         options={['iOS', { label: 'Android', value: 'Android' }, 'Web']}
         onChange={(value) => handleValueChange(value)}
       />,
@@ -140,7 +141,7 @@ describe('rc-segmented', () => {
   it('render segmented with options: disabled', () => {
     const handleValueChange = jest.fn();
     const { container, asFragment } = render(
-      <Segmented
+      <Segmented<Options>
         options={[
           'iOS',
           { label: 'Android', value: 'Android', disabled: true },
@@ -474,7 +475,7 @@ describe('rc-segmented', () => {
 
   it('render segmented with title', () => {
     const { asFragment, container } = render(
-      <Segmented
+      <Segmented<'Web' | 'hello2' | 'test2' | 'hello1' | 'foo2'>
         options={[
           'Web',
           {
@@ -511,7 +512,7 @@ describe('rc-segmented', () => {
 
   it('render with rtl', () => {
     const { container } = render(
-      <Segmented
+      <Segmented<Options>
         direction="rtl"
         options={[{ label: 'iOS', value: 'iOS' }, 'Android', 'Web']}
       />,
