@@ -120,7 +120,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     const {
       prefixCls = 'rc-segmented',
       direction,
-      options,
+      options = [],
       disabled,
       defaultValue,
       value,
@@ -220,9 +220,5 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
 );
 
 Segmented.displayName = 'Segmented';
-
-Segmented.defaultProps = {
-  options: [],
-};
 
 export default Segmented;
