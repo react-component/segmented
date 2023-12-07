@@ -84,6 +84,9 @@
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0"
   },
+  "resolutions": {
+    "types-ramda": "0.29.4"
+  },
   "cnpm": {
     "mode": "npm"
   },
