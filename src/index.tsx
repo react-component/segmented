@@ -10,25 +10,32 @@ export type SegmentedValue = string | number;
 
 export type SegmentedRawOption = SegmentedValue;
 
-export interface SegmentedLabeledOption {
+export interface SegmentedLabeledOption<
+  Value extends SegmentedRawOption = SegmentedRawOption,
+> {
   className?: string;
   disabled?: boolean;
   label: React.ReactNode;
-  value: SegmentedRawOption;
+  value: Value;
   /**
    * html `title` property for label
    */
   title?: string;
 }
 
-type SegmentedOptions = (SegmentedRawOption | SegmentedLabeledOption)[];
+type SegmentedOptions<
+  PlainValue extends SegmentedRawOption = SegmentedRawOption,
+  Value extends SegmentedRawOption = PlainValue,
+> = (PlainValue | SegmentedLabeledOption<Value>)[];
 
 /**
  * Generic parameter `Value` is supported since 2.3.0
  */
-export interface SegmentedProps<Value extends SegmentedValue = SegmentedValue>
-  extends Omit<React.HTMLProps<HTMLDivElement>, 'onChange'> {
-  options: SegmentedOptions;
+export interface SegmentedProps<
+  PlainValue extends SegmentedRawOption = SegmentedRawOption,
+  Value extends SegmentedRawOption = PlainValue,
+> extends Omit<React.HTMLProps<HTMLDivElement>, 'onChange'> {
+  options: SegmentedOptions<Value>;
   defaultValue?: Value;
   value?: Value;
   onChange?: (value: Value) => void;
@@ -49,8 +56,10 @@ function getValidTitle(option: SegmentedLabeledOption) {
   }
 }
 
-function normalizeOptions(options: SegmentedOptions): SegmentedLabeledOption[] {
-  return options.map((option) => {
+function normalizeOptions<
+  Value extends SegmentedRawOption = SegmentedRawOption,
+>(options: SegmentedOptions<Value>) {
+  return options.map<SegmentedLabeledOption<Value>>((option) => {
     if (typeof option === 'object' && option !== null) {
       const validTitle = getValidTitle(option);
 
@@ -230,6 +239,11 @@ const Segmented = (
 const RefSegmented = React.forwardRef(Segmented);
 RefSegmented.displayName = 'Segmented';
 
-export default RefSegmented as <Value extends SegmentedValue = SegmentedValue>(
-  props: SegmentedProps<Value> & { ref?: React.Ref<HTMLDivElement> },
+export default RefSegmented as <
+  PlainValue extends SegmentedRawOption = SegmentedRawOption,
+  Value extends SegmentedRawOption = PlainValue,
+>(
+  props: SegmentedProps<PlainValue, Value> & {
+    ref?: React.Ref<HTMLDivElement>;
+  },
 ) => React.ReactElement;
