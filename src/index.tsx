@@ -17,7 +17,7 @@ export interface SegmentedLabeledOption<T = React.Key> {
   title?: string;
 }
 
-type SegmentedOptions<T = React.Key> = (T | SegmentedLabeledOption)[];
+type SegmentedOptions<T = React.Key> = (T | SegmentedLabeledOption<T>)[];
 
 export interface SegmentedProps<T = React.Key>
   extends Omit<
