@@ -43,7 +43,7 @@
     "pretty-quick": "pretty-quick",
     "test": "jest",
     "coverage": "jest --coverage",
-    "prepare": "husky install"
+    "prepare": "husky install && dumi setup"
   },
   "dependencies": {
     "@babel/runtime": "^7.11.1",

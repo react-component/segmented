@@ -1,15 +1,9 @@
-import '../../assets/style.less';
-import React from 'react';
 import Segmented from 'rc-segmented';
-import type { SegmentedValue } from 'rc-segmented';
+import React from 'react';
+import '../../assets/style.less';
 
-export default class Demo extends React.Component<
-  unknown,
-  { value: SegmentedValue }
-> {
-  state = {
-    value: 'Web3',
-  };
+export default class Demo extends React.Component<unknown, { value: string }> {
+  state = { value: 'Web3' };
 
   render() {
     return (

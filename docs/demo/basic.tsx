@@ -1,8 +1,9 @@
-import '../../assets/style.less';
-import React from 'react';
 import Segmented from 'rc-segmented';
+import React from 'react';
 
-export default function App() {
+import '../../assets/style.less';
+
+const Demo = () => {
   return (
     <div>
       <div className="wrapper">
@@ -27,8 +28,11 @@ export default function App() {
             { label: 'Android', value: 'Android', disabled: true },
             'Web',
           ]}
+          onChange={(value) => console.log(value, typeof value)}
         />
       </div>
     </div>
   );
-}
+};
+
+export default Demo;

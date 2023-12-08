@@ -1,11 +1,11 @@
-import '../../assets/style.less';
-import React from 'react';
 import Segmented from 'rc-segmented';
+import React from 'react';
+import '../../assets/style.less';
 
 class ClassComponentWithStringRef extends React.Component {
   componentDidMount() {
     // eslint-disable-next-line react/no-string-refs
-    console.log(this.refs.segmentedRef, 'ref');
+    console.log(this.refs.segmentedRef, 'ClassComponentWithStringRef');
   }
 
   render() {
@@ -22,7 +22,7 @@ class ClassComponent2 extends React.Component {
   segmentedRef: HTMLDivElement | null = null;
 
   componentDidMount() {
-    console.log(this.segmentedRef, 'ref');
+    console.log(this.segmentedRef, 'ClassComponent2');
   }
 
   render() {
@@ -42,7 +42,7 @@ class ClassComponentWithCreateRef extends React.Component<
   segmentedRef = React.createRef<HTMLDivElement>();
 
   componentDidMount() {
-    console.log(this.segmentedRef.current, 'ref');
+    console.log(this.segmentedRef.current, 'ClassComponentWithCreateRef');
   }
 
   render() {
@@ -55,7 +55,7 @@ class ClassComponentWithCreateRef extends React.Component<
 function FunctionalComponent() {
   const segmentedRef = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
-    console.log(segmentedRef.current, 'ref');
+    console.log(segmentedRef.current, 'FunctionalComponent');
   }, []);
   return <Segmented options={['iOS', 'Android', 'Web']} ref={segmentedRef} />;
 }
