@@ -16,7 +16,7 @@ export default function App() {
       <div className="wrapper">
         <Segmented
           value={platform}
-          options={['iOS', 'Android', 'Web']}
+          options={Object.values(Platform)}
           onChange={setPlatform}
         />
       </div>
@@ -30,11 +30,19 @@ export default function App() {
         <Segmented options={['iOS', 'Android', 'Web']} disabled />
       </div>
       <div className="wrapper">
-        <Segmented
+        <Segmented<Platform>
           options={[
-            'iOS',
-            { label: 'Android', value: 'Android', disabled: true },
-            'Web',
+            Platform.iOS,
+            { label: 'Android', value: Platform.Android, disabled: true },
+            Platform.Web,
+          ]}
+        />
+        <hr />
+        <Segmented<Platform, string>
+          options={[
+            Platform.iOS,
+            { label: 'Android', value: 'Linux', disabled: true },
+            Platform.Web,
           ]}
         />
       </div>
