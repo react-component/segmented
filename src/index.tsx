@@ -68,7 +68,7 @@ function normalizeOptions(options: SegmentedOptions): SegmentedLabeledOption[] {
   });
 }
 
-interface _InternalSegmentedOptionProps {
+interface InternalSegmentedOptionProps {
   prefixCls: string;
   className?: string;
   disabled?: boolean;
@@ -82,7 +82,7 @@ interface _InternalSegmentedOptionProps {
   ) => void;
 }
 
-const InternalSegmentedOption = (props: _InternalSegmentedOptionProps) => {
+const InternalSegmentedOption = (props: InternalSegmentedOptionProps) => {
   const {
     prefixCls,
     className,
