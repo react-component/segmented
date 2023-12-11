@@ -3,7 +3,6 @@ import CSSMotion from 'rc-motion';
 import useLayoutEffect from 'rc-util/lib/hooks/useLayoutEffect';
 import { composeRef } from 'rc-util/lib/ref';
 import * as React from 'react';
-import type { SegmentedValue } from '.';
 
 type ThumbReact = {
   left: number;
@@ -11,10 +10,10 @@ type ThumbReact = {
   width: number;
 } | null;
 
-export interface MotionThumbInterface {
+export interface MotionThumbInterface<Value = React.Key> {
   containerRef: React.RefObject<HTMLDivElement>;
-  value: SegmentedValue;
-  getValueIndex: (value: SegmentedValue) => number;
+  value: Value;
+  getValueIndex: (value: Value) => number;
   prefixCls: string;
   motionName: string;
   onMotionStart: VoidFunction;
@@ -55,7 +54,7 @@ export default function MotionThumb(props: MotionThumbInterface) {
   const [prevValue, setPrevValue] = React.useState(value);
 
   // =========================== Effect ===========================
-  const findValueElement = (val: SegmentedValue) => {
+  const findValueElement = (val: any) => {
     const index = getValueIndex(val);
 
     const ele = containerRef.current?.querySelectorAll<HTMLDivElement>(
