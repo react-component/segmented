@@ -10,7 +10,7 @@ type ThumbReact = {
   width: number;
 } | null;
 
-export interface MotionThumbInterface<Value = React.Key> {
+export interface MotionThumbInterface<Value = any> {
   containerRef: React.RefObject<HTMLDivElement>;
   value: Value;
   getValueIndex: (value: Value) => number;

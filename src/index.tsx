@@ -6,7 +6,7 @@ import * as React from 'react';
 
 import MotionThumb from './MotionThumb';
 
-export interface SegmentedLabeledOption<Value = React.Key> {
+export interface SegmentedLabeledOption<Value = any> {
   className?: string;
   disabled?: boolean;
   label: React.ReactNode;
@@ -17,12 +17,9 @@ export interface SegmentedLabeledOption<Value = React.Key> {
   title?: string;
 }
 
-type SegmentedOptions<Value = React.Key> = (
-  | Value
-  | SegmentedLabeledOption<Value>
-)[];
+type SegmentedOptions<Value = any> = (Value | SegmentedLabeledOption<Value>)[];
 
-export interface SegmentedProps<Value = React.Key>
+export interface SegmentedProps<Value = any>
   extends Omit<
     React.HTMLProps<HTMLDivElement>,
     'value' | 'defaultValue' | 'onChange'
@@ -74,8 +71,8 @@ const InternalSegmentedOption: React.FC<{
   checked: boolean;
   label: React.ReactNode;
   title?: string;
-  value: React.Key;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>, value: React.Key) => void;
+  value: any;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>, value: any) => void;
 }> = ({
   prefixCls,
   className,
@@ -153,7 +150,7 @@ const InternalSegmented: React.ForwardRefRenderFunction<
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement>,
-    val: React.Key,
+    val: any,
   ) => {
     if (disabled) {
       return;
