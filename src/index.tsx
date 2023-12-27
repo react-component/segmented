@@ -152,10 +152,6 @@ const InternalSegmented: React.ForwardRefRenderFunction<
     event: React.ChangeEvent<HTMLInputElement>,
     val: any,
   ) => {
-    if (disabled) {
-      return;
-    }
-
     setRawValue(val);
 
     onChange?.(val);
