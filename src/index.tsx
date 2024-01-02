@@ -6,7 +6,9 @@ import * as React from 'react';
 
 import MotionThumb from './MotionThumb';
 
-export interface SegmentedLabeledOption<Value = any> {
+export type SegmentedValue = string | number | boolean;
+
+export interface SegmentedLabeledOption<Value = SegmentedValue> {
   className?: string;
   disabled?: boolean;
   label: React.ReactNode;
@@ -17,9 +19,12 @@ export interface SegmentedLabeledOption<Value = any> {
   title?: string;
 }
 
-type SegmentedOptions<Value = any> = (Value | SegmentedLabeledOption<Value>)[];
+type SegmentedOptions<Value = SegmentedValue> = (
+  | Value
+  | SegmentedLabeledOption<Value>
+)[];
 
-export interface SegmentedProps<Value = any>
+export interface SegmentedProps<Value = SegmentedValue>
   extends Omit<
     React.HTMLProps<HTMLDivElement>,
     'value' | 'defaultValue' | 'onChange'
@@ -192,7 +197,7 @@ const InternalSegmented: React.ForwardRefRenderFunction<
         {segmentedOptions.map((segmentedOption) => (
           <InternalSegmentedOption
             {...segmentedOption}
-            key={segmentedOption.value}
+            key={segmentedOption.value as any}
             prefixCls={prefixCls}
             className={classNames(
               segmentedOption.className,
@@ -214,7 +219,7 @@ const InternalSegmented: React.ForwardRefRenderFunction<
 
 const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
   InternalSegmented,
-) as (<Value = any>(
+) as (<Value = SegmentedValue>(
   props: SegmentedProps<Value> & { ref?: React.Ref<HTMLDivElement> },
 ) => React.ReactElement) & { displayName?: string };
 

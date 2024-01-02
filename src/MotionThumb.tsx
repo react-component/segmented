@@ -3,6 +3,7 @@ import CSSMotion from 'rc-motion';
 import useLayoutEffect from 'rc-util/lib/hooks/useLayoutEffect';
 import { composeRef } from 'rc-util/lib/ref';
 import * as React from 'react';
+import type { SegmentedValue } from '.';
 
 type ThumbReact = {
   left: number;
@@ -10,7 +11,7 @@ type ThumbReact = {
   width: number;
 } | null;
 
-export interface MotionThumbInterface<Value = any> {
+export interface MotionThumbInterface<Value = SegmentedValue> {
   containerRef: React.RefObject<HTMLDivElement>;
   value: Value;
   getValueIndex: (value: Value) => number;
