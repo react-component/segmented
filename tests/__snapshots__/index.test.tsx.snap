@@ -1,5 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`rc-segmented render empty options segmented 1`] = `
+<div
+  class="rc-segmented"
+>
+  <div
+    class="rc-segmented-group"
+  />
+</div>
+`;
+
 exports[`rc-segmented render empty segmented 1`] = `
 <div
   class="rc-segmented"
