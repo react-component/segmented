@@ -24,7 +24,7 @@ export interface SegmentedProps<Value = any>
     React.HTMLProps<HTMLDivElement>,
     'value' | 'defaultValue' | 'onChange'
   > {
-  options: SegmentedOptions<Value>;
+  options?: SegmentedOptions<Value>;
   defaultValue?: Value;
   value?: Value;
   onChange?: (value: Value) => void;

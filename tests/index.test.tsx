@@ -45,6 +45,11 @@ describe('rc-segmented', () => {
     expect(asFragment().firstChild).toMatchSnapshot();
   });
 
+  it('render empty options segmented', () => {
+    const { asFragment } = render(<Segmented />);
+    expect(asFragment().firstChild).toMatchSnapshot();
+  });
+
   it('render segmented ok', () => {
     const { container, asFragment } = render(
       <Segmented
@@ -231,12 +236,6 @@ describe('rc-segmented', () => {
   });
 
   it('render segmented with controlled mode', () => {
-    const offsetParentSpy = jest
-      .spyOn(HTMLElement.prototype, 'offsetParent', 'get')
-      .mockImplementation(() => {
-        return container;
-      });
-
     const Demo = () => {
       const options = ['iOS', 'Android', 'Web3'];
 
@@ -256,6 +255,12 @@ describe('rc-segmented', () => {
       );
     };
     const { container } = render(<Demo />);
+
+    const offsetParentSpy = jest
+      .spyOn(HTMLElement.prototype, 'offsetParent', 'get')
+      .mockImplementation(() => {
+        return container;
+      });
 
     fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[0]);
     expect(container.querySelector('.value')?.textContent).toBe('iOS');
@@ -297,11 +302,6 @@ describe('rc-segmented', () => {
 
   describe('render segmented with CSSMotion', () => {
     it('basic', () => {
-      const offsetParentSpy = jest
-        .spyOn(HTMLElement.prototype, 'offsetParent', 'get')
-        .mockImplementation(() => {
-          return container;
-        });
       const handleValueChange = jest.fn();
       const { container, asFragment } = render(
         <Segmented
@@ -309,6 +309,13 @@ describe('rc-segmented', () => {
           onChange={(value) => handleValueChange(value)}
         />,
       );
+
+      const offsetParentSpy = jest
+        .spyOn(HTMLElement.prototype, 'offsetParent', 'get')
+        .mockImplementation(() => {
+          return container;
+        });
+
       expect(asFragment().firstChild).toMatchSnapshot();
 
       expectMatchChecked(container, [true, false, false]);
@@ -385,17 +392,18 @@ describe('rc-segmented', () => {
     });
 
     it('quick switch', () => {
-      const offsetParentSpy = jest
-        .spyOn(HTMLElement.prototype, 'offsetParent', 'get')
-        .mockImplementation(() => {
-          return container;
-        });
       const { container } = render(
         <Segmented
           options={['IOS', 'Android', 'Web3']}
           defaultValue="Android"
         />,
       );
+
+      const offsetParentSpy = jest
+        .spyOn(HTMLElement.prototype, 'offsetParent', 'get')
+        .mockImplementation(() => {
+          return container;
+        });
 
       // >>> Click: Web3
       fireEvent.click(
@@ -525,11 +533,6 @@ describe('rc-segmented', () => {
   });
 
   it('click can work as expected with rtl', () => {
-    const offsetParentSpy = jest
-      .spyOn(HTMLElement.prototype, 'offsetParent', 'get')
-      .mockImplementation(() => {
-        return container;
-      });
     const handleValueChange = jest.fn();
     const { container } = render(
       <Segmented
@@ -538,6 +541,12 @@ describe('rc-segmented', () => {
         onChange={(value) => handleValueChange(value)}
       />,
     );
+
+    const offsetParentSpy = jest
+      .spyOn(HTMLElement.prototype, 'offsetParent', 'get')
+      .mockImplementation(() => {
+        return container;
+      });
 
     fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[1]);
     expectMatchChecked(container, [false, true, false]);
