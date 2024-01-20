@@ -89,5 +89,8 @@
   },
   "tnpm": {
     "mode": "npm"
+  },
+  "resolutions": {
+    "types-ramda": "0.29.6"
   }
 }
