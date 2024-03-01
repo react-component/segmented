@@ -63,7 +63,7 @@
     "@umijs/test": "^4.0.36",
     "coveralls": "^3.0.6",
     "cross-env": "^7.0.3",
-    "cssstyle": "^2.3.0",
+    "cssstyle": "^4.0.1",
     "dumi": "^2.1.2",
     "eslint": "^7.0.0",
     "father": "^4.1.1",
