@@ -1,8 +1,8 @@
-import * as React from 'react';
 import classNames from 'classnames';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
-import { composeRef } from 'rc-util/lib/ref';
 import omit from 'rc-util/lib/omit';
+import { composeRef } from 'rc-util/lib/ref';
+import * as React from 'react';
 
 import MotionThumb from './MotionThumb';
 
@@ -10,25 +10,31 @@ export type SegmentedValue = string | number;
 
 export type SegmentedRawOption = SegmentedValue;
 
-export interface SegmentedLabeledOption {
+export interface SegmentedLabeledOption<ValueType = SegmentedRawOption> {
   className?: string;
   disabled?: boolean;
   label: React.ReactNode;
-  value: SegmentedRawOption;
+  value: ValueType;
   /**
    * html `title` property for label
    */
   title?: string;
 }
 
-type SegmentedOptions = (SegmentedRawOption | SegmentedLabeledOption)[];
+type SegmentedOptions<T = SegmentedRawOption> = (
+  | T
+  | SegmentedLabeledOption<T>
+)[];
 
-export interface SegmentedProps
-  extends Omit<React.HTMLProps<HTMLDivElement>, 'onChange'> {
-  options: SegmentedOptions;
-  defaultValue?: SegmentedValue;
-  value?: SegmentedValue;
-  onChange?: (value: SegmentedValue) => void;
+export interface SegmentedProps<ValueType = SegmentedValue>
+  extends Omit<
+    React.HTMLProps<HTMLDivElement>,
+    'defaultValue' | 'value' | 'onChange'
+  > {
+  options: SegmentedOptions<ValueType>;
+  defaultValue?: ValueType;
+  value?: ValueType;
+  onChange?: (value: ValueType) => void;
   disabled?: boolean;
   prefixCls?: string;
   direction?: 'ltr' | 'rtl';
@@ -219,6 +225,14 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
   },
 );
 
-Segmented.displayName = 'Segmented';
+if (process.env.NODE_ENV !== 'production') {
+  Segmented.displayName = 'Segmented';
+}
 
-export default Segmented;
+const TypedSegmented = Segmented as <ValueType>(
+  props: SegmentedProps<ValueType> & {
+    ref?: React.ForwardedRef<HTMLDivElement>;
+  },
+) => ReturnType<typeof Segmented>;
+
+export default TypedSegmented;
