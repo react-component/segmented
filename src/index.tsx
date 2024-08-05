@@ -106,6 +106,8 @@ const InternalSegmentedOption: React.FC<{
       className={classNames(className, {
         [`${prefixCls}-item-disabled`]: disabled,
       })}
+      role="option"
+      aria-selected={checked}
     >
       <input
         className={`${prefixCls}-item-input`}
@@ -173,6 +175,8 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
 
     return (
       <div
+        role="listbox"
+        aria-label="segmented control"
         {...divProps}
         className={classNames(
           prefixCls,
