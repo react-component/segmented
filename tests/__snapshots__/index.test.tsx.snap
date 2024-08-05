@@ -22,9 +22,7 @@ exports[`rc-segmented render label with ReactNode 1`] = `
     class="rc-segmented-group"
   >
     <label
-      aria-selected="true"
       class="rc-segmented-item rc-segmented-item-selected"
-      role="option"
     >
       <input
         checked=""
@@ -32,23 +30,25 @@ exports[`rc-segmented render label with ReactNode 1`] = `
         type="radio"
       />
       <div
+        aria-selected="true"
         class="rc-segmented-item-label"
+        role="option"
         title="iOS"
       >
         iOS
       </div>
     </label>
     <label
-      aria-selected="false"
       class="rc-segmented-item"
-      role="option"
     >
       <input
         class="rc-segmented-item-input"
         type="radio"
       />
       <div
+        aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
       >
         <div
           id="android"
@@ -58,16 +58,16 @@ exports[`rc-segmented render label with ReactNode 1`] = `
       </div>
     </label>
     <label
-      aria-selected="false"
       class="rc-segmented-item"
-      role="option"
     >
       <input
         class="rc-segmented-item-input"
         type="radio"
       />
       <div
+        aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
       >
         <h2>
           Web
@@ -88,9 +88,7 @@ exports[`rc-segmented render segmented ok 1`] = `
     class="rc-segmented-group"
   >
     <label
-      aria-selected="true"
       class="rc-segmented-item rc-segmented-item-selected"
-      role="option"
     >
       <input
         checked=""
@@ -98,39 +96,41 @@ exports[`rc-segmented render segmented ok 1`] = `
         type="radio"
       />
       <div
+        aria-selected="true"
         class="rc-segmented-item-label"
+        role="option"
         title="iOS"
       >
         iOS
       </div>
     </label>
     <label
-      aria-selected="false"
       class="rc-segmented-item"
-      role="option"
     >
       <input
         class="rc-segmented-item-input"
         type="radio"
       />
       <div
+        aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Android"
       >
         Android
       </div>
     </label>
     <label
-      aria-selected="false"
       class="rc-segmented-item"
-      role="option"
     >
       <input
         class="rc-segmented-item-input"
         type="radio"
       />
       <div
+        aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Web"
       >
         Web
@@ -150,9 +150,7 @@ exports[`rc-segmented render segmented with CSSMotion basic 1`] = `
     class="rc-segmented-group"
   >
     <label
-      aria-selected="true"
       class="rc-segmented-item rc-segmented-item-selected"
-      role="option"
     >
       <input
         checked=""
@@ -160,39 +158,41 @@ exports[`rc-segmented render segmented with CSSMotion basic 1`] = `
         type="radio"
       />
       <div
+        aria-selected="true"
         class="rc-segmented-item-label"
+        role="option"
         title="iOS"
       >
         iOS
       </div>
     </label>
     <label
-      aria-selected="false"
       class="rc-segmented-item"
-      role="option"
     >
       <input
         class="rc-segmented-item-input"
         type="radio"
       />
       <div
+        aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Android"
       >
         Android
       </div>
     </label>
     <label
-      aria-selected="false"
       class="rc-segmented-item"
-      role="option"
     >
       <input
         class="rc-segmented-item-input"
         type="radio"
       />
       <div
+        aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Web3"
       >
         Web3
@@ -212,9 +212,7 @@ exports[`rc-segmented render segmented with options 1`] = `
     class="rc-segmented-group"
   >
     <label
-      aria-selected="true"
       class="rc-segmented-item rc-segmented-item-selected"
-      role="option"
     >
       <input
         checked=""
@@ -222,39 +220,41 @@ exports[`rc-segmented render segmented with options 1`] = `
         type="radio"
       />
       <div
+        aria-selected="true"
         class="rc-segmented-item-label"
+        role="option"
         title="iOS"
       >
         iOS
       </div>
     </label>
     <label
-      aria-selected="false"
       class="rc-segmented-item"
-      role="option"
     >
       <input
         class="rc-segmented-item-input"
         type="radio"
       />
       <div
+        aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Android"
       >
         Android
       </div>
     </label>
     <label
-      aria-selected="false"
       class="rc-segmented-item"
-      role="option"
     >
       <input
         class="rc-segmented-item-input"
         type="radio"
       />
       <div
+        aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Web"
       >
         Web
@@ -274,9 +274,7 @@ exports[`rc-segmented render segmented with options null/undefined 1`] = `
     class="rc-segmented-group"
   >
     <label
-      aria-selected="true"
       class="rc-segmented-item rc-segmented-item-selected rc-segmented-item-disabled"
-      role="option"
     >
       <input
         checked=""
@@ -285,13 +283,13 @@ exports[`rc-segmented render segmented with options null/undefined 1`] = `
         type="radio"
       />
       <div
+        aria-selected="true"
         class="rc-segmented-item-label"
+        role="option"
       />
     </label>
     <label
-      aria-selected="false"
       class="rc-segmented-item rc-segmented-item-disabled"
-      role="option"
     >
       <input
         class="rc-segmented-item-input"
@@ -299,13 +297,13 @@ exports[`rc-segmented render segmented with options null/undefined 1`] = `
         type="radio"
       />
       <div
+        aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
       />
     </label>
     <label
-      aria-selected="false"
       class="rc-segmented-item rc-segmented-item-disabled"
-      role="option"
     >
       <input
         class="rc-segmented-item-input"
@@ -313,7 +311,9 @@ exports[`rc-segmented render segmented with options null/undefined 1`] = `
         type="radio"
       />
       <div
+        aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title=""
       />
     </label>
@@ -331,9 +331,7 @@ exports[`rc-segmented render segmented with options: 1 1`] = `
     class="rc-segmented-group"
   >
     <label
-      aria-selected="true"
       class="rc-segmented-item rc-segmented-item-selected"
-      role="option"
     >
       <input
         checked=""
@@ -341,71 +339,73 @@ exports[`rc-segmented render segmented with options: 1 1`] = `
         type="radio"
       />
       <div
+        aria-selected="true"
         class="rc-segmented-item-label"
+        role="option"
         title="1"
       >
         1
       </div>
     </label>
     <label
-      aria-selected="false"
       class="rc-segmented-item"
-      role="option"
     >
       <input
         class="rc-segmented-item-input"
         type="radio"
       />
       <div
+        aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="2"
       >
         2
       </div>
     </label>
     <label
-      aria-selected="false"
       class="rc-segmented-item"
-      role="option"
     >
       <input
         class="rc-segmented-item-input"
         type="radio"
       />
       <div
+        aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="3"
       >
         3
       </div>
     </label>
     <label
-      aria-selected="false"
       class="rc-segmented-item"
-      role="option"
     >
       <input
         class="rc-segmented-item-input"
         type="radio"
       />
       <div
+        aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="4"
       >
         4
       </div>
     </label>
     <label
-      aria-selected="false"
       class="rc-segmented-item"
-      role="option"
     >
       <input
         class="rc-segmented-item-input"
         type="radio"
       />
       <div
+        aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="5"
       >
         5
@@ -425,9 +425,7 @@ exports[`rc-segmented render segmented with options: 2 1`] = `
     class="rc-segmented-group"
   >
     <label
-      aria-selected="true"
       class="rc-segmented-item rc-segmented-item-selected"
-      role="option"
     >
       <input
         checked=""
@@ -435,39 +433,41 @@ exports[`rc-segmented render segmented with options: 2 1`] = `
         type="radio"
       />
       <div
+        aria-selected="true"
         class="rc-segmented-item-label"
+        role="option"
         title="iOS"
       >
         iOS
       </div>
     </label>
     <label
-      aria-selected="false"
       class="rc-segmented-item"
-      role="option"
     >
       <input
         class="rc-segmented-item-input"
         type="radio"
       />
       <div
+        aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Android"
       >
         Android
       </div>
     </label>
     <label
-      aria-selected="false"
       class="rc-segmented-item"
-      role="option"
     >
       <input
         class="rc-segmented-item-input"
         type="radio"
       />
       <div
+        aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Web"
       >
         Web
@@ -487,9 +487,7 @@ exports[`rc-segmented render segmented with options: disabled 1`] = `
     class="rc-segmented-group"
   >
     <label
-      aria-selected="true"
       class="rc-segmented-item rc-segmented-item-selected"
-      role="option"
     >
       <input
         checked=""
@@ -497,16 +495,16 @@ exports[`rc-segmented render segmented with options: disabled 1`] = `
         type="radio"
       />
       <div
+        aria-selected="true"
         class="rc-segmented-item-label"
+        role="option"
         title="iOS"
       >
         iOS
       </div>
     </label>
     <label
-      aria-selected="false"
       class="rc-segmented-item rc-segmented-item-disabled"
-      role="option"
     >
       <input
         class="rc-segmented-item-input"
@@ -514,23 +512,25 @@ exports[`rc-segmented render segmented with options: disabled 1`] = `
         type="radio"
       />
       <div
+        aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Android"
       >
         Android
       </div>
     </label>
     <label
-      aria-selected="false"
       class="rc-segmented-item"
-      role="option"
     >
       <input
         class="rc-segmented-item-input"
         type="radio"
       />
       <div
+        aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Web"
       >
         Web
@@ -550,9 +550,7 @@ exports[`rc-segmented render segmented with title 1`] = `
     class="rc-segmented-group"
   >
     <label
-      aria-selected="true"
       class="rc-segmented-item rc-segmented-item-selected"
-      role="option"
     >
       <input
         checked=""
@@ -560,39 +558,41 @@ exports[`rc-segmented render segmented with title 1`] = `
         type="radio"
       />
       <div
+        aria-selected="true"
         class="rc-segmented-item-label"
+        role="option"
         title="Web"
       >
         Web
       </div>
     </label>
     <label
-      aria-selected="false"
       class="rc-segmented-item"
-      role="option"
     >
       <input
         class="rc-segmented-item-input"
         type="radio"
       />
       <div
+        aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="hello1"
       >
         hello1
       </div>
     </label>
     <label
-      aria-selected="false"
       class="rc-segmented-item"
-      role="option"
     >
       <input
         class="rc-segmented-item-input"
         type="radio"
       />
       <div
+        aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
       >
         <div>
           test1
@@ -600,32 +600,32 @@ exports[`rc-segmented render segmented with title 1`] = `
       </div>
     </label>
     <label
-      aria-selected="false"
       class="rc-segmented-item"
-      role="option"
     >
       <input
         class="rc-segmented-item-input"
         type="radio"
       />
       <div
+        aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="hello1.5"
       >
         hello1
       </div>
     </label>
     <label
-      aria-selected="false"
       class="rc-segmented-item"
-      role="option"
     >
       <input
         class="rc-segmented-item-input"
         type="radio"
       />
       <div
+        aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title=""
       >
         foo1
@@ -645,9 +645,7 @@ exports[`rc-segmented render segmented: disabled 1`] = `
     class="rc-segmented-group"
   >
     <label
-      aria-selected="true"
       class="rc-segmented-item rc-segmented-item-selected rc-segmented-item-disabled"
-      role="option"
     >
       <input
         checked=""
@@ -656,16 +654,16 @@ exports[`rc-segmented render segmented: disabled 1`] = `
         type="radio"
       />
       <div
+        aria-selected="true"
         class="rc-segmented-item-label"
+        role="option"
         title="iOS"
       >
         iOS
       </div>
     </label>
     <label
-      aria-selected="false"
       class="rc-segmented-item rc-segmented-item-disabled"
-      role="option"
     >
       <input
         class="rc-segmented-item-input"
@@ -673,16 +671,16 @@ exports[`rc-segmented render segmented: disabled 1`] = `
         type="radio"
       />
       <div
+        aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Android"
       >
         Android
       </div>
     </label>
     <label
-      aria-selected="false"
       class="rc-segmented-item rc-segmented-item-disabled"
-      role="option"
     >
       <input
         class="rc-segmented-item-input"
@@ -690,7 +688,9 @@ exports[`rc-segmented render segmented: disabled 1`] = `
         type="radio"
       />
       <div
+        aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Web"
       >
         Web

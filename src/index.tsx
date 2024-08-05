@@ -106,8 +106,6 @@ const InternalSegmentedOption: React.FC<{
       className={classNames(className, {
         [`${prefixCls}-item-disabled`]: disabled,
       })}
-      role="option"
-      aria-selected={checked}
     >
       <input
         className={`${prefixCls}-item-input`}
@@ -116,7 +114,12 @@ const InternalSegmentedOption: React.FC<{
         checked={checked}
         onChange={handleChange}
       />
-      <div className={`${prefixCls}-item-label`} title={title}>
+      <div
+        className={`${prefixCls}-item-label`}
+        title={title}
+        role="option"
+        aria-selected={checked}
+      >
         {label}
       </div>
     </label>
