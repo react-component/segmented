@@ -13,7 +13,7 @@ type ThumbReact = {
 
 export interface MotionThumbInterface {
   containerRef: React.RefObject<HTMLDivElement>;
-  value: SegmentedValue;
+  value?: SegmentedValue;
   getValueIndex: (value: SegmentedValue) => number;
   prefixCls: string;
   motionName: string;
@@ -55,7 +55,8 @@ export default function MotionThumb(props: MotionThumbInterface) {
   const [prevValue, setPrevValue] = React.useState(value);
 
   // =========================== Effect ===========================
-  const findValueElement = (val: SegmentedValue) => {
+  const findValueElement = (val?: SegmentedValue) => {
+    if (!val) return null;
     const index = getValueIndex(val);
 
     const ele = containerRef.current?.querySelectorAll<HTMLDivElement>(
@@ -90,16 +91,20 @@ export default function MotionThumb(props: MotionThumbInterface) {
 
   const thumbStart = React.useMemo(
     () =>
-      direction === 'rtl'
-        ? toPX(-(prevStyle?.right as number))
-        : toPX(prevStyle?.left as number),
+      prevStyle
+        ? direction === 'rtl'
+          ? toPX(-(prevStyle?.right as number))
+          : toPX(prevStyle?.left as number)
+        : 'auto',
     [direction, prevStyle],
   );
   const thumbActive = React.useMemo(
     () =>
-      direction === 'rtl'
-        ? toPX(-(nextStyle?.right as number))
-        : toPX(nextStyle?.left as number),
+      nextStyle
+        ? direction === 'rtl'
+          ? toPX(-(nextStyle?.right as number))
+          : toPX(nextStyle?.left as number)
+        : 'auto',
     [direction, nextStyle],
   );
 
