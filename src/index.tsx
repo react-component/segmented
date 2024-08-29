@@ -164,7 +164,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     };
 
     const divProps = omit(restProps, ['children']);
-    console.log('rawValue', rawValue);
+
     return (
       <div
         role="listbox"
