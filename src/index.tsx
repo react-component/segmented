@@ -15,6 +15,9 @@ export interface SegmentedLabeledOption<ValueType = SegmentedRawOption> {
   disabled?: boolean;
   label: React.ReactNode;
   value: ValueType;
+  /**
+   * html `title` property for label
+   */
   title?: string;
 }
 
@@ -36,7 +39,7 @@ export interface SegmentedProps<ValueType = SegmentedValue>
   prefixCls?: string;
   direction?: 'ltr' | 'rtl';
   motionName?: string;
-  position?: 'horizontal' | 'vertical'; // Add position prop
+  mode?: 'horizontal' | 'vertical'; // Add mode prop
 }
 
 function getValidTitle(option: SegmentedLabeledOption) {
@@ -124,7 +127,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     const {
       prefixCls = 'rc-segmented',
       direction,
-      position = 'horizontal', // Default to 'horizontal'
+      mode,
       options = [],
       disabled,
       defaultValue,
@@ -175,20 +178,15 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
           {
             [`${prefixCls}-rtl`]: direction === 'rtl',
             [`${prefixCls}-disabled`]: disabled,
-            [`${prefixCls}-vertical`]: position === 'vertical', // Apply vertical class if position is 'vertical'
+            [`${prefixCls}-vertical`]: mode === 'vertical', // Apply vertical class if mode is 'vertical'
           },
           className,
         )}
         ref={mergedRef}
       >
-        <div
-          className={classNames(
-            `${prefixCls}-group`,
-            `${prefixCls}-${position}-group`,
-          )}
-        >
+        <div className={classNames(`${prefixCls}-group`)}>
           <MotionThumb
-            position={position}
+            mode={mode}
             prefixCls={prefixCls}
             value={rawValue}
             containerRef={containerRef}

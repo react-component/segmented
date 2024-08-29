@@ -13,7 +13,7 @@ export default function App() {
       </div>
       <div className="wrapper">
         <Segmented
-          position="vertical"
+          mode="vertical"
           options={['iOS', 'Android', 'Web']}
           onChange={(value) => console.log(value, typeof value)}
         />
