@@ -9,6 +9,9 @@ type ThumbReact = {
   left: number;
   right: number;
   width: number;
+  top: number;
+  bottom: number;
+  height: number;
 } | null;
 
 export interface MotionThumbInterface {
@@ -20,23 +23,52 @@ export interface MotionThumbInterface {
   onMotionStart: VoidFunction;
   onMotionEnd: VoidFunction;
   direction?: 'ltr' | 'rtl';
+  position?: 'horizontal' | 'vertical';
 }
 
 const calcThumbStyle = (
   targetElement: HTMLElement | null | undefined,
-): ThumbReact =>
-  targetElement
-    ? {
-        left: targetElement.offsetLeft,
-        right:
-          (targetElement.parentElement!.clientWidth as number) -
-          targetElement.clientWidth -
-          targetElement.offsetLeft,
-        width: targetElement.clientWidth,
-      }
-    : null;
+  position: 'horizontal' | 'vertical',
+): ThumbReact => {
+  if (!targetElement) return null;
 
-const toPX = (value: number) =>
+  const style: ThumbReact = {
+    left: targetElement.offsetLeft,
+    right:
+      (targetElement.parentElement!.clientWidth as number) -
+      targetElement.clientWidth -
+      targetElement.offsetLeft,
+    width: targetElement.clientWidth,
+    top: targetElement.offsetTop,
+    bottom:
+      (targetElement.parentElement!.clientHeight as number) -
+      targetElement.clientHeight -
+      targetElement.offsetTop,
+    height: targetElement.clientHeight,
+  };
+
+  if (position === 'vertical') {
+    return {
+      left: 0,
+      right: 0,
+      width: 0,
+      top: style.top,
+      bottom: style.bottom,
+      height: style.height,
+    };
+  }
+
+  return {
+    left: style.left,
+    right: style.right,
+    width: style.width,
+    top: 0,
+    bottom: 0,
+    height: 0,
+  };
+};
+
+const toPX = (value: number | undefined): string | undefined =>
   value !== undefined ? `${value}px` : undefined;
 
 export default function MotionThumb(props: MotionThumbInterface) {
@@ -49,19 +81,17 @@ export default function MotionThumb(props: MotionThumbInterface) {
     onMotionStart,
     onMotionEnd,
     direction,
+    position = 'horizontal',
   } = props;
 
   const thumbRef = React.useRef<HTMLDivElement>(null);
   const [prevValue, setPrevValue] = React.useState(value);
 
-  // =========================== Effect ===========================
   const findValueElement = (val: SegmentedValue) => {
     const index = getValueIndex(val);
-
     const ele = containerRef.current?.querySelectorAll<HTMLDivElement>(
       `.${prefixCls}-item`,
     )[index];
-
     return ele?.offsetParent && ele;
   };
 
@@ -73,8 +103,8 @@ export default function MotionThumb(props: MotionThumbInterface) {
       const prev = findValueElement(prevValue);
       const next = findValueElement(value);
 
-      const calcPrevStyle = calcThumbStyle(prev);
-      const calcNextStyle = calcThumbStyle(next);
+      const calcPrevStyle = calcThumbStyle(prev, position);
+      const calcNextStyle = calcThumbStyle(next, position);
 
       setPrevValue(value);
       setPrevStyle(calcPrevStyle);
@@ -90,40 +120,44 @@ export default function MotionThumb(props: MotionThumbInterface) {
 
   const thumbStart = React.useMemo(
     () =>
-      direction === 'rtl'
-        ? toPX(-(prevStyle?.right as number))
-        : toPX(prevStyle?.left as number),
-    [direction, prevStyle],
-  );
-  const thumbActive = React.useMemo(
-    () =>
-      direction === 'rtl'
-        ? toPX(-(nextStyle?.right as number))
-        : toPX(nextStyle?.left as number),
-    [direction, nextStyle],
+      position === 'vertical'
+        ? toPX(prevStyle?.top ?? 0)
+        : toPX(prevStyle?.left ?? 0),
+    [position, prevStyle],
   );
 
-  // =========================== Motion ===========================
-  const onAppearStart = () => {
-    return {
-      transform: `translateX(var(--thumb-start-left))`,
-      width: `var(--thumb-start-width)`,
-    };
-  };
-  const onAppearActive = () => {
-    return {
-      transform: `translateX(var(--thumb-active-left))`,
-      width: `var(--thumb-active-width)`,
-    };
-  };
+  const thumbActive = React.useMemo(
+    () =>
+      position === 'vertical'
+        ? toPX(nextStyle?.top ?? 0)
+        : toPX(nextStyle?.left ?? 0),
+    [position, nextStyle],
+  );
+
+  const onAppearStart = () => ({
+    transform: `translate${
+      position === 'vertical' ? 'Y' : 'X'
+    }(var(--thumb-start-${position === 'vertical' ? 'top' : 'left'}))`,
+    [position === 'vertical' ? 'height' : 'width']: `var(--thumb-start-${
+      position === 'vertical' ? 'height' : 'width'
+    })`,
+  });
+
+  const onAppearActive = () => ({
+    transform: `translate${
+      position === 'vertical' ? 'Y' : 'X'
+    }(var(--thumb-active-${position === 'vertical' ? 'top' : 'left'}))`,
+    [position === 'vertical' ? 'height' : 'width']: `var(--thumb-active-${
+      position === 'vertical' ? 'height' : 'width'
+    })`,
+  });
+
   const onVisibleChanged = () => {
     setPrevStyle(null);
     setNextStyle(null);
     onMotionEnd();
   };
 
-  // =========================== Render ===========================
-  // No need motion when nothing exist in queue
   if (!prevStyle || !nextStyle) {
     return null;
   }
@@ -144,13 +178,20 @@ export default function MotionThumb(props: MotionThumbInterface) {
           '--thumb-start-width': toPX(prevStyle?.width),
           '--thumb-active-left': thumbActive,
           '--thumb-active-width': toPX(nextStyle?.width),
+          '--thumb-start-top': thumbStart,
+          '--thumb-start-height': toPX(prevStyle?.height),
+          '--thumb-active-top': thumbActive,
+          '--thumb-active-height': toPX(nextStyle?.height),
         } as React.CSSProperties;
 
-        // It's little ugly which should be refactor when @umi/test update to latest jsdom
         const motionProps = {
           ref: composeRef(thumbRef, ref),
           style: mergedStyle,
-          className: classNames(`${prefixCls}-thumb`, motionClassName),
+          className: classNames(
+            `${prefixCls}-thumb`,
+            `${prefixCls}-${position}-thumb`,
+            motionClassName,
+          ),
         };
 
         if (process.env.NODE_ENV === 'test') {

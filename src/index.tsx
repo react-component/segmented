@@ -15,9 +15,6 @@ export interface SegmentedLabeledOption<ValueType = SegmentedRawOption> {
   disabled?: boolean;
   label: React.ReactNode;
   value: ValueType;
-  /**
-   * html `title` property for label
-   */
   title?: string;
 }
 
@@ -39,14 +36,13 @@ export interface SegmentedProps<ValueType = SegmentedValue>
   prefixCls?: string;
   direction?: 'ltr' | 'rtl';
   motionName?: string;
+  position?: 'horizontal' | 'vertical'; // Add position prop
 }
 
 function getValidTitle(option: SegmentedLabeledOption) {
   if (typeof option.title !== 'undefined') {
     return option.title;
   }
-
-  // read `label` when title is `undefined`
   if (typeof option.label !== 'object') {
     return option.label?.toString();
   }
@@ -56,13 +52,11 @@ function normalizeOptions(options: SegmentedOptions): SegmentedLabeledOption[] {
   return options.map((option) => {
     if (typeof option === 'object' && option !== null) {
       const validTitle = getValidTitle(option);
-
       return {
         ...option,
         title: validTitle,
       };
     }
-
     return {
       label: option?.toString(),
       title: option?.toString(),
@@ -97,7 +91,6 @@ const InternalSegmentedOption: React.FC<{
     if (disabled) {
       return;
     }
-
     onChange(event, value);
   };
 
@@ -131,6 +124,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     const {
       prefixCls = 'rc-segmented',
       direction,
+      position = 'horizontal', // Default to 'horizontal'
       options = [],
       disabled,
       defaultValue,
@@ -151,14 +145,11 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       return normalizeOptions(options);
     }, [options]);
 
-    // Note: We should not auto switch value when value not exist in options
-    // which may break single source of truth.
     const [rawValue, setRawValue] = useMergedState(segmentedOptions[0]?.value, {
       value,
       defaultValue,
     });
 
-    // ======================= Change ========================
     const [thumbShow, setThumbShow] = React.useState(false);
 
     const handleChange = (
@@ -168,14 +159,12 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       if (disabled) {
         return;
       }
-
       setRawValue(val);
-
       onChange?.(val);
     };
 
     const divProps = omit(restProps, ['children']);
-
+    console.log('rawValue', rawValue);
     return (
       <div
         role="listbox"
@@ -186,13 +175,20 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
           {
             [`${prefixCls}-rtl`]: direction === 'rtl',
             [`${prefixCls}-disabled`]: disabled,
+            [`${prefixCls}-vertical`]: position === 'vertical', // Apply vertical class if position is 'vertical'
           },
           className,
         )}
         ref={mergedRef}
       >
-        <div className={`${prefixCls}-group`}>
+        <div
+          className={classNames(
+            `${prefixCls}-group`,
+            `${prefixCls}-${position}-group`,
+          )}
+        >
           <MotionThumb
+            position={position}
             prefixCls={prefixCls}
             value={rawValue}
             containerRef={containerRef}
