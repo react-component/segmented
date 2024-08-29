@@ -23,12 +23,12 @@ export interface MotionThumbInterface {
   onMotionStart: VoidFunction;
   onMotionEnd: VoidFunction;
   direction?: 'ltr' | 'rtl';
-  mode?: 'horizontal' | 'vertical';
+  vertical?: boolean;
 }
 
 const calcThumbStyle = (
   targetElement: HTMLElement | null | undefined,
-  mode: 'horizontal' | 'vertical',
+  vertical?: boolean,
 ): ThumbReact => {
   if (!targetElement) return null;
 
@@ -47,7 +47,7 @@ const calcThumbStyle = (
     height: targetElement.clientHeight,
   };
 
-  if (mode === 'vertical') {
+  if (vertical) {
     return {
       left: 0,
       right: 0,
@@ -81,7 +81,7 @@ export default function MotionThumb(props: MotionThumbInterface) {
     onMotionStart,
     onMotionEnd,
     direction,
-    mode = 'horizontal',
+    vertical = false,
   } = props;
 
   const thumbRef = React.useRef<HTMLDivElement>(null);
@@ -103,8 +103,8 @@ export default function MotionThumb(props: MotionThumbInterface) {
       const prev = findValueElement(prevValue);
       const next = findValueElement(value);
 
-      const calcPrevStyle = calcThumbStyle(prev, mode);
-      const calcNextStyle = calcThumbStyle(next, mode);
+      const calcPrevStyle = calcThumbStyle(prev, vertical);
+      const calcNextStyle = calcThumbStyle(next, vertical);
 
       setPrevValue(value);
       setPrevStyle(calcPrevStyle);
@@ -120,26 +120,26 @@ export default function MotionThumb(props: MotionThumbInterface) {
 
   const thumbStart = React.useMemo(
     () =>
-      mode === 'vertical'
+      vertical
         ? toPX(prevStyle?.top ?? 0)
         : direction === 'rtl'
         ? toPX(-(prevStyle?.right as number))
         : toPX(prevStyle?.left as number),
-    [mode, direction, prevStyle],
+    [vertical, direction, prevStyle],
   );
 
   const thumbActive = React.useMemo(
     () =>
-      mode === 'vertical'
+      vertical
         ? toPX(nextStyle?.top ?? 0)
         : direction === 'rtl'
         ? toPX(-(nextStyle?.right as number))
         : toPX(nextStyle?.left as number),
-    [mode, direction, nextStyle],
+    [vertical, direction, nextStyle],
   );
 
   const onAppearStart = () =>
-    mode === 'vertical'
+    vertical
       ? {
           transform: 'translateY(var(--thumb-start-top))',
           height: 'var(--thumb-start-height)',
@@ -150,7 +150,7 @@ export default function MotionThumb(props: MotionThumbInterface) {
         };
 
   const onAppearActive = () =>
-    mode === 'vertical'
+    vertical
       ? {
           transform: 'translateY(var(--thumb-active-top))',
           height: 'var(--thumb-active-height)',

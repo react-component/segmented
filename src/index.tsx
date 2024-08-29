@@ -39,7 +39,7 @@ export interface SegmentedProps<ValueType = SegmentedValue>
   prefixCls?: string;
   direction?: 'ltr' | 'rtl';
   motionName?: string;
-  mode?: 'horizontal' | 'vertical'; // Add mode prop
+  vertical?: boolean;
 }
 
 function getValidTitle(option: SegmentedLabeledOption) {
@@ -127,7 +127,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     const {
       prefixCls = 'rc-segmented',
       direction,
-      mode,
+      vertical,
       options = [],
       disabled,
       defaultValue,
@@ -178,15 +178,15 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
           {
             [`${prefixCls}-rtl`]: direction === 'rtl',
             [`${prefixCls}-disabled`]: disabled,
-            [`${prefixCls}-vertical`]: mode === 'vertical', // Apply vertical class if mode is 'vertical'
+            [`${prefixCls}-vertical`]: vertical,
           },
           className,
         )}
         ref={mergedRef}
       >
-        <div className={classNames(`${prefixCls}-group`)}>
+        <div className={`${prefixCls}-group`}>
           <MotionThumb
-            mode={mode}
+            vertical={vertical}
             prefixCls={prefixCls}
             value={rawValue}
             containerRef={containerRef}

@@ -555,4 +555,16 @@ describe('rc-segmented', () => {
 
     offsetParentSpy.mockRestore();
   });
+
+  it('should render vertical segmented', () => {
+    const { container, asFragment } = render(
+      <Segmented options={['iOS', 'Android', 'Web']} vertical />,
+    );
+
+    expect(asFragment().firstChild).toMatchSnapshot();
+    expect(container.querySelector('.rc-segmented')).toHaveClass(
+      'rc-segmented-vertical',
+    );
+    expectMatchChecked(container, [true, false, false]);
+  });
 });
