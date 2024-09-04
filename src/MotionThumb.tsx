@@ -48,6 +48,7 @@ const calcThumbStyle = (
   };
 
   if (vertical) {
+    // Adjusts positioning and size for vertical layout by setting horizontal properties to 0 and using vertical properties from the style object.
     return {
       left: 0,
       right: 0,
@@ -141,6 +142,7 @@ export default function MotionThumb(props: MotionThumbInterface) {
 
   // =========================== Motion ===========================
   const onAppearStart = () =>
+    // Returns initial transform and size styles for the thumb based on the layout orientation (vertical or horizontal).
     vertical
       ? {
           transform: 'translateY(var(--thumb-start-top))',
@@ -152,6 +154,7 @@ export default function MotionThumb(props: MotionThumbInterface) {
         };
 
   const onAppearActive = () =>
+    // Returns active transform and size styles for the thumb based on the layout orientation (vertical or horizontal).
     vertical
       ? {
           transform: 'translateY(var(--thumb-active-top))',
