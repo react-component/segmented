@@ -142,7 +142,6 @@ export default function MotionThumb(props: MotionThumbInterface) {
 
   // =========================== Motion ===========================
   const onAppearStart = () =>
-    // Returns initial transform and size styles for the thumb based on the layout orientation (vertical or horizontal).
     vertical
       ? {
           transform: 'translateY(var(--thumb-start-top))',

@@ -451,6 +451,42 @@ describe('rc-segmented', () => {
       offsetParentSpy.mockRestore();
     });
   });
+  describe('render segmented with CSSMotion: vertical', () => {
+    it('quick switch', () => {
+      const offsetParentSpy = jest
+        .spyOn(HTMLElement.prototype, 'offsetParent', 'get')
+        .mockImplementation(() => {
+          return container;
+        });
+      const { container } = render(
+        <Segmented
+          vertical
+          options={['IOS', 'Android', 'Web3']}
+          defaultValue="Android"
+        />,
+      );
+
+      // >>> Click: Web3
+      fireEvent.click(
+        container.querySelectorAll('.rc-segmented-item-input')[2],
+      );
+
+      // Motion to active
+      act(() => {
+        jest.runAllTimers();
+      });
+      expect(container.querySelector('.rc-segmented-thumb')).toHaveClass(
+        'rc-segmented-thumb-motion-appear-active',
+      );
+
+      exceptThumbHaveStyle(container, {
+        '--thumb-active-top': '0px',
+        '--thumb-active-width': '0px',
+      });
+
+      offsetParentSpy.mockRestore();
+    });
+  });
 
   it('render segmented with options null/undefined', () => {
     const handleValueChange = jest.fn();
