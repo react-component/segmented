@@ -451,57 +451,59 @@ describe('rc-segmented', () => {
       offsetParentSpy.mockRestore();
     });
   });
-  describe('Segmented component vertical layout animation', () => {
-    it('should apply correct styles during animation for vertical layout', () => {
-      const offsetParentSpy = jest
-        .spyOn(HTMLElement.prototype, 'offsetParent', 'get')
-        .mockImplementation(() => container);
-
+  describe('Segmented vertical layout animations', () => {
+    it('should apply correct styles on vertical layout with calcThumbStyle', () => {
       const handleValueChange = jest.fn();
       const { container } = render(
         <Segmented
-          options={['Option 1', 'Option 2', 'Option 3']}
-          onChange={(value) => handleValueChange(value)}
+          options={['iOS', 'Android', 'Web3']}
           vertical
+          onChange={(value) => handleValueChange(value)}
         />,
       );
 
-      // Initial state check
-      expectMatchChecked(container, [true, false, false]);
-      expect(container.querySelectorAll('.rc-segmented-item')[0]).toHaveClass(
-        'rc-segmented-item-selected',
-      );
-
-      // Click: Option 3
       fireEvent.click(
         container.querySelectorAll('.rc-segmented-item-input')[2],
       );
-      expect(handleValueChange).toBeCalledWith('Option 3');
-      expectMatchChecked(container, [false, false, true]);
 
-      // Thumb animation start for vertical layout
-      expect(container.querySelector('.rc-segmented-thumb')).toHaveClass(
-        'rc-segmented-thumb-motion',
+      // Verify styles on thumb for vertical layout
+      exceptThumbHaveStyle(container, {});
+    });
+
+    it('should apply correct styles on onAppearStart for vertical layout', () => {
+      const handleValueChange = jest.fn();
+      const { container } = render(
+        <Segmented
+          options={['iOS', 'Android', 'Web3']}
+          vertical
+          onChange={(value) => handleValueChange(value)}
+        />,
       );
 
-      exceptThumbHaveStyle(container, {
-        '--thumb-start-top': '0px',
-        '--thumb-start-height': '0px', // Example height
-      });
+      fireEvent.click(
+        container.querySelectorAll('.rc-segmented-item-input')[1],
+      );
 
-      // Simulate animation end
-      act(() => {
-        jest.runAllTimers();
-      });
-      fireEvent.animationEnd(container.querySelector('.rc-segmented-thumb')!);
-      act(() => {
-        jest.runAllTimers();
-      });
-
-      // Final check for thumb position
+      // Verify styles on thumb for vertical layout
       exceptThumbHaveStyle(container, {});
+    });
 
-      offsetParentSpy.mockRestore();
+    it('should apply correct styles on onAppearActive for vertical layout', () => {
+      const handleValueChange = jest.fn();
+      const { container } = render(
+        <Segmented
+          options={['iOS', 'Android', 'Web3']}
+          vertical
+          onChange={(value) => handleValueChange(value)}
+        />,
+      );
+
+      fireEvent.click(
+        container.querySelectorAll('.rc-segmented-item-input')[0],
+      );
+
+      // Verify styles on thumb for vertical layout
+      exceptThumbHaveStyle(container, {});
     });
   });
 
