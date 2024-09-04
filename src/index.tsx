@@ -46,6 +46,8 @@ function getValidTitle(option: SegmentedLabeledOption) {
   if (typeof option.title !== 'undefined') {
     return option.title;
   }
+
+  // read `label` when title is `undefined`
   if (typeof option.label !== 'object') {
     return option.label?.toString();
   }
@@ -148,11 +150,14 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       return normalizeOptions(options);
     }, [options]);
 
+    // Note: We should not auto switch value when value not exist in options
+    // which may break single source of truth.
     const [rawValue, setRawValue] = useMergedState(segmentedOptions[0]?.value, {
       value,
       defaultValue,
     });
 
+    // ======================= Change ========================
     const [thumbShow, setThumbShow] = React.useState(false);
 
     const handleChange = (

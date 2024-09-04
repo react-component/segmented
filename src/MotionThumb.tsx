@@ -87,6 +87,7 @@ export default function MotionThumb(props: MotionThumbInterface) {
   const thumbRef = React.useRef<HTMLDivElement>(null);
   const [prevValue, setPrevValue] = React.useState(value);
 
+  // =========================== Effect ===========================
   const findValueElement = (val: SegmentedValue) => {
     const index = getValueIndex(val);
     const ele = containerRef.current?.querySelectorAll<HTMLDivElement>(
@@ -138,6 +139,7 @@ export default function MotionThumb(props: MotionThumbInterface) {
     [vertical, direction, nextStyle],
   );
 
+  // =========================== Motion ===========================
   const onAppearStart = () =>
     vertical
       ? {
@@ -166,6 +168,8 @@ export default function MotionThumb(props: MotionThumbInterface) {
     onMotionEnd();
   };
 
+  // =========================== Render ===========================
+  // No need motion when nothing exist in queue
   if (!prevStyle || !nextStyle) {
     return null;
   }
@@ -192,6 +196,7 @@ export default function MotionThumb(props: MotionThumbInterface) {
           '--thumb-active-height': toPX(nextStyle?.height),
         } as React.CSSProperties;
 
+        // It's little ugly which should be refactor when @umi/test update to latest jsdom
         const motionProps = {
           ref: composeRef(thumbRef, ref),
           style: mergedStyle,
