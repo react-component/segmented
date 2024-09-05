@@ -145,28 +145,33 @@ export default function MotionThumb(props: MotionThumbInterface) {
   }, [vertical, direction, nextStyle]);
 
   // =========================== Motion ===========================
-  const onAppearStart = () =>
-    vertical
-      ? {
-          transform: 'translateY(var(--thumb-start-top))',
-          height: 'var(--thumb-start-height)',
-        }
-      : {
-          transform: 'translateX(var(--thumb-start-left))',
-          width: 'var(--thumb-start-width)',
-        };
+  const onAppearStart = () => {
+    if (vertical) {
+      return {
+        transform: 'translateY(var(--thumb-start-top))',
+        height: 'var(--thumb-start-height)',
+      };
+    }
 
-  const onAppearActive = () =>
-    // Returns active transform and size styles for the thumb based on the layout orientation (vertical or horizontal).
-    vertical
-      ? {
-          transform: 'translateY(var(--thumb-active-top))',
-          height: 'var(--thumb-active-height)',
-        }
-      : {
-          transform: 'translateX(var(--thumb-active-left))',
-          width: 'var(--thumb-active-width)',
-        };
+    return {
+      transform: 'translateX(var(--thumb-start-left))',
+      width: 'var(--thumb-start-width)',
+    };
+  };
+
+  const onAppearActive = () => {
+    if (vertical) {
+      return {
+        transform: 'translateY(var(--thumb-active-top))',
+        height: 'var(--thumb-active-height)',
+      };
+    }
+
+    return {
+      transform: 'translateX(var(--thumb-active-left))',
+      width: 'var(--thumb-active-width)',
+    };
+  };
 
   const onVisibleChanged = () => {
     setPrevStyle(null);
