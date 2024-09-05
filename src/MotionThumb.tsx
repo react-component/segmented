@@ -120,25 +120,29 @@ export default function MotionThumb(props: MotionThumbInterface) {
     }
   }, [value]);
 
-  const thumbStart = React.useMemo(
-    () =>
-      vertical
-        ? toPX(prevStyle?.top ?? 0)
-        : direction === 'rtl'
-        ? toPX(-(prevStyle?.right as number))
-        : toPX(prevStyle?.left as number),
-    [vertical, direction, prevStyle],
-  );
+  const thumbStart = React.useMemo(() => {
+    if (vertical) {
+      return toPX(prevStyle?.top ?? 0);
+    }
 
-  const thumbActive = React.useMemo(
-    () =>
-      vertical
-        ? toPX(nextStyle?.top ?? 0)
-        : direction === 'rtl'
-        ? toPX(-(nextStyle?.right as number))
-        : toPX(nextStyle?.left as number),
-    [vertical, direction, nextStyle],
-  );
+    if (direction === 'rtl') {
+      return toPX(-(prevStyle?.right as number));
+    }
+
+    return toPX(prevStyle?.left as number);
+  }, [vertical, direction, prevStyle]);
+
+  const thumbActive = React.useMemo(() => {
+    if (vertical) {
+      return toPX(nextStyle?.top ?? 0);
+    }
+
+    if (direction === 'rtl') {
+      return toPX(-(nextStyle?.right as number));
+    }
+
+    return toPX(nextStyle?.left as number);
+  }, [vertical, direction, nextStyle]);
 
   // =========================== Motion ===========================
   const onAppearStart = () =>
