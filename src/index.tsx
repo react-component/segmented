@@ -39,6 +39,7 @@ export interface SegmentedProps<ValueType = SegmentedValue>
   prefixCls?: string;
   direction?: 'ltr' | 'rtl';
   motionName?: string;
+  vertical?: boolean;
 }
 
 function getValidTitle(option: SegmentedLabeledOption) {
@@ -56,13 +57,11 @@ function normalizeOptions(options: SegmentedOptions): SegmentedLabeledOption[] {
   return options.map((option) => {
     if (typeof option === 'object' && option !== null) {
       const validTitle = getValidTitle(option);
-
       return {
         ...option,
         title: validTitle,
       };
     }
-
     return {
       label: option?.toString(),
       title: option?.toString(),
@@ -97,7 +96,6 @@ const InternalSegmentedOption: React.FC<{
     if (disabled) {
       return;
     }
-
     onChange(event, value);
   };
 
@@ -131,6 +129,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     const {
       prefixCls = 'rc-segmented',
       direction,
+      vertical,
       options = [],
       disabled,
       defaultValue,
@@ -168,9 +167,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       if (disabled) {
         return;
       }
-
       setRawValue(val);
-
       onChange?.(val);
     };
 
@@ -186,6 +183,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
           {
             [`${prefixCls}-rtl`]: direction === 'rtl',
             [`${prefixCls}-disabled`]: disabled,
+            [`${prefixCls}-vertical`]: vertical,
           },
           className,
         )}
@@ -193,6 +191,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       >
         <div className={`${prefixCls}-group`}>
           <MotionThumb
+            vertical={vertical}
             prefixCls={prefixCls}
             value={rawValue}
             containerRef={containerRef}
