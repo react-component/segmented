@@ -567,6 +567,7 @@ describe('rc-segmented', () => {
     );
     expectMatchChecked(container, [true, false, false]);
   });
+
   it('should render vertical segmented and handle thumb animations correctly', () => {
     const offsetParentSpy = jest
       .spyOn(HTMLElement.prototype, 'offsetParent', 'get')
