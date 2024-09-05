@@ -699,3 +699,127 @@ exports[`rc-segmented render segmented: disabled 1`] = `
   </div>
 </div>
 `;
+
+exports[`rc-segmented should render vertical segmented 1`] = `
+<div
+  aria-label="segmented control"
+  class="rc-segmented rc-segmented-vertical"
+  role="listbox"
+>
+  <div
+    class="rc-segmented-group"
+  >
+    <label
+      class="rc-segmented-item rc-segmented-item-selected"
+    >
+      <input
+        checked=""
+        class="rc-segmented-item-input"
+        type="radio"
+      />
+      <div
+        aria-selected="true"
+        class="rc-segmented-item-label"
+        role="option"
+        title="iOS"
+      >
+        iOS
+      </div>
+    </label>
+    <label
+      class="rc-segmented-item"
+    >
+      <input
+        class="rc-segmented-item-input"
+        type="radio"
+      />
+      <div
+        aria-selected="false"
+        class="rc-segmented-item-label"
+        role="option"
+        title="Android"
+      >
+        Android
+      </div>
+    </label>
+    <label
+      class="rc-segmented-item"
+    >
+      <input
+        class="rc-segmented-item-input"
+        type="radio"
+      />
+      <div
+        aria-selected="false"
+        class="rc-segmented-item-label"
+        role="option"
+        title="Web"
+      >
+        Web
+      </div>
+    </label>
+  </div>
+</div>
+`;
+
+exports[`rc-segmented should render vertical segmented and handle thumb animations correctly 1`] = `
+<div
+  aria-label="segmented control"
+  class="rc-segmented rc-segmented-vertical"
+  role="listbox"
+>
+  <div
+    class="rc-segmented-group"
+  >
+    <label
+      class="rc-segmented-item rc-segmented-item-selected"
+    >
+      <input
+        checked=""
+        class="rc-segmented-item-input"
+        type="radio"
+      />
+      <div
+        aria-selected="true"
+        class="rc-segmented-item-label"
+        role="option"
+        title="iOS"
+      >
+        iOS
+      </div>
+    </label>
+    <label
+      class="rc-segmented-item"
+    >
+      <input
+        class="rc-segmented-item-input"
+        type="radio"
+      />
+      <div
+        aria-selected="false"
+        class="rc-segmented-item-label"
+        role="option"
+        title="Android"
+      >
+        Android
+      </div>
+    </label>
+    <label
+      class="rc-segmented-item"
+    >
+      <input
+        class="rc-segmented-item-input"
+        type="radio"
+      />
+      <div
+        aria-selected="false"
+        class="rc-segmented-item-label"
+        role="option"
+        title="Web"
+      >
+        Web
+      </div>
+    </label>
+  </div>
+</div>
+`;
