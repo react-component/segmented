@@ -1,6 +1,6 @@
 # rc-segmented
 
-[![NPM version][npm-image]][npm-url] [![npm download][download-image]][download-url] [![dumi](https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square)](https://github.com/umijs/dumi) [![build status][github-actions-image]][github-actions-url] [![Codecov][codecov-image]][codecov-url][![bundle size][bundlephobia-image]][bundlephobia-url]
+[![NPM version][npm-image]][npm-url] [![npm download][download-image]][download-url] [![dumi](https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square)](https://github.com/umijs/dumi) [![build status][github-actions-image]][github-actions-url] [![Codecov][codecov-image]][codecov-url] [![bundle size][bundlephobia-image]][bundlephobia-url]
 
 [npm-image]: http://img.shields.io/npm/v/rc-segmented.svg?style=flat-square
 [npm-url]: http://npmjs.org/package/rc-segmented
@@ -10,7 +10,7 @@
 [codecov-url]: https://codecov.io/gh/react-component/segmented/branch/master
 [download-image]: https://img.shields.io/npm/dm/rc-segmented.svg?style=flat-square
 [download-url]: https://npmjs.org/package/rc-segmented
-[bundlephobia-url]: https://bundlephobia.com/result?p=rc-segmented
+[bundlephobia-url]: https://bundlephobia.com/package/rc-segmented
 [bundlephobia-image]: https://badgen.net/bundlephobia/minzip/rc-segmented
 
 React Segmented Control.

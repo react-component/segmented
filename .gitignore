@@ -39,3 +39,9 @@ coverage/
 
 # vscode
 .vscode
+
+# dumi
+.dumi/tmp
+.dumi/tmp-production
+
+bun.lockb

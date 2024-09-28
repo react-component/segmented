@@ -1,8 +1,8 @@
-import * as React from 'react';
 import classNames from 'classnames';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
-import { composeRef } from 'rc-util/lib/ref';
 import omit from 'rc-util/lib/omit';
+import { composeRef } from 'rc-util/lib/ref';
+import * as React from 'react';
 
 import MotionThumb from './MotionThumb';
 
@@ -10,29 +10,36 @@ export type SegmentedValue = string | number;
 
 export type SegmentedRawOption = SegmentedValue;
 
-export interface SegmentedLabeledOption {
+export interface SegmentedLabeledOption<ValueType = SegmentedRawOption> {
   className?: string;
   disabled?: boolean;
   label: React.ReactNode;
-  value: SegmentedRawOption;
+  value: ValueType;
   /**
    * html `title` property for label
    */
   title?: string;
 }
 
-type SegmentedOptions = (SegmentedRawOption | SegmentedLabeledOption)[];
+type SegmentedOptions<T = SegmentedRawOption> = (
+  | T
+  | SegmentedLabeledOption<T>
+)[];
 
-export interface SegmentedProps
-  extends Omit<React.HTMLProps<HTMLDivElement>, 'onChange'> {
-  options: SegmentedOptions;
-  defaultValue?: SegmentedValue;
-  value?: SegmentedValue;
-  onChange?: (value: SegmentedValue) => void;
+export interface SegmentedProps<ValueType = SegmentedValue>
+  extends Omit<
+    React.HTMLProps<HTMLDivElement>,
+    'defaultValue' | 'value' | 'onChange'
+  > {
+  options: SegmentedOptions<ValueType>;
+  defaultValue?: ValueType;
+  value?: ValueType;
+  onChange?: (value: ValueType) => void;
   disabled?: boolean;
   prefixCls?: string;
   direction?: 'ltr' | 'rtl';
   motionName?: string;
+  vertical?: boolean;
 }
 
 function getValidTitle(option: SegmentedLabeledOption) {
@@ -50,13 +57,11 @@ function normalizeOptions(options: SegmentedOptions): SegmentedLabeledOption[] {
   return options.map((option) => {
     if (typeof option === 'object' && option !== null) {
       const validTitle = getValidTitle(option);
-
       return {
         ...option,
         title: validTitle,
       };
     }
-
     return {
       label: option?.toString(),
       title: option?.toString(),
@@ -91,7 +96,6 @@ const InternalSegmentedOption: React.FC<{
     if (disabled) {
       return;
     }
-
     onChange(event, value);
   };
 
@@ -108,7 +112,12 @@ const InternalSegmentedOption: React.FC<{
         checked={checked}
         onChange={handleChange}
       />
-      <div className={`${prefixCls}-item-label`} title={title}>
+      <div
+        className={`${prefixCls}-item-label`}
+        title={title}
+        role="option"
+        aria-selected={checked}
+      >
         {label}
       </div>
     </label>
@@ -120,7 +129,8 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     const {
       prefixCls = 'rc-segmented',
       direction,
-      options,
+      vertical,
+      options = [],
       disabled,
       defaultValue,
       value,
@@ -155,7 +165,6 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       val: SegmentedRawOption,
     ) => {
       setRawValue(val);
-
       onChange?.(val);
     };
 
@@ -163,12 +172,15 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
 
     return (
       <div
+        role="listbox"
+        aria-label="segmented control"
         {...divProps}
         className={classNames(
           prefixCls,
           {
             [`${prefixCls}-rtl`]: direction === 'rtl',
             [`${prefixCls}-disabled`]: disabled,
+            [`${prefixCls}-vertical`]: vertical,
           },
           className,
         )}
@@ -176,10 +188,12 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       >
         <div className={`${prefixCls}-group`}>
           <MotionThumb
+            vertical={vertical}
             prefixCls={prefixCls}
             value={rawValue}
             containerRef={containerRef}
             motionName={`${prefixCls}-${motionName}`}
+            direction={direction}
             getValueIndex={(val) =>
               segmentedOptions.findIndex((n) => n.value === val)
             }
@@ -192,6 +206,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
           />
           {segmentedOptions.map((segmentedOption) => (
             <InternalSegmentedOption
+              {...segmentedOption}
               key={segmentedOption.value}
               prefixCls={prefixCls}
               className={classNames(
@@ -204,7 +219,6 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
               )}
               checked={segmentedOption.value === rawValue}
               onChange={handleChange}
-              {...segmentedOption}
               disabled={!!disabled || !!segmentedOption.disabled}
             />
           ))}
@@ -214,10 +228,14 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
   },
 );
 
-Segmented.displayName = 'Segmented';
+if (process.env.NODE_ENV !== 'production') {
+  Segmented.displayName = 'Segmented';
+}
 
-Segmented.defaultProps = {
-  options: [],
-};
+const TypedSegmented = Segmented as <ValueType>(
+  props: SegmentedProps<ValueType> & {
+    ref?: React.ForwardedRef<HTMLDivElement>;
+  },
+) => ReturnType<typeof Segmented>;
 
-export default Segmented;
+export default TypedSegmented;

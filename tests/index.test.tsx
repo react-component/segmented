@@ -1,5 +1,5 @@
-import React from 'react';
-import { render, act, fireEvent } from '@testing-library/react';
+import { act, fireEvent, render } from '@testing-library/react';
+import * as React from 'react';
 import Segmented from '../src';
 
 jest.mock('rc-motion/lib/util/motion', () => {
@@ -27,7 +27,7 @@ describe('rc-segmented', () => {
     const styleText = container
       .querySelector('.rc-segmented-thumb')
       ?.getAttribute('data-test-style');
-    const style = JSON.parse(styleText!) || {};
+    const style = styleText ? JSON.parse(styleText!) : {};
 
     expect(style).toMatchObject(matchStyle);
   }
@@ -231,6 +231,12 @@ describe('rc-segmented', () => {
   });
 
   it('render segmented with controlled mode', () => {
+    const offsetParentSpy = jest
+      .spyOn(HTMLElement.prototype, 'offsetParent', 'get')
+      .mockImplementation(() => {
+        return container;
+      });
+
     const Demo = () => {
       const options = ['iOS', 'Android', 'Web3'];
 
@@ -250,6 +256,7 @@ describe('rc-segmented', () => {
       );
     };
     const { container } = render(<Demo />);
+
     fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[0]);
     expect(container.querySelector('.value')?.textContent).toBe('iOS');
 
@@ -284,10 +291,17 @@ describe('rc-segmented', () => {
 
     // invalid changes: Should not active any item to make sure it's single source of truth
     expect(container.querySelector('.rc-segmented-item-selected')).toBeFalsy();
+
+    offsetParentSpy.mockRestore();
   });
 
   describe('render segmented with CSSMotion', () => {
     it('basic', () => {
+      const offsetParentSpy = jest
+        .spyOn(HTMLElement.prototype, 'offsetParent', 'get')
+        .mockImplementation(() => {
+          return container;
+        });
       const handleValueChange = jest.fn();
       const { container, asFragment } = render(
         <Segmented
@@ -366,9 +380,16 @@ describe('rc-segmented', () => {
 
       // thumb should disappear
       expect(container.querySelector('.rc-segmented-thumb')).toBeFalsy();
+
+      offsetParentSpy.mockRestore();
     });
 
     it('quick switch', () => {
+      const offsetParentSpy = jest
+        .spyOn(HTMLElement.prototype, 'offsetParent', 'get')
+        .mockImplementation(() => {
+          return container;
+        });
       const { container } = render(
         <Segmented
           options={['IOS', 'Android', 'Web3']}
@@ -403,6 +424,31 @@ describe('rc-segmented', () => {
         '--thumb-active-left': '0px',
         '--thumb-active-width': '62px',
       });
+
+      offsetParentSpy.mockRestore();
+    });
+
+    it('stop animation early in hidden parent', () => {
+      const offsetParentSpy = jest
+        .spyOn(HTMLElement.prototype, 'offsetParent', 'get')
+        .mockImplementation(() => null);
+      const Demo = () => {
+        const [value, setValue] = React.useState<string>('iOS');
+        React.useEffect(() => setValue('Web3'), []);
+        return <Segmented options={['iOS', 'Android', 'Web3']} value={value} />;
+      };
+
+      const { container } = render(<Demo />);
+
+      // stop animation early and place "selected" class
+      expect(container.querySelectorAll('.rc-segmented-item')[2]).toHaveClass(
+        'rc-segmented-item-selected',
+      );
+
+      // thumb should disappear
+      expect(container.querySelector('.rc-segmented-thumb')).toBeFalsy();
+
+      offsetParentSpy.mockRestore();
     });
   });
 
@@ -476,5 +522,132 @@ describe('rc-segmented', () => {
     );
 
     expectMatchChecked(container, [true, false, false]);
+  });
+
+  it('click can work as expected with rtl', () => {
+    const offsetParentSpy = jest
+      .spyOn(HTMLElement.prototype, 'offsetParent', 'get')
+      .mockImplementation(() => {
+        return container;
+      });
+    const handleValueChange = jest.fn();
+    const { container } = render(
+      <Segmented
+        direction="rtl"
+        options={['iOS', 'Android', 'Web']}
+        onChange={(value) => handleValueChange(value)}
+      />,
+    );
+
+    fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[1]);
+    expectMatchChecked(container, [false, true, false]);
+    expect(handleValueChange).toBeCalledWith('Android');
+
+    // Motion to active
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    exceptThumbHaveStyle(container, {
+      '--thumb-active-left': '-22px',
+      '--thumb-active-width': '118px',
+    });
+
+    offsetParentSpy.mockRestore();
+  });
+
+  it('should render vertical segmented', () => {
+    const { container, asFragment } = render(
+      <Segmented options={['iOS', 'Android', 'Web']} vertical />,
+    );
+
+    expect(asFragment().firstChild).toMatchSnapshot();
+    expect(container.querySelector('.rc-segmented')).toHaveClass(
+      'rc-segmented-vertical',
+    );
+    expectMatchChecked(container, [true, false, false]);
+  });
+
+  it('should render vertical segmented and handle thumb animations correctly', () => {
+    const offsetParentSpy = jest
+      .spyOn(HTMLElement.prototype, 'offsetParent', 'get')
+      .mockImplementation(() => {
+        return container;
+      });
+    const handleValueChange = jest.fn();
+    const { container, asFragment } = render(
+      <Segmented
+        options={['iOS', 'Android', 'Web']}
+        vertical
+        onChange={(value) => handleValueChange(value)}
+      />,
+    );
+
+    // Snapshot test
+    expect(asFragment().firstChild).toMatchSnapshot();
+    expect(container.querySelector('.rc-segmented')).toHaveClass(
+      'rc-segmented-vertical',
+    );
+    expectMatchChecked(container, [true, false, false]);
+
+    // Click: Web
+    fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[2]);
+    expect(handleValueChange).toBeCalledWith('Web');
+    expectMatchChecked(container, [false, false, true]);
+
+    // Thumb should appear at `iOS`
+    exceptThumbHaveStyle(container, {
+      '--thumb-start-top': '0px',
+      '--thumb-start-height': '0px',
+    });
+
+    // Motion => active
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    // Motion enter end
+    fireEvent.animationEnd(container.querySelector('.rc-segmented-thumb')!);
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    // Thumb should disappear
+    expect(container.querySelector('.rc-segmented-thumb')).toBeFalsy();
+
+    // Click: Android
+    fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[1]);
+    expect(handleValueChange).toBeCalledWith('Android');
+    expectMatchChecked(container, [false, true, false]);
+
+    // Thumb should move
+    expect(container.querySelector('.rc-segmented-thumb')).toHaveClass(
+      'rc-segmented-thumb-motion',
+    );
+
+    // Thumb appeared at `Web`
+    exceptThumbHaveStyle(container, {
+      '--thumb-start-top': '0px',
+      '--thumb-start-height': '0px',
+    });
+
+    // Motion appear end
+    act(() => {
+      jest.runAllTimers();
+    });
+    exceptThumbHaveStyle(container, {
+      '--thumb-active-top': '0px',
+      '--thumb-active-height': '0px',
+    });
+
+    fireEvent.animationEnd(container.querySelector('.rc-segmented-thumb')!);
+    act(() => {
+      jest.runAllTimers();
+    });
+
+    // Thumb should disappear
+    expect(container.querySelector('.rc-segmented-thumb')).toBeFalsy();
+
+    offsetParentSpy.mockRestore();
   });
 });
