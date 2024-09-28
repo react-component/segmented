@@ -164,9 +164,6 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       event: React.ChangeEvent<HTMLInputElement>,
       val: SegmentedRawOption,
     ) => {
-      if (disabled) {
-        return;
-      }
       setRawValue(val);
       onChange?.(val);
     };
