@@ -107,6 +107,7 @@ const InternalSegmentedOption: React.FC<{
     >
       <input
         className={`${prefixCls}-item-input`}
+        aria-hidden="true"
         type="radio"
         disabled={disabled}
         checked={checked}
