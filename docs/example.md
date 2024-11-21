@@ -32,3 +32,7 @@ nav:
 ## rtl
 
 <code src="./demo/rtl.tsx"></code>
+
+## name
+
+<code src="./demo/name.tsx"></code>

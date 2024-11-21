@@ -40,6 +40,7 @@ export interface SegmentedProps<ValueType = SegmentedValue>
   direction?: 'ltr' | 'rtl';
   motionName?: string;
   vertical?: boolean;
+  name?: string;
 }
 
 function getValidTitle(option: SegmentedLabeledOption) {
@@ -78,6 +79,7 @@ const InternalSegmentedOption: React.FC<{
   label: React.ReactNode;
   title?: string;
   value: SegmentedRawOption;
+  name?: string;
   onChange: (
     e: React.ChangeEvent<HTMLInputElement>,
     value: SegmentedRawOption,
@@ -90,6 +92,7 @@ const InternalSegmentedOption: React.FC<{
   label,
   title,
   value,
+  name,
   onChange,
 }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -106,6 +109,7 @@ const InternalSegmentedOption: React.FC<{
       })}
     >
       <input
+        name={name}
         className={`${prefixCls}-item-input`}
         aria-hidden="true"
         type="radio"
@@ -135,6 +139,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       disabled,
       defaultValue,
       value,
+      name,
       onChange,
       className = '',
       motionName = 'thumb-motion',
@@ -208,6 +213,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
           {segmentedOptions.map((segmentedOption) => (
             <InternalSegmentedOption
               {...segmentedOption}
+              name={name}
               key={segmentedOption.value}
               prefixCls={prefixCls}
               className={classNames(
