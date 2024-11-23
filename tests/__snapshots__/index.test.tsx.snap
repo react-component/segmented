@@ -5,6 +5,7 @@ exports[`rc-segmented render empty segmented 1`] = `
   aria-label="segmented control"
   class="rc-segmented"
   role="listbox"
+  tabindex="0"
 >
   <div
     class="rc-segmented-group"
@@ -17,6 +18,7 @@ exports[`rc-segmented render label with ReactNode 1`] = `
   aria-label="segmented control"
   class="rc-segmented"
   role="listbox"
+  tabindex="0"
 >
   <div
     class="rc-segmented-group"
@@ -25,7 +27,6 @@ exports[`rc-segmented render label with ReactNode 1`] = `
       class="rc-segmented-item rc-segmented-item-selected"
     >
       <input
-        aria-hidden="true"
         checked=""
         class="rc-segmented-item-input"
         type="radio"
@@ -43,7 +44,6 @@ exports[`rc-segmented render label with ReactNode 1`] = `
       class="rc-segmented-item"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         type="radio"
       />
@@ -63,7 +63,6 @@ exports[`rc-segmented render label with ReactNode 1`] = `
       class="rc-segmented-item"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         type="radio"
       />
@@ -86,6 +85,7 @@ exports[`rc-segmented render segmented ok 1`] = `
   aria-label="segmented control"
   class="rc-segmented"
   role="listbox"
+  tabindex="0"
 >
   <div
     class="rc-segmented-group"
@@ -94,7 +94,6 @@ exports[`rc-segmented render segmented ok 1`] = `
       class="rc-segmented-item rc-segmented-item-selected"
     >
       <input
-        aria-hidden="true"
         checked=""
         class="rc-segmented-item-input"
         type="radio"
@@ -112,7 +111,6 @@ exports[`rc-segmented render segmented ok 1`] = `
       class="rc-segmented-item"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         type="radio"
       />
@@ -129,7 +127,6 @@ exports[`rc-segmented render segmented ok 1`] = `
       class="rc-segmented-item"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         type="radio"
       />
@@ -151,6 +148,7 @@ exports[`rc-segmented render segmented with CSSMotion basic 1`] = `
   aria-label="segmented control"
   class="rc-segmented"
   role="listbox"
+  tabindex="0"
 >
   <div
     class="rc-segmented-group"
@@ -159,7 +157,6 @@ exports[`rc-segmented render segmented with CSSMotion basic 1`] = `
       class="rc-segmented-item rc-segmented-item-selected"
     >
       <input
-        aria-hidden="true"
         checked=""
         class="rc-segmented-item-input"
         type="radio"
@@ -177,7 +174,6 @@ exports[`rc-segmented render segmented with CSSMotion basic 1`] = `
       class="rc-segmented-item"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         type="radio"
       />
@@ -194,7 +190,6 @@ exports[`rc-segmented render segmented with CSSMotion basic 1`] = `
       class="rc-segmented-item"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         type="radio"
       />
@@ -216,6 +211,7 @@ exports[`rc-segmented render segmented with options 1`] = `
   aria-label="segmented control"
   class="rc-segmented"
   role="listbox"
+  tabindex="0"
 >
   <div
     class="rc-segmented-group"
@@ -224,7 +220,6 @@ exports[`rc-segmented render segmented with options 1`] = `
       class="rc-segmented-item rc-segmented-item-selected"
     >
       <input
-        aria-hidden="true"
         checked=""
         class="rc-segmented-item-input"
         type="radio"
@@ -242,7 +237,6 @@ exports[`rc-segmented render segmented with options 1`] = `
       class="rc-segmented-item"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         type="radio"
       />
@@ -259,7 +253,6 @@ exports[`rc-segmented render segmented with options 1`] = `
       class="rc-segmented-item"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         type="radio"
       />
@@ -281,6 +274,7 @@ exports[`rc-segmented render segmented with options null/undefined 1`] = `
   aria-label="segmented control"
   class="rc-segmented rc-segmented-disabled"
   role="listbox"
+  tabindex="0"
 >
   <div
     class="rc-segmented-group"
@@ -289,7 +283,6 @@ exports[`rc-segmented render segmented with options null/undefined 1`] = `
       class="rc-segmented-item rc-segmented-item-selected rc-segmented-item-disabled"
     >
       <input
-        aria-hidden="true"
         checked=""
         class="rc-segmented-item-input"
         disabled=""
@@ -305,7 +298,6 @@ exports[`rc-segmented render segmented with options null/undefined 1`] = `
       class="rc-segmented-item rc-segmented-item-disabled"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         disabled=""
         type="radio"
@@ -320,7 +312,6 @@ exports[`rc-segmented render segmented with options null/undefined 1`] = `
       class="rc-segmented-item rc-segmented-item-disabled"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         disabled=""
         type="radio"
@@ -341,6 +332,7 @@ exports[`rc-segmented render segmented with options: 1 1`] = `
   aria-label="segmented control"
   class="rc-segmented"
   role="listbox"
+  tabindex="0"
 >
   <div
     class="rc-segmented-group"
@@ -349,7 +341,6 @@ exports[`rc-segmented render segmented with options: 1 1`] = `
       class="rc-segmented-item rc-segmented-item-selected"
     >
       <input
-        aria-hidden="true"
         checked=""
         class="rc-segmented-item-input"
         type="radio"
@@ -367,7 +358,6 @@ exports[`rc-segmented render segmented with options: 1 1`] = `
       class="rc-segmented-item"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         type="radio"
       />
@@ -384,7 +374,6 @@ exports[`rc-segmented render segmented with options: 1 1`] = `
       class="rc-segmented-item"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         type="radio"
       />
@@ -401,7 +390,6 @@ exports[`rc-segmented render segmented with options: 1 1`] = `
       class="rc-segmented-item"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         type="radio"
       />
@@ -418,7 +406,6 @@ exports[`rc-segmented render segmented with options: 1 1`] = `
       class="rc-segmented-item"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         type="radio"
       />
@@ -440,6 +427,7 @@ exports[`rc-segmented render segmented with options: 2 1`] = `
   aria-label="segmented control"
   class="rc-segmented"
   role="listbox"
+  tabindex="0"
 >
   <div
     class="rc-segmented-group"
@@ -448,7 +436,6 @@ exports[`rc-segmented render segmented with options: 2 1`] = `
       class="rc-segmented-item rc-segmented-item-selected"
     >
       <input
-        aria-hidden="true"
         checked=""
         class="rc-segmented-item-input"
         type="radio"
@@ -466,7 +453,6 @@ exports[`rc-segmented render segmented with options: 2 1`] = `
       class="rc-segmented-item"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         type="radio"
       />
@@ -483,7 +469,6 @@ exports[`rc-segmented render segmented with options: 2 1`] = `
       class="rc-segmented-item"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         type="radio"
       />
@@ -505,6 +490,7 @@ exports[`rc-segmented render segmented with options: disabled 1`] = `
   aria-label="segmented control"
   class="rc-segmented"
   role="listbox"
+  tabindex="0"
 >
   <div
     class="rc-segmented-group"
@@ -513,7 +499,6 @@ exports[`rc-segmented render segmented with options: disabled 1`] = `
       class="rc-segmented-item rc-segmented-item-selected"
     >
       <input
-        aria-hidden="true"
         checked=""
         class="rc-segmented-item-input"
         type="radio"
@@ -531,7 +516,6 @@ exports[`rc-segmented render segmented with options: disabled 1`] = `
       class="rc-segmented-item rc-segmented-item-disabled"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         disabled=""
         type="radio"
@@ -549,7 +533,6 @@ exports[`rc-segmented render segmented with options: disabled 1`] = `
       class="rc-segmented-item"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         type="radio"
       />
@@ -571,6 +554,7 @@ exports[`rc-segmented render segmented with title 1`] = `
   aria-label="segmented control"
   class="rc-segmented"
   role="listbox"
+  tabindex="0"
 >
   <div
     class="rc-segmented-group"
@@ -579,7 +563,6 @@ exports[`rc-segmented render segmented with title 1`] = `
       class="rc-segmented-item rc-segmented-item-selected"
     >
       <input
-        aria-hidden="true"
         checked=""
         class="rc-segmented-item-input"
         type="radio"
@@ -597,7 +580,6 @@ exports[`rc-segmented render segmented with title 1`] = `
       class="rc-segmented-item"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         type="radio"
       />
@@ -614,7 +596,6 @@ exports[`rc-segmented render segmented with title 1`] = `
       class="rc-segmented-item"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         type="radio"
       />
@@ -632,7 +613,6 @@ exports[`rc-segmented render segmented with title 1`] = `
       class="rc-segmented-item"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         type="radio"
       />
@@ -649,7 +629,6 @@ exports[`rc-segmented render segmented with title 1`] = `
       class="rc-segmented-item"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         type="radio"
       />
@@ -671,6 +650,7 @@ exports[`rc-segmented render segmented: disabled 1`] = `
   aria-label="segmented control"
   class="rc-segmented rc-segmented-disabled"
   role="listbox"
+  tabindex="0"
 >
   <div
     class="rc-segmented-group"
@@ -679,7 +659,6 @@ exports[`rc-segmented render segmented: disabled 1`] = `
       class="rc-segmented-item rc-segmented-item-selected rc-segmented-item-disabled"
     >
       <input
-        aria-hidden="true"
         checked=""
         class="rc-segmented-item-input"
         disabled=""
@@ -698,7 +677,6 @@ exports[`rc-segmented render segmented: disabled 1`] = `
       class="rc-segmented-item rc-segmented-item-disabled"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         disabled=""
         type="radio"
@@ -716,7 +694,6 @@ exports[`rc-segmented render segmented: disabled 1`] = `
       class="rc-segmented-item rc-segmented-item-disabled"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         disabled=""
         type="radio"
@@ -739,6 +716,7 @@ exports[`rc-segmented should render vertical segmented 1`] = `
   aria-label="segmented control"
   class="rc-segmented rc-segmented-vertical"
   role="listbox"
+  tabindex="0"
 >
   <div
     class="rc-segmented-group"
@@ -747,7 +725,6 @@ exports[`rc-segmented should render vertical segmented 1`] = `
       class="rc-segmented-item rc-segmented-item-selected"
     >
       <input
-        aria-hidden="true"
         checked=""
         class="rc-segmented-item-input"
         type="radio"
@@ -765,7 +742,6 @@ exports[`rc-segmented should render vertical segmented 1`] = `
       class="rc-segmented-item"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         type="radio"
       />
@@ -782,7 +758,6 @@ exports[`rc-segmented should render vertical segmented 1`] = `
       class="rc-segmented-item"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         type="radio"
       />
@@ -804,6 +779,7 @@ exports[`rc-segmented should render vertical segmented and handle thumb animatio
   aria-label="segmented control"
   class="rc-segmented rc-segmented-vertical"
   role="listbox"
+  tabindex="0"
 >
   <div
     class="rc-segmented-group"
@@ -812,7 +788,6 @@ exports[`rc-segmented should render vertical segmented and handle thumb animatio
       class="rc-segmented-item rc-segmented-item-selected"
     >
       <input
-        aria-hidden="true"
         checked=""
         class="rc-segmented-item-input"
         type="radio"
@@ -830,7 +805,6 @@ exports[`rc-segmented should render vertical segmented and handle thumb animatio
       class="rc-segmented-item"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         type="radio"
       />
@@ -847,7 +821,6 @@ exports[`rc-segmented should render vertical segmented and handle thumb animatio
       class="rc-segmented-item"
     >
       <input
-        aria-hidden="true"
         class="rc-segmented-item-input"
         type="radio"
       />
