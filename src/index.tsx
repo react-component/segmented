@@ -106,6 +106,8 @@ const InternalSegmentedOption: React.FC<{
     if (disabled) {
       return;
     }
+    // Do not add focus style when clicking
+    onBlur();
     onChange(event, value);
   };
 
