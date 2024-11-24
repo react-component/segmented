@@ -192,11 +192,11 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       (option) => option.value === rawValue,
     );
 
-    const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+    const handleFocus = () => {
       setIsFocused(true);
     };
 
-    const handleBlur = (event?: React.FocusEvent<HTMLInputElement>) => {
+    const handleBlur = () => {
       setIsFocused(false);
     };
 
