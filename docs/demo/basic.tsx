@@ -8,6 +8,8 @@ export default function App() {
       <div className="wrapper">
         <Segmented
           options={['iOS', 'Android', 'Web']}
+          defaultValue="Android"
+          name="segmented1"
           onChange={(value) => console.log(value, typeof value)}
         />
       </div>
@@ -15,6 +17,7 @@ export default function App() {
         <Segmented
           vertical
           options={['iOS', 'Android', 'Web']}
+          name="segmented2"
           onChange={(value) => console.log(value, typeof value)}
         />
       </div>

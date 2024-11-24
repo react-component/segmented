@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import useMergedState from 'rc-util/lib/hooks/useMergedState';
-import KeyCode from 'rc-util/lib/KeyCode';
 import omit from 'rc-util/lib/omit';
 import { composeRef } from 'rc-util/lib/ref';
 import * as React from 'react';
@@ -202,37 +201,22 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     };
 
     // ======================= Keyboard ========================
-    const getNextIndex = (current: number, offset: number) => {
-      if (disabled) {
-        return current;
-      }
-
-      const total = segmentedOptions.length;
-      const nextIndex = (current + offset + total) % total;
-
-      if (segmentedOptions[nextIndex]?.disabled) {
-        return getNextIndex(nextIndex, offset);
-      }
-      return nextIndex;
-    };
-
     const handleKeyDown = (event: React.KeyboardEvent) => {
-      let offset = 0;
+      const total = segmentedOptions.length;
+      let nextIndex = currentIndex;
 
-      switch (event.which) {
-        case KeyCode.LEFT:
-        case KeyCode.UP:
-          offset = -1;
+      switch (event.key) {
+        case 'ArrowLeft':
+        case 'ArrowUp':
+          nextIndex = currentIndex === 0 ? total - 1 : currentIndex - 1;
           break;
-        case KeyCode.RIGHT:
-        case KeyCode.DOWN:
-          offset = 1;
+        case 'ArrowRight':
+        case 'ArrowDown':
+          nextIndex = currentIndex === total - 1 ? 0 : currentIndex + 1;
           break;
       }
 
-      const nextIndex = getNextIndex(currentIndex, offset);
       const nextOption = segmentedOptions[nextIndex];
-
       if (nextOption) {
         setRawValue(nextOption.value);
         onChange?.(nextOption.value);
