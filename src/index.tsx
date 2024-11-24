@@ -85,8 +85,8 @@ const InternalSegmentedOption: React.FC<{
     e: React.ChangeEvent<HTMLInputElement>,
     value: SegmentedRawOption,
   ) => void;
-  onFocus: () => void;
-  onBlur: () => void;
+  onFocus: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onBlur: (e?: React.FocusEvent<HTMLInputElement>) => void;
   onKeyDown: (e: React.KeyboardEvent) => void;
 }> = ({
   prefixCls,
@@ -131,7 +131,6 @@ const InternalSegmentedOption: React.FC<{
       <div
         className={`${prefixCls}-item-label`}
         title={title}
-        role="option"
         aria-selected={checked}
       >
         {label}
@@ -194,11 +193,11 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       (option) => option.value === rawValue,
     );
 
-    const handleFocus = () => {
+    const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
       setIsFocused(true);
     };
 
-    const handleBlur = () => {
+    const handleBlur = (event?: React.FocusEvent<HTMLInputElement>) => {
       setIsFocused(false);
     };
 
@@ -223,16 +222,12 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       switch (event.which) {
         case KeyCode.LEFT:
         case KeyCode.UP:
-          event.preventDefault();
           offset = -1;
           break;
         case KeyCode.RIGHT:
         case KeyCode.DOWN:
-          event.preventDefault();
           offset = 1;
           break;
-        default:
-          return;
       }
 
       const nextIndex = getNextIndex(currentIndex, offset);
@@ -246,9 +241,9 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
 
     return (
       <div
-        role="listbox"
+        role="radiogroup"
         aria-label="segmented control"
-        tabIndex={0}
+        tabIndex={disabled ? undefined : 0}
         {...divProps}
         className={classNames(
           prefixCls,
