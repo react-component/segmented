@@ -188,10 +188,6 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     // ======================= Focus ========================
     const [isFocused, setIsFocused] = React.useState(false);
 
-    const currentIndex = segmentedOptions.findIndex(
-      (option) => option.value === rawValue,
-    );
-
     const handleFocus = () => {
       setIsFocused(true);
     };
@@ -202,6 +198,10 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
 
     // ======================= Keyboard ========================
     const onOffset = (offset: number) => {
+      const currentIndex = segmentedOptions.findIndex(
+        (option) => option.value === rawValue,
+      );
+
       const total = segmentedOptions.length;
       const nextIndex = (currentIndex + offset + total) % total;
 
