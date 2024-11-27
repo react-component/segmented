@@ -753,4 +753,16 @@ describe('Segmented keyboard navigation', () => {
     await user.keyboard('{ArrowLeft}');
     expect(onChange).toHaveBeenCalledWith('iOS');
   });
+
+  it('should not have focus style when clicking', async () => {
+    const user = userEvent.setup();
+    const { container } = render(
+      <Segmented options={['iOS', 'Android', 'Web']} />,
+    );
+
+    await user.click(container.querySelector('.rc-segmented-item-input')!);
+    expect(container.querySelector('.rc-segmented-item-input')).not.toHaveClass(
+      'rc-segmented-item-input-focused',
+    );
+  });
 });
