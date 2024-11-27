@@ -87,6 +87,8 @@ const InternalSegmentedOption: React.FC<{
   onFocus: (e: React.FocusEvent<HTMLInputElement>) => void;
   onBlur: (e?: React.FocusEvent<HTMLInputElement>) => void;
   onKeyDown: (e: React.KeyboardEvent) => void;
+  onKeyUp: (e: React.KeyboardEvent) => void;
+  onMouseDown: () => void;
 }> = ({
   prefixCls,
   className,
@@ -100,13 +102,13 @@ const InternalSegmentedOption: React.FC<{
   onFocus,
   onBlur,
   onKeyDown,
+  onKeyUp,
+  onMouseDown,
 }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (disabled) {
       return;
     }
-    // Do not add focus style when clicking
-    onBlur();
     onChange(event, value);
   };
 
@@ -115,6 +117,7 @@ const InternalSegmentedOption: React.FC<{
       className={classNames(className, {
         [`${prefixCls}-item-disabled`]: disabled,
       })}
+      onMouseDown={onMouseDown}
     >
       <input
         name={name}
@@ -126,6 +129,7 @@ const InternalSegmentedOption: React.FC<{
         onFocus={onFocus}
         onBlur={onBlur}
         onKeyDown={onKeyDown}
+        onKeyUp={onKeyUp}
       />
       <div
         className={`${prefixCls}-item-label`}
@@ -186,6 +190,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     const divProps = omit(restProps, ['children']);
 
     // ======================= Focus ========================
+    const [isKeyboard, setIsKeyboard] = React.useState(false);
     const [isFocused, setIsFocused] = React.useState(false);
 
     const handleFocus = () => {
@@ -194,6 +199,17 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
 
     const handleBlur = () => {
       setIsFocused(false);
+    };
+
+    const handleMouseDown = () => {
+      setIsKeyboard(false);
+    };
+
+    // capture keyboard tab interaction for correct focus style
+    const handleKeyUp = (event: React.KeyboardEvent) => {
+      if (event.key === 'Tab') {
+        setIsKeyboard(true);
+      }
     };
 
     // ======================= Keyboard ========================
@@ -273,7 +289,9 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
                   [`${prefixCls}-item-selected`]:
                     segmentedOption.value === rawValue && !thumbShow,
                   [`${prefixCls}-item-focused`]:
-                    isFocused && segmentedOption.value === rawValue,
+                    isFocused &&
+                    isKeyboard &&
+                    segmentedOption.value === rawValue,
                 },
               )}
               checked={segmentedOption.value === rawValue}
@@ -281,6 +299,8 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
               onFocus={handleFocus}
               onBlur={handleBlur}
               onKeyDown={handleKeyDown}
+              onKeyUp={handleKeyUp}
+              onMouseDown={handleMouseDown}
               disabled={!!disabled || !!segmentedOption.disabled}
             />
           ))}
