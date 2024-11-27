@@ -201,25 +201,27 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     };
 
     // ======================= Keyboard ========================
-    const handleKeyDown = (event: React.KeyboardEvent) => {
+    const onOffset = (offset: number) => {
       const total = segmentedOptions.length;
-      let nextIndex = currentIndex;
-
-      switch (event.key) {
-        case 'ArrowLeft':
-        case 'ArrowUp':
-          nextIndex = currentIndex === 0 ? total - 1 : currentIndex - 1;
-          break;
-        case 'ArrowRight':
-        case 'ArrowDown':
-          nextIndex = currentIndex === total - 1 ? 0 : currentIndex + 1;
-          break;
-      }
+      const nextIndex = (currentIndex + offset + total) % total;
 
       const nextOption = segmentedOptions[nextIndex];
       if (nextOption) {
         setRawValue(nextOption.value);
         onChange?.(nextOption.value);
+      }
+    };
+
+    const handleKeyDown = (event: React.KeyboardEvent) => {
+      switch (event.key) {
+        case 'ArrowLeft':
+        case 'ArrowUp':
+          onOffset(-1);
+          break;
+        case 'ArrowRight':
+        case 'ArrowDown':
+          onOffset(1);
+          break;
       }
     };
 
