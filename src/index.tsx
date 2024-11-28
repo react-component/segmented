@@ -84,6 +84,11 @@ const InternalSegmentedOption: React.FC<{
     e: React.ChangeEvent<HTMLInputElement>,
     value: SegmentedRawOption,
   ) => void;
+  onFocus: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onBlur: (e?: React.FocusEvent<HTMLInputElement>) => void;
+  onKeyDown: (e: React.KeyboardEvent) => void;
+  onKeyUp: (e: React.KeyboardEvent) => void;
+  onMouseDown: () => void;
 }> = ({
   prefixCls,
   className,
@@ -94,6 +99,11 @@ const InternalSegmentedOption: React.FC<{
   value,
   name,
   onChange,
+  onFocus,
+  onBlur,
+  onKeyDown,
+  onKeyUp,
+  onMouseDown,
 }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (disabled) {
@@ -107,20 +117,23 @@ const InternalSegmentedOption: React.FC<{
       className={classNames(className, {
         [`${prefixCls}-item-disabled`]: disabled,
       })}
+      onMouseDown={onMouseDown}
     >
       <input
         name={name}
         className={`${prefixCls}-item-input`}
-        aria-hidden="true"
         type="radio"
         disabled={disabled}
         checked={checked}
         onChange={handleChange}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onKeyDown={onKeyDown}
+        onKeyUp={onKeyUp}
       />
       <div
         className={`${prefixCls}-item-label`}
         title={title}
-        role="option"
         aria-selected={checked}
       >
         {label}
@@ -176,10 +189,63 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
 
     const divProps = omit(restProps, ['children']);
 
+    // ======================= Focus ========================
+    const [isKeyboard, setIsKeyboard] = React.useState(false);
+    const [isFocused, setIsFocused] = React.useState(false);
+
+    const handleFocus = () => {
+      setIsFocused(true);
+    };
+
+    const handleBlur = () => {
+      setIsFocused(false);
+    };
+
+    const handleMouseDown = () => {
+      setIsKeyboard(false);
+    };
+
+    // capture keyboard tab interaction for correct focus style
+    const handleKeyUp = (event: React.KeyboardEvent) => {
+      if (event.key === 'Tab') {
+        setIsKeyboard(true);
+      }
+    };
+
+    // ======================= Keyboard ========================
+    const onOffset = (offset: number) => {
+      const currentIndex = segmentedOptions.findIndex(
+        (option) => option.value === rawValue,
+      );
+
+      const total = segmentedOptions.length;
+      const nextIndex = (currentIndex + offset + total) % total;
+
+      const nextOption = segmentedOptions[nextIndex];
+      if (nextOption) {
+        setRawValue(nextOption.value);
+        onChange?.(nextOption.value);
+      }
+    };
+
+    const handleKeyDown = (event: React.KeyboardEvent) => {
+      switch (event.key) {
+        case 'ArrowLeft':
+        case 'ArrowUp':
+          onOffset(-1);
+          break;
+        case 'ArrowRight':
+        case 'ArrowDown':
+          onOffset(1);
+          break;
+      }
+    };
+
     return (
       <div
-        role="listbox"
+        role="radiogroup"
         aria-label="segmented control"
+        tabIndex={disabled ? undefined : 0}
         {...divProps}
         className={classNames(
           prefixCls,
@@ -222,10 +288,19 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
                 {
                   [`${prefixCls}-item-selected`]:
                     segmentedOption.value === rawValue && !thumbShow,
+                  [`${prefixCls}-item-focused`]:
+                    isFocused &&
+                    isKeyboard &&
+                    segmentedOption.value === rawValue,
                 },
               )}
               checked={segmentedOption.value === rawValue}
               onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              onKeyDown={handleKeyDown}
+              onKeyUp={handleKeyUp}
+              onMouseDown={handleMouseDown}
               disabled={!!disabled || !!segmentedOption.disabled}
             />
           ))}

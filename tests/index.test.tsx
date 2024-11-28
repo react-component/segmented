@@ -1,4 +1,5 @@
 import { act, fireEvent, render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import * as React from 'react';
 import Segmented from '../src';
 
@@ -662,5 +663,106 @@ describe('rc-segmented', () => {
       .forEach((el) => {
         expect(el.name).toEqual(GROUP_NAME);
       });
+  });
+});
+
+describe('Segmented keyboard navigation', () => {
+  it('should be focusable through Tab key', async () => {
+    const user = userEvent.setup();
+    const { getByRole, container } = render(
+      <Segmented options={['Daily', 'Weekly', 'Monthly']} />,
+    );
+
+    const segmentedContainer = getByRole('radiogroup');
+    const inputs = container.querySelectorAll('.rc-segmented-item-input');
+    const firstInput = inputs[0];
+
+    await user.tab();
+    // segmented container should be focused
+    expect(segmentedContainer).toHaveFocus();
+    await user.tab();
+    // first segmented item should be focused
+    expect(firstInput).toHaveFocus();
+  });
+
+  it('should handle circular navigation with arrow keys', async () => {
+    const user = userEvent.setup();
+    const onChange = jest.fn();
+    render(
+      <Segmented options={['iOS', 'Android', 'Web']} onChange={onChange} />,
+    );
+
+    // focus on segmented
+    await user.tab();
+    // focus on first item
+    await user.tab();
+
+    // Test right navigation from first item and back to first item
+    await user.keyboard('{ArrowRight}');
+    expect(onChange).toHaveBeenCalledWith('Android');
+    await user.keyboard('{ArrowRight}');
+    expect(onChange).toHaveBeenCalledWith('Web');
+    await user.keyboard('{ArrowRight}');
+    expect(onChange).toHaveBeenCalledWith('iOS');
+
+    // Test left navigation from first item to last item
+    await user.keyboard('{ArrowLeft}');
+    expect(onChange).toHaveBeenCalledWith('Web');
+  });
+
+  it('should skip Tab navigation when disabled', async () => {
+    const user = userEvent.setup();
+    const { container } = render(
+      <Segmented options={['Daily', 'Weekly', 'Monthly']} disabled />,
+    );
+
+    const segmentedContainer = container.querySelector('.rc-segmented');
+
+    await user.tab();
+
+    // Disabled state should not get focus
+    expect(segmentedContainer).not.toHaveFocus();
+
+    // Verify container has no tabIndex attribute
+    expect(segmentedContainer?.getAttribute('tabIndex')).toBeNull();
+  });
+
+  it('should handle keyboard navigation with disabled options', async () => {
+    const user = userEvent.setup();
+    const onChange = jest.fn();
+    render(
+      <Segmented
+        options={[
+          'iOS',
+          { label: 'Android', value: 'Android', disabled: true },
+          'Web',
+        ]}
+        defaultValue="iOS"
+        onChange={onChange}
+      />,
+    );
+
+    await user.tab();
+    await user.tab();
+
+    await user.keyboard('{ArrowRight}');
+    expect(onChange).toHaveBeenCalledWith('Web');
+
+    onChange.mockClear();
+
+    await user.keyboard('{ArrowLeft}');
+    expect(onChange).toHaveBeenCalledWith('iOS');
+  });
+
+  it('should not have focus style when clicking', async () => {
+    const user = userEvent.setup();
+    const { container } = render(
+      <Segmented options={['iOS', 'Android', 'Web']} />,
+    );
+
+    await user.click(container.querySelector('.rc-segmented-item-input')!);
+    expect(container.querySelector('.rc-segmented-item-input')).not.toHaveClass(
+      'rc-segmented-item-input-focused',
+    );
   });
 });
