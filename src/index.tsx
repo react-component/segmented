@@ -6,6 +6,7 @@ import * as React from 'react';
 
 import MotionThumb from './MotionThumb';
 
+export type SemanticName = 'item' | 'label';
 export type SegmentedValue = string | number;
 
 export type SegmentedRawOption = SegmentedValue;
@@ -41,6 +42,8 @@ export interface SegmentedProps<ValueType = SegmentedValue>
   motionName?: string;
   vertical?: boolean;
   name?: string;
+  classNames?: Partial<Record<SemanticName, string>>;
+  styles?: Partial<Record<SemanticName, React.CSSProperties>>;
 }
 
 function getValidTitle(option: SegmentedLabeledOption) {
@@ -74,6 +77,8 @@ function normalizeOptions(options: SegmentedOptions): SegmentedLabeledOption[] {
 const InternalSegmentedOption: React.FC<{
   prefixCls: string;
   className?: string;
+  classNames?: Partial<Record<SemanticName, string>>;
+  styles?: Partial<Record<SemanticName, React.CSSProperties>>;
   disabled?: boolean;
   checked: boolean;
   label: React.ReactNode;
@@ -92,6 +97,8 @@ const InternalSegmentedOption: React.FC<{
 }> = ({
   prefixCls,
   className,
+  styles,
+  classNames: segmentedClassNames,
   disabled,
   checked,
   label,
@@ -117,6 +124,7 @@ const InternalSegmentedOption: React.FC<{
       className={classNames(className, {
         [`${prefixCls}-item-disabled`]: disabled,
       })}
+      style={styles?.item}
       onMouseDown={onMouseDown}
     >
       <input
@@ -132,9 +140,13 @@ const InternalSegmentedOption: React.FC<{
         onKeyUp={onKeyUp}
       />
       <div
-        className={`${prefixCls}-item-label`}
+        className={classNames(
+          `${prefixCls}-item-label`,
+          segmentedClassNames?.label,
+        )}
         title={title}
         aria-selected={checked}
+        style={styles?.label}
       >
         {label}
       </div>
@@ -155,6 +167,9 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       name,
       onChange,
       className = '',
+      style,
+      styles,
+      classNames: segmentedClassNames,
       motionName = 'thumb-motion',
       ...restProps
     } = props;
@@ -240,12 +255,12 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
           break;
       }
     };
-
     return (
       <div
         role="radiogroup"
         aria-label="segmented control"
         tabIndex={disabled ? undefined : 0}
+        style={style}
         {...divProps}
         className={classNames(
           prefixCls,
@@ -285,6 +300,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
               className={classNames(
                 segmentedOption.className,
                 `${prefixCls}-item`,
+                segmentedClassNames?.item,
                 {
                   [`${prefixCls}-item-selected`]:
                     segmentedOption.value === rawValue && !thumbShow,
@@ -294,6 +310,8 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
                     segmentedOption.value === rawValue,
                 },
               )}
+              classNames={segmentedClassNames}
+              styles={styles}
               checked={segmentedOption.value === rawValue}
               onChange={handleChange}
               onFocus={handleFocus}
