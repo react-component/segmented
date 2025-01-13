@@ -77,6 +77,7 @@ function normalizeOptions(options: SegmentedOptions): SegmentedLabeledOption[] {
 const InternalSegmentedOption: React.FC<{
   prefixCls: string;
   className?: string;
+  style?: React.CSSProperties;
   classNames?: Partial<Record<SemanticName, string>>;
   styles?: Partial<Record<SemanticName, React.CSSProperties>>;
   disabled?: boolean;
@@ -97,6 +98,7 @@ const InternalSegmentedOption: React.FC<{
 }> = ({
   prefixCls,
   className,
+  style,
   styles,
   classNames: segmentedClassNames,
   disabled,
@@ -124,7 +126,7 @@ const InternalSegmentedOption: React.FC<{
       className={classNames(className, {
         [`${prefixCls}-item-disabled`]: disabled,
       })}
-      style={styles?.item}
+      style={style}
       onMouseDown={onMouseDown}
     >
       <input
@@ -310,6 +312,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
                     segmentedOption.value === rawValue,
                 },
               )}
+              style={styles?.item}
               classNames={segmentedClassNames}
               styles={styles}
               checked={segmentedOption.value === rawValue}
