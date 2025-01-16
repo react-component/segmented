@@ -765,4 +765,38 @@ describe('Segmented keyboard navigation', () => {
       'rc-segmented-item-input-focused',
     );
   });
+  it('should apply custom styles to Segmented', () => {
+    const customClassNames = {
+      item: 'custom-item',
+      label: 'custom-label',
+    };
+
+    const customStyles = {
+      item: { color: 'yellow' },
+      label: { backgroundColor: 'black' },
+    };
+
+    const { container } = render(
+      <Segmented
+        options={['iOS', 'Android', 'Web']}
+        classNames={customClassNames}
+        styles={customStyles}
+      />,
+    );
+
+    const itemElement = container.querySelector(
+      '.rc-segmented-item',
+    ) as HTMLElement;
+    const labelElement = container.querySelector(
+      '.rc-segmented-item-label',
+    ) as HTMLElement;
+
+    // check classNames
+    expect(itemElement.classList).toContain('custom-item');
+    expect(labelElement.classList).toContain('custom-label');
+
+    // check styles
+    expect(itemElement.style.color).toBe('yellow');
+    expect(labelElement.style.backgroundColor).toBe('black');
+  });
 });
