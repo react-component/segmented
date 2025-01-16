@@ -1,7 +1,7 @@
+import useMergedState from '@rc-component/util/lib/hooks/useMergedState';
+import omit from '@rc-component/util/lib/omit';
+import { composeRef } from '@rc-component/util/lib/ref';
 import classNames from 'classnames';
-import useMergedState from 'rc-util/lib/hooks/useMergedState';
-import omit from 'rc-util/lib/omit';
-import { composeRef } from 'rc-util/lib/ref';
 import * as React from 'react';
 
 import MotionThumb from './MotionThumb';
