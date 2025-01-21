@@ -34,6 +34,7 @@ exports[`rc-segmented render label with ReactNode 1`] = `
       <div
         aria-selected="true"
         class="rc-segmented-item-label"
+        role="option"
         title="iOS"
       >
         iOS
@@ -49,6 +50,7 @@ exports[`rc-segmented render label with ReactNode 1`] = `
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
       >
         <div
           id="android"
@@ -67,6 +69,7 @@ exports[`rc-segmented render label with ReactNode 1`] = `
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
       >
         <h2>
           Web
@@ -98,6 +101,7 @@ exports[`rc-segmented render segmented ok 1`] = `
       <div
         aria-selected="true"
         class="rc-segmented-item-label"
+        role="option"
         title="iOS"
       >
         iOS
@@ -113,6 +117,7 @@ exports[`rc-segmented render segmented ok 1`] = `
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Android"
       >
         Android
@@ -128,6 +133,7 @@ exports[`rc-segmented render segmented ok 1`] = `
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Web"
       >
         Web
@@ -158,6 +164,7 @@ exports[`rc-segmented render segmented with CSSMotion basic 1`] = `
       <div
         aria-selected="true"
         class="rc-segmented-item-label"
+        role="option"
         title="iOS"
       >
         iOS
@@ -173,6 +180,7 @@ exports[`rc-segmented render segmented with CSSMotion basic 1`] = `
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Android"
       >
         Android
@@ -188,6 +196,7 @@ exports[`rc-segmented render segmented with CSSMotion basic 1`] = `
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Web3"
       >
         Web3
@@ -218,6 +227,7 @@ exports[`rc-segmented render segmented with options 1`] = `
       <div
         aria-selected="true"
         class="rc-segmented-item-label"
+        role="option"
         title="iOS"
       >
         iOS
@@ -233,6 +243,7 @@ exports[`rc-segmented render segmented with options 1`] = `
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Android"
       >
         Android
@@ -248,6 +259,7 @@ exports[`rc-segmented render segmented with options 1`] = `
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Web"
       >
         Web
@@ -278,6 +290,7 @@ exports[`rc-segmented render segmented with options null/undefined 1`] = `
       <div
         aria-selected="true"
         class="rc-segmented-item-label"
+        role="option"
       />
     </label>
     <label
@@ -291,6 +304,7 @@ exports[`rc-segmented render segmented with options null/undefined 1`] = `
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
       />
     </label>
     <label
@@ -304,6 +318,7 @@ exports[`rc-segmented render segmented with options null/undefined 1`] = `
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title=""
       />
     </label>
@@ -332,6 +347,7 @@ exports[`rc-segmented render segmented with options: 1 1`] = `
       <div
         aria-selected="true"
         class="rc-segmented-item-label"
+        role="option"
         title="1"
       >
         1
@@ -347,6 +363,7 @@ exports[`rc-segmented render segmented with options: 1 1`] = `
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="2"
       >
         2
@@ -362,6 +379,7 @@ exports[`rc-segmented render segmented with options: 1 1`] = `
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="3"
       >
         3
@@ -377,6 +395,7 @@ exports[`rc-segmented render segmented with options: 1 1`] = `
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="4"
       >
         4
@@ -392,6 +411,7 @@ exports[`rc-segmented render segmented with options: 1 1`] = `
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="5"
       >
         5
@@ -422,6 +442,7 @@ exports[`rc-segmented render segmented with options: 2 1`] = `
       <div
         aria-selected="true"
         class="rc-segmented-item-label"
+        role="option"
         title="iOS"
       >
         iOS
@@ -437,6 +458,7 @@ exports[`rc-segmented render segmented with options: 2 1`] = `
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Android"
       >
         Android
@@ -452,6 +474,7 @@ exports[`rc-segmented render segmented with options: 2 1`] = `
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Web"
       >
         Web
@@ -482,6 +505,7 @@ exports[`rc-segmented render segmented with options: disabled 1`] = `
       <div
         aria-selected="true"
         class="rc-segmented-item-label"
+        role="option"
         title="iOS"
       >
         iOS
@@ -498,6 +522,7 @@ exports[`rc-segmented render segmented with options: disabled 1`] = `
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Android"
       >
         Android
@@ -513,6 +538,7 @@ exports[`rc-segmented render segmented with options: disabled 1`] = `
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Web"
       >
         Web
@@ -543,6 +569,7 @@ exports[`rc-segmented render segmented with title 1`] = `
       <div
         aria-selected="true"
         class="rc-segmented-item-label"
+        role="option"
         title="Web"
       >
         Web
@@ -558,6 +585,7 @@ exports[`rc-segmented render segmented with title 1`] = `
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="hello1"
       >
         hello1
@@ -573,6 +601,7 @@ exports[`rc-segmented render segmented with title 1`] = `
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
       >
         <div>
           test1
@@ -589,6 +618,7 @@ exports[`rc-segmented render segmented with title 1`] = `
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="hello1.5"
       >
         hello1
@@ -604,6 +634,7 @@ exports[`rc-segmented render segmented with title 1`] = `
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title=""
       >
         foo1
@@ -634,6 +665,7 @@ exports[`rc-segmented render segmented: disabled 1`] = `
       <div
         aria-selected="true"
         class="rc-segmented-item-label"
+        role="option"
         title="iOS"
       >
         iOS
@@ -650,6 +682,7 @@ exports[`rc-segmented render segmented: disabled 1`] = `
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Android"
       >
         Android
@@ -666,6 +699,7 @@ exports[`rc-segmented render segmented: disabled 1`] = `
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Web"
       >
         Web
@@ -696,6 +730,7 @@ exports[`rc-segmented should render vertical segmented 1`] = `
       <div
         aria-selected="true"
         class="rc-segmented-item-label"
+        role="option"
         title="iOS"
       >
         iOS
@@ -711,6 +746,7 @@ exports[`rc-segmented should render vertical segmented 1`] = `
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Android"
       >
         Android
@@ -726,6 +762,7 @@ exports[`rc-segmented should render vertical segmented 1`] = `
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Web"
       >
         Web
@@ -756,6 +793,7 @@ exports[`rc-segmented should render vertical segmented and handle thumb animatio
       <div
         aria-selected="true"
         class="rc-segmented-item-label"
+        role="option"
         title="iOS"
       >
         iOS
@@ -771,6 +809,7 @@ exports[`rc-segmented should render vertical segmented and handle thumb animatio
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Android"
       >
         Android
@@ -786,6 +825,7 @@ exports[`rc-segmented should render vertical segmented and handle thumb animatio
       <div
         aria-selected="false"
         class="rc-segmented-item-label"
+        role="option"
         title="Web"
       >
         Web
