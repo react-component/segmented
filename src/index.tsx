@@ -147,8 +147,8 @@ const InternalSegmentedOption: React.FC<{
           segmentedClassNames?.label,
         )}
         title={title}
-        role="option"
-        aria-selected={checked}
+        role="radio"
+        aria-checked={checked}
         style={styles?.label}
       >
         {label}
