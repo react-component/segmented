@@ -134,7 +134,8 @@ const InternalSegmentedOption: React.FC<{
       <div
         className={`${prefixCls}-item-label`}
         title={title}
-        aria-selected={checked}
+        role="radio"
+        aria-checked={checked}
       >
         {label}
       </div>
