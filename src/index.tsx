@@ -44,6 +44,7 @@ export interface SegmentedProps<ValueType = SegmentedValue>
   name?: string;
   classNames?: Partial<Record<SemanticName, string>>;
   styles?: Partial<Record<SemanticName, React.CSSProperties>>;
+  itemRender?: (node: React.ReactNode) => React.ReactNode;
 }
 
 function getValidTitle(option: SegmentedLabeledOption) {
@@ -86,6 +87,7 @@ const InternalSegmentedOption: React.FC<{
   title?: string;
   value: SegmentedRawOption;
   name?: string;
+  itemRender?: (node: React.ReactNode) => React.ReactNode;
   onChange: (
     e: React.ChangeEvent<HTMLInputElement>,
     value: SegmentedRawOption,
@@ -107,6 +109,7 @@ const InternalSegmentedOption: React.FC<{
   title,
   value,
   name,
+  itemRender = (node: React.ReactNode) => node,
   onChange,
   onFocus,
   onBlur,
@@ -120,8 +123,7 @@ const InternalSegmentedOption: React.FC<{
     }
     onChange(event, value);
   };
-
-  return (
+  const ItemContent = (
     <label
       className={classNames(className, {
         [`${prefixCls}-item-disabled`]: disabled,
@@ -155,6 +157,7 @@ const InternalSegmentedOption: React.FC<{
       </div>
     </label>
   );
+  return itemRender(ItemContent);
 };
 
 const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
@@ -174,6 +177,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       styles,
       classNames: segmentedClassNames,
       motionName = 'thumb-motion',
+      itemRender,
       ...restProps
     } = props;
 
@@ -298,6 +302,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
             <InternalSegmentedOption
               {...segmentedOption}
               name={name}
+              itemRender={itemRender}
               key={segmentedOption.value}
               prefixCls={prefixCls}
               className={classNames(

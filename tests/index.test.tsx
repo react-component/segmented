@@ -799,4 +799,23 @@ describe('Segmented keyboard navigation', () => {
     expect(itemElement.style.color).toBe('yellow');
     expect(labelElement.style.backgroundColor).toBe('black');
   });
+  describe('itemRender', () => {
+    it('When "itemRender" is not configured, render the original "label"', () => {
+      const { container } = render(
+        <Segmented options={['iOS', 'Android', 'Web']} />,
+      );
+      const label = container.querySelector('.rc-segmented-item-label');
+      expect(label).toHaveTextContent('iOS');
+    });
+    it('Configure "itemRender" to render the return value', () => {
+      const { container } = render(
+        <Segmented
+          options={['iOS', 'Android', 'Web']}
+          itemRender={(node) => <div className="test-title">{node}</div>}
+        />,
+      );
+      const labels = container.querySelectorAll('.test-title');
+      expect(labels).toHaveLength(3);
+    });
+  });
 });
