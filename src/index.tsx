@@ -129,7 +129,7 @@ const InternalSegmentedOption: React.FC<
     }
     onChange(event, value);
   };
-  const ItemContent = (
+  const ItemContent: React.ReactNode = (
     <label
       className={classNames(className, {
         [`${prefixCls}-item-disabled`]: disabled,
