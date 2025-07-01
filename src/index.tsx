@@ -44,7 +44,7 @@ export interface SegmentedProps<ValueType = SegmentedValue>
   name?: string;
   classNames?: Partial<Record<SemanticName, string>>;
   styles?: Partial<Record<SemanticName, React.CSSProperties>>;
-  itemRender?: (node: React.ReactNode) => React.ReactNode;
+  itemRender?: (node: React.ReactNode, itemInfo: ItemInfo) => React.ReactNode;
 }
 
 function getValidTitle(option: SegmentedLabeledOption) {
@@ -75,7 +75,7 @@ function normalizeOptions(options: SegmentedOptions): SegmentedLabeledOption[] {
   });
 }
 
-const InternalSegmentedOption: React.FC<{
+interface ItemInfo {
   prefixCls: string;
   className?: string;
   style?: React.CSSProperties;
@@ -87,7 +87,6 @@ const InternalSegmentedOption: React.FC<{
   title?: string;
   value: SegmentedRawOption;
   name?: string;
-  itemRender?: (node: React.ReactNode) => React.ReactNode;
   onChange: (
     e: React.ChangeEvent<HTMLInputElement>,
     value: SegmentedRawOption,
@@ -97,26 +96,33 @@ const InternalSegmentedOption: React.FC<{
   onKeyDown: (e: React.KeyboardEvent) => void;
   onKeyUp: (e: React.KeyboardEvent) => void;
   onMouseDown: () => void;
-}> = ({
-  prefixCls,
-  className,
-  style,
-  styles,
-  classNames: segmentedClassNames,
-  disabled,
-  checked,
-  label,
-  title,
-  value,
-  name,
-  itemRender = (node: React.ReactNode) => node,
-  onChange,
-  onFocus,
-  onBlur,
-  onKeyDown,
-  onKeyUp,
-  onMouseDown,
-}) => {
+}
+
+const InternalSegmentedOption: React.FC<
+  {
+    itemRender?: (node: React.ReactNode, itemInfo: ItemInfo) => React.ReactNode;
+  } & ItemInfo
+> = (props) => {
+  const {
+    prefixCls,
+    className,
+    style,
+    styles,
+    classNames: segmentedClassNames,
+    disabled,
+    checked,
+    label,
+    title,
+    value,
+    name,
+    itemRender = (node: React.ReactNode) => node,
+    onChange,
+    onFocus,
+    onBlur,
+    onKeyDown,
+    onKeyUp,
+    onMouseDown,
+  } = props;
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (disabled) {
       return;
@@ -157,7 +163,10 @@ const InternalSegmentedOption: React.FC<{
       </div>
     </label>
   );
-  return itemRender(ItemContent);
+
+  const renderProps = { ...props };
+  delete renderProps.itemRender;
+  return itemRender(ItemContent, renderProps);
 };
 
 const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
