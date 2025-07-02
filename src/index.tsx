@@ -22,18 +22,9 @@ export interface SegmentedLabeledOption<ValueType = SegmentedRawOption> {
   title?: string;
 }
 
-interface SegementItem {
-  disabled?: boolean;
-  checked: boolean;
-  label: React.ReactNode;
-  title?: string;
-  value: SegmentedRawOption;
-  name?: string;
-}
-
 type ItemRender = (
   node: React.ReactNode,
-  info: { item: SegementItem },
+  info: { item: SegmentedLabeledOption },
 ) => React.ReactNode;
 
 type SegmentedOptions<T = SegmentedRawOption> = (
@@ -171,13 +162,11 @@ const InternalSegmentedOption: React.FC<{
       </div>
     </label>
   );
-  const itemInfo: SegementItem = {
+  const itemInfo: SegmentedLabeledOption = {
     label,
     title,
     value,
-    name,
     disabled,
-    checked,
   };
   return itemRender(itemContent, { item: itemInfo });
 };
