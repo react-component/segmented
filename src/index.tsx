@@ -102,7 +102,7 @@ const InternalSegmentedOption: React.FC<
   {
     itemRender?: (node: React.ReactNode, itemInfo: ItemInfo) => React.ReactNode;
   } & ItemInfo
-> = (props) => {
+> = ({ itemRender = (node: React.ReactNode) => node, ...props }) => {
   const {
     prefixCls,
     className,
@@ -115,7 +115,6 @@ const InternalSegmentedOption: React.FC<
     title,
     value,
     name,
-    itemRender = (node: React.ReactNode) => node,
     onChange,
     onFocus,
     onBlur,
@@ -164,9 +163,7 @@ const InternalSegmentedOption: React.FC<
     </label>
   );
 
-  const renderProps = { ...props };
-  delete renderProps.itemRender;
-  return itemRender(ItemContent, renderProps);
+  return itemRender(ItemContent, props);
 };
 
 const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
