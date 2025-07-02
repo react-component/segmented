@@ -22,6 +22,15 @@ export interface SegmentedLabeledOption<ValueType = SegmentedRawOption> {
   title?: string;
 }
 
+interface SegementItem {
+  disabled?: boolean;
+  checked: boolean;
+  label: React.ReactNode;
+  title?: string;
+  value: SegmentedRawOption;
+  name?: string;
+}
+
 type SegmentedOptions<T = SegmentedRawOption> = (
   | T
   | SegmentedLabeledOption<T>
@@ -44,7 +53,10 @@ export interface SegmentedProps<ValueType = SegmentedValue>
   name?: string;
   classNames?: Partial<Record<SemanticName, string>>;
   styles?: Partial<Record<SemanticName, React.CSSProperties>>;
-  itemRender?: (node: React.ReactNode, itemInfo: ItemInfo) => React.ReactNode;
+  itemRender?: (
+    node: React.ReactNode,
+    info: { item: SegementItem },
+  ) => React.ReactNode;
 }
 
 function getValidTitle(option: SegmentedLabeledOption) {
@@ -75,7 +87,7 @@ function normalizeOptions(options: SegmentedOptions): SegmentedLabeledOption[] {
   });
 }
 
-interface ItemInfo {
+const InternalSegmentedOption: React.FC<{
   prefixCls: string;
   className?: string;
   style?: React.CSSProperties;
@@ -96,32 +108,30 @@ interface ItemInfo {
   onKeyDown: (e: React.KeyboardEvent) => void;
   onKeyUp: (e: React.KeyboardEvent) => void;
   onMouseDown: () => void;
-}
-
-const InternalSegmentedOption: React.FC<
-  {
-    itemRender?: (node: React.ReactNode, itemInfo: ItemInfo) => React.ReactNode;
-  } & ItemInfo
-> = ({ itemRender = (node: React.ReactNode) => node, ...props }) => {
-  const {
-    prefixCls,
-    className,
-    style,
-    styles,
-    classNames: segmentedClassNames,
-    disabled,
-    checked,
-    label,
-    title,
-    value,
-    name,
-    onChange,
-    onFocus,
-    onBlur,
-    onKeyDown,
-    onKeyUp,
-    onMouseDown,
-  } = props;
+  itemRender?: (
+    node: React.ReactNode,
+    info: { item: SegementItem },
+  ) => React.ReactNode;
+}> = ({
+  prefixCls,
+  className,
+  style,
+  styles,
+  classNames: segmentedClassNames,
+  disabled,
+  checked,
+  label,
+  title,
+  value,
+  name,
+  onChange,
+  onFocus,
+  onBlur,
+  onKeyDown,
+  onKeyUp,
+  onMouseDown,
+  itemRender = (node: React.ReactNode) => node,
+}) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (disabled) {
       return;
@@ -162,8 +172,15 @@ const InternalSegmentedOption: React.FC<
       </div>
     </label>
   );
-
-  return itemRender(ItemContent, props);
+  const itemInfo: SegementItem = {
+    label,
+    title,
+    value,
+    name,
+    disabled,
+    checked,
+  };
+  return itemRender(ItemContent, { item: itemInfo });
 };
 
 const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
