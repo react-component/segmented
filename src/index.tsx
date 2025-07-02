@@ -86,6 +86,7 @@ const InternalSegmentedOption: React.FC<{
   style?: React.CSSProperties;
   classNames?: Partial<Record<SemanticName, string>>;
   styles?: Partial<Record<SemanticName, React.CSSProperties>>;
+  data: SegmentedLabeledOption;
   disabled?: boolean;
   checked: boolean;
   label: React.ReactNode;
@@ -108,6 +109,7 @@ const InternalSegmentedOption: React.FC<{
   style,
   styles,
   classNames: segmentedClassNames,
+  data,
   disabled,
   checked,
   label,
@@ -162,13 +164,7 @@ const InternalSegmentedOption: React.FC<{
       </div>
     </label>
   );
-  const itemInfo: SegmentedLabeledOption = {
-    label,
-    title,
-    value,
-    disabled,
-  };
-  return itemRender(itemContent, { item: itemInfo });
+  return itemRender(itemContent, { item: data });
 };
 
 const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
@@ -273,6 +269,54 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
           break;
       }
     };
+
+    const renderOption = (segmentedOption: SegmentedLabeledOption) => {
+      const {
+        label,
+        value: optionValue,
+        disabled: optionDisabled,
+        title,
+      } = segmentedOption;
+      const optionData: SegmentedLabeledOption = {
+        label,
+        value: optionValue,
+        disabled: optionDisabled,
+        title,
+      };
+      return (
+        <InternalSegmentedOption
+          {...segmentedOption}
+          name={name}
+          data={optionData}
+          itemRender={itemRender}
+          key={optionValue}
+          prefixCls={prefixCls}
+          className={classNames(
+            segmentedOption.className,
+            `${prefixCls}-item`,
+            segmentedClassNames?.item,
+            {
+              [`${prefixCls}-item-selected`]:
+                optionValue === rawValue && !thumbShow,
+              [`${prefixCls}-item-focused`]:
+                isFocused && isKeyboard && optionValue === rawValue,
+            },
+          )}
+          style={styles?.item}
+          classNames={segmentedClassNames}
+          styles={styles}
+          checked={optionValue === rawValue}
+          onChange={handleChange}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          onKeyDown={handleKeyDown}
+          onKeyUp={handleKeyUp}
+          onMouseDown={handleMouseDown}
+          disabled={!!disabled || !!optionDisabled}
+        />
+      );
+    };
+
     return (
       <div
         role="radiogroup"
@@ -309,39 +353,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
               setThumbShow(false);
             }}
           />
-          {segmentedOptions.map((segmentedOption) => (
-            <InternalSegmentedOption
-              {...segmentedOption}
-              name={name}
-              itemRender={itemRender}
-              key={segmentedOption.value}
-              prefixCls={prefixCls}
-              className={classNames(
-                segmentedOption.className,
-                `${prefixCls}-item`,
-                segmentedClassNames?.item,
-                {
-                  [`${prefixCls}-item-selected`]:
-                    segmentedOption.value === rawValue && !thumbShow,
-                  [`${prefixCls}-item-focused`]:
-                    isFocused &&
-                    isKeyboard &&
-                    segmentedOption.value === rawValue,
-                },
-              )}
-              style={styles?.item}
-              classNames={segmentedClassNames}
-              styles={styles}
-              checked={segmentedOption.value === rawValue}
-              onChange={handleChange}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-              onKeyDown={handleKeyDown}
-              onKeyUp={handleKeyUp}
-              onMouseDown={handleMouseDown}
-              disabled={!!disabled || !!segmentedOption.disabled}
-            />
-          ))}
+          {segmentedOptions.map(renderOption)}
         </div>
       </div>
     );
