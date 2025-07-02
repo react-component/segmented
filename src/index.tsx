@@ -31,6 +31,11 @@ interface SegementItem {
   name?: string;
 }
 
+type ItemRender = (
+  node: React.ReactNode,
+  info: { item: SegementItem },
+) => React.ReactNode;
+
 type SegmentedOptions<T = SegmentedRawOption> = (
   | T
   | SegmentedLabeledOption<T>
@@ -53,10 +58,7 @@ export interface SegmentedProps<ValueType = SegmentedValue>
   name?: string;
   classNames?: Partial<Record<SemanticName, string>>;
   styles?: Partial<Record<SemanticName, React.CSSProperties>>;
-  itemRender?: (
-    node: React.ReactNode,
-    info: { item: SegementItem },
-  ) => React.ReactNode;
+  itemRender?: ItemRender;
 }
 
 function getValidTitle(option: SegmentedLabeledOption) {
@@ -108,10 +110,7 @@ const InternalSegmentedOption: React.FC<{
   onKeyDown: (e: React.KeyboardEvent) => void;
   onKeyUp: (e: React.KeyboardEvent) => void;
   onMouseDown: () => void;
-  itemRender?: (
-    node: React.ReactNode,
-    info: { item: SegementItem },
-  ) => React.ReactNode;
+  itemRender?: ItemRender;
 }> = ({
   prefixCls,
   className,
@@ -138,7 +137,7 @@ const InternalSegmentedOption: React.FC<{
     }
     onChange(event, value);
   };
-  const ItemContent: React.ReactNode = (
+  const itemContent: React.ReactNode = (
     <label
       className={classNames(className, {
         [`${prefixCls}-item-disabled`]: disabled,
@@ -180,7 +179,7 @@ const InternalSegmentedOption: React.FC<{
     disabled,
     checked,
   };
-  return itemRender(ItemContent, { item: itemInfo });
+  return itemRender(itemContent, { item: itemInfo });
 };
 
 const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
