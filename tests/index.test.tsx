@@ -799,4 +799,47 @@ describe('Segmented keyboard navigation', () => {
     expect(itemElement.style.color).toBe('yellow');
     expect(labelElement.style.backgroundColor).toBe('black');
   });
+  describe('itemRender', () => {
+    it('When "itemRender" is not configured, render the original "label"', () => {
+      const { container } = render(
+        <Segmented options={['iOS', 'Android', 'Web']} />,
+      );
+      const label = container.querySelector('.rc-segmented-item-label');
+      expect(label).toHaveTextContent('iOS');
+    });
+    it('Configure "itemRender" to render the return value', () => {
+      const { container } = render(
+        <Segmented
+          options={['iOS', 'Android', 'Web']}
+          itemRender={(node) => <div className="test-title">{node}</div>}
+        />,
+      );
+      const labels = container.querySelectorAll('.test-title');
+      expect(labels).toHaveLength(3);
+    });
+    it('should pass complete params to itemRender', () => {
+      const mockItemRender = jest.fn((node, params) => node);
+      const testData = {
+        label: 'iOS',
+        value: 'iOS',
+        disabled: false,
+        title: 'iOS',
+      };
+      render(
+        <Segmented
+          options={[{ ...testData, className: 'test-class' }, 'Android', 'Web']}
+          itemRender={mockItemRender}
+        />,
+      );
+      expect(mockItemRender).toHaveBeenCalledTimes(3);
+      const callArgs = mockItemRender.mock.calls[0];
+      const receivedParams = callArgs[1];
+      expect(receivedParams).toEqual({
+        item: {
+          ...testData,
+        },
+      });
+      expect(React.isValidElement(callArgs[0])).toBeTruthy();
+    });
+  });
 });
