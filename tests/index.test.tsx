@@ -824,10 +824,11 @@ describe('Segmented keyboard navigation', () => {
         value: 'iOS',
         disabled: false,
         title: 'iOS',
+        tooltip: 'hello iOS',
       };
       render(
         <Segmented
-          options={[{ ...testData, className: 'test-class' }, 'Android', 'Web']}
+          options={[testData, 'Android', 'Web']}
           itemRender={mockItemRender}
         />,
       );

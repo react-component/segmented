@@ -271,23 +271,13 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     };
 
     const renderOption = (segmentedOption: SegmentedLabeledOption) => {
-      const {
-        label,
-        value: optionValue,
-        disabled: optionDisabled,
-        title,
-      } = segmentedOption;
-      const optionData: SegmentedLabeledOption = {
-        label,
-        value: optionValue,
-        disabled: optionDisabled,
-        title,
-      };
+      const { value: optionValue, disabled: optionDisabled } = segmentedOption;
+
       return (
         <InternalSegmentedOption
           {...segmentedOption}
           name={name}
-          data={optionData}
+          data={segmentedOption}
           itemRender={itemRender}
           key={optionValue}
           prefixCls={prefixCls}
