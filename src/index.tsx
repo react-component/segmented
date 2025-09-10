@@ -1,4 +1,4 @@
-import useMergedState from '@rc-component/util/lib/hooks/useMergedState';
+import useControlledState from '@rc-component/util/lib/hooks/useControlledState';
 import omit from '@rc-component/util/lib/omit';
 import { composeRef } from '@rc-component/util/lib/ref';
 import classNames from 'classnames';
@@ -200,10 +200,10 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
 
     // Note: We should not auto switch value when value not exist in options
     // which may break single source of truth.
-    const [rawValue, setRawValue] = useMergedState(segmentedOptions[0]?.value, {
+    const [rawValue, setRawValue] = useControlledState(
+      defaultValue ?? segmentedOptions[0]?.value,
       value,
-      defaultValue,
-    });
+    );
 
     // ======================= Change ========================
     const [thumbShow, setThumbShow] = React.useState(false);
