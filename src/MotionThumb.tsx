@@ -1,6 +1,6 @@
 import useLayoutEffect from '@rc-component/util/lib/hooks/useLayoutEffect';
 import { composeRef } from '@rc-component/util/lib/ref';
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import CSSMotion from 'rc-motion';
 import * as React from 'react';
 import type { SegmentedValue } from '.';
@@ -211,7 +211,7 @@ export default function MotionThumb(props: MotionThumbInterface) {
         const motionProps = {
           ref: composeRef(thumbRef, ref),
           style: mergedStyle,
-          className: classNames(`${prefixCls}-thumb`, motionClassName),
+          className: clsx(`${prefixCls}-thumb`, motionClassName),
         };
 
         if (process.env.NODE_ENV === 'test') {

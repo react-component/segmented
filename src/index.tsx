@@ -1,7 +1,7 @@
 import useControlledState from '@rc-component/util/lib/hooks/useControlledState';
 import omit from '@rc-component/util/lib/omit';
 import { composeRef } from '@rc-component/util/lib/ref';
-import classNames from 'classnames';
+import { clsx } from 'clsx';
 import * as React from 'react';
 
 import MotionThumb from './MotionThumb';
@@ -132,9 +132,7 @@ const InternalSegmentedOption: React.FC<{
   };
   const itemContent: React.ReactNode = (
     <label
-      className={classNames(className, {
-        [`${prefixCls}-item-disabled`]: disabled,
-      })}
+      className={clsx(className, { [`${prefixCls}-item-disabled`]: disabled })}
       style={style}
       onMouseDown={onMouseDown}
     >
@@ -151,10 +149,7 @@ const InternalSegmentedOption: React.FC<{
         onKeyUp={onKeyUp}
       />
       <div
-        className={classNames(
-          `${prefixCls}-item-label`,
-          segmentedClassNames?.label,
-        )}
+        className={clsx(`${prefixCls}-item-label`, segmentedClassNames?.label)}
         title={title}
         role="radio"
         aria-checked={checked}
@@ -189,6 +184,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     } = props;
 
     const containerRef = React.useRef<HTMLDivElement>(null);
+
     const mergedRef = React.useMemo(
       () => composeRef<HTMLDivElement>(containerRef, ref),
       [containerRef, ref],
@@ -281,7 +277,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
           itemRender={itemRender}
           key={optionValue}
           prefixCls={prefixCls}
-          className={classNames(
+          className={clsx(
             segmentedOption.className,
             `${prefixCls}-item`,
             segmentedClassNames?.item,
@@ -314,7 +310,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
         tabIndex={disabled ? undefined : 0}
         style={style}
         {...divProps}
-        className={classNames(
+        className={clsx(
           prefixCls,
           {
             [`${prefixCls}-rtl`]: direction === 'rtl',
