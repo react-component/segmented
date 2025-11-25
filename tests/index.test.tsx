@@ -3,9 +3,9 @@ import userEvent from '@testing-library/user-event';
 import * as React from 'react';
 import Segmented from '../src';
 
-jest.mock('rc-motion/lib/util/motion', () => {
+jest.mock('@rc-component/motion/lib/util/motion', () => {
   return {
-    ...jest.requireActual('rc-motion/lib/util/motion'),
+    ...jest.requireActual('@rc-component/motion/lib/util/motion'),
     supportTransition: true,
   };
 });
