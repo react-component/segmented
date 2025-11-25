@@ -29,7 +29,7 @@ https://react-component.github.io/segmented/
 
 ```js
 import Segmented from '@rc-component/segmented';
-import '@rc-component/segmented/assets/index.css'; // import '@rc-component/segmented/asssets/index.less';
+import '@rc-component/segmented/assets/index.css'; // import '@rc-component/segmented/assets/index.less';
 import { render } from 'react-dom';
 
 render(
