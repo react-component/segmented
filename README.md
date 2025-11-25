@@ -1,17 +1,17 @@
-# rc-segmented
+# @rc-component/segmented
 
 [![NPM version][npm-image]][npm-url] [![npm download][download-image]][download-url] [![dumi](https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square)](https://github.com/umijs/dumi) [![build status][github-actions-image]][github-actions-url] [![Codecov][codecov-image]][codecov-url] [![bundle size][bundlephobia-image]][bundlephobia-url]
 
-[npm-image]: http://img.shields.io/npm/v/rc-segmented.svg?style=flat-square
-[npm-url]: http://npmjs.org/package/rc-segmented
-[github-actions-image]: https://github.com/react-component/segmented/workflows/CI/badge.svg
-[github-actions-url]: https://github.com/react-component/segmented/actions
+[npm-image]: http://img.shields.io/npm/v/@rc-component/segmented.svg?style=flat-square
+[npm-url]: http://npmjs.org/package/@rc-component/segmented
+[github-actions-image]: https://github.com/react-component/segmented/actions/workflows/main.yml/badge.svg
+[github-actions-url]: https://github.com/react-component/segmented/actions/workflows/main.yml
 [codecov-image]: https://codecov.io/gh/react-component/segmented/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/react-component/segmented/branch/master
-[download-image]: https://img.shields.io/npm/dm/rc-segmented.svg?style=flat-square
-[download-url]: https://npmjs.org/package/rc-segmented
-[bundlephobia-url]: https://bundlephobia.com/package/rc-segmented
-[bundlephobia-image]: https://badgen.net/bundlephobia/minzip/rc-segmented
+[download-image]: https://img.shields.io/npm/dm/@rc-component/segmented.svg?style=flat-square
+[download-url]: https://npmjs.org/package/@rc-component/segmented
+[bundlephobia-url]: https://bundlephobia.com/package/@rc-component/segmented
+[bundlephobia-image]: https://badgen.net/bundlephobia/minzip/@rc-component/segmented
 
 React Segmented Control.
 
@@ -23,13 +23,13 @@ https://react-component.github.io/segmented/
 
 ## Install
 
-[![rc-segmented](https://nodei.co/npm/rc-segmented.png)](https://npmjs.org/package/rc-segmented)
+[![@rc-component/segmented](https://nodei.co/npm/@rc-component/segmented.png)](https://npmjs.org/package/@rc-component/segmented)
 
 ## Usage
 
 ```js
-import Segmented from 'rc-segmented';
-import 'rc-segmented/assets/index.css'; // import 'rc-segmented/asssets/index.less';
+import Segmented from '@rc-component/segmented';
+import '@rc-component/segmented/assets/index.css'; // import '@rc-component/segmented/asssets/index.less';
 import { render } from 'react-dom';
 
 render(
@@ -48,7 +48,7 @@ Please note that **onChange** API
 
 | Property     | Type                                                           | Default      | Description                        |
 | --------- | --------- | --------- | --------- |
-| prefixCls    | string                                                         | rc-segmented | prefixCls of this component |
+| prefixCls    | string                                                         | @rc-component/segmented | prefixCls of this component |
 | className    | string                                                         | ''           | additional class name of segmented |
 | style        | React.CSSProperties                                            |              | style properties of segmented      |
 | options      | Array<string \| number \| [SegmentedOption](#SegmentedOption)> | []           | options for choices                |
@@ -76,4 +76,4 @@ npm start
 
 ## License
 
-rc-segmented is released under the MIT license.
+@rc-component/segmented is released under the MIT license.
