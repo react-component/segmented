@@ -12,12 +12,12 @@
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "declaration": true,
-    "types": ["jest", "node"],
+    "types": ["jest", "node", "@testing-library/jest-dom"],
     "paths": {
       "@/*": ["src/*"],
       "@@/*": [".dumi/tmp/*"],
       "rc-segmented": ["src/index.tsx"]
     }
   },
-  "include": [".dumi/**/*", ".dumirc.ts", "src", "tests", "docs/examples"],
+  "include": [".dumi/**/*", ".dumirc.ts", "src", "tests", "docs/demo"]
 }

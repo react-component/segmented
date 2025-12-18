@@ -131,12 +131,7 @@ const InternalSegmentedOption: React.FC<{
         onKeyDown={onKeyDown}
         onKeyUp={onKeyUp}
       />
-      <div
-        className={`${prefixCls}-item-label`}
-        title={title}
-        role="radio"
-        aria-checked={checked}
-      >
+      <div className={`${prefixCls}-item-label`} title={title}>
         {label}
       </div>
     </label>
@@ -247,6 +242,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
         role="radiogroup"
         aria-label="segmented control"
         tabIndex={disabled ? undefined : 0}
+        aria-orientation={vertical ? 'vertical' : 'horizontal'}
         {...divProps}
         className={classNames(
           prefixCls,
