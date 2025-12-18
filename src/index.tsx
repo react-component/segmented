@@ -151,8 +151,6 @@ const InternalSegmentedOption: React.FC<{
       <div
         className={clsx(`${prefixCls}-item-label`, segmentedClassNames?.label)}
         title={title}
-        role="radio"
-        aria-checked={checked}
         style={styles?.label}
       >
         {label}
@@ -308,6 +306,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
         role="radiogroup"
         aria-label="segmented control"
         tabIndex={disabled ? undefined : 0}
+        aria-orientation={vertical ? 'vertical' : 'horizontal'}
         style={style}
         {...divProps}
         className={clsx(
