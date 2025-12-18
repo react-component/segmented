@@ -3,6 +3,7 @@
 exports[`rc-segmented render empty segmented 1`] = `
 <div
   aria-label="segmented control"
+  aria-orientation="horizontal"
   class="rc-segmented"
   role="radiogroup"
   tabindex="0"
@@ -16,6 +17,7 @@ exports[`rc-segmented render empty segmented 1`] = `
 exports[`rc-segmented render label with ReactNode 1`] = `
 <div
   aria-label="segmented control"
+  aria-orientation="horizontal"
   class="rc-segmented"
   role="radiogroup"
   tabindex="0"
@@ -32,9 +34,7 @@ exports[`rc-segmented render label with ReactNode 1`] = `
         type="radio"
       />
       <div
-        aria-checked="true"
         class="rc-segmented-item-label"
-        role="radio"
         title="iOS"
       >
         iOS
@@ -48,9 +48,7 @@ exports[`rc-segmented render label with ReactNode 1`] = `
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
       >
         <div
           id="android"
@@ -67,9 +65,7 @@ exports[`rc-segmented render label with ReactNode 1`] = `
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
       >
         <h2>
           Web
@@ -83,6 +79,7 @@ exports[`rc-segmented render label with ReactNode 1`] = `
 exports[`rc-segmented render segmented ok 1`] = `
 <div
   aria-label="segmented control"
+  aria-orientation="horizontal"
   class="rc-segmented"
   role="radiogroup"
   tabindex="0"
@@ -99,9 +96,7 @@ exports[`rc-segmented render segmented ok 1`] = `
         type="radio"
       />
       <div
-        aria-checked="true"
         class="rc-segmented-item-label"
-        role="radio"
         title="iOS"
       >
         iOS
@@ -115,9 +110,7 @@ exports[`rc-segmented render segmented ok 1`] = `
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
         title="Android"
       >
         Android
@@ -131,9 +124,7 @@ exports[`rc-segmented render segmented ok 1`] = `
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
         title="Web"
       >
         Web
@@ -146,6 +137,7 @@ exports[`rc-segmented render segmented ok 1`] = `
 exports[`rc-segmented render segmented with CSSMotion basic 1`] = `
 <div
   aria-label="segmented control"
+  aria-orientation="horizontal"
   class="rc-segmented"
   role="radiogroup"
   tabindex="0"
@@ -162,9 +154,7 @@ exports[`rc-segmented render segmented with CSSMotion basic 1`] = `
         type="radio"
       />
       <div
-        aria-checked="true"
         class="rc-segmented-item-label"
-        role="radio"
         title="iOS"
       >
         iOS
@@ -178,9 +168,7 @@ exports[`rc-segmented render segmented with CSSMotion basic 1`] = `
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
         title="Android"
       >
         Android
@@ -194,9 +182,7 @@ exports[`rc-segmented render segmented with CSSMotion basic 1`] = `
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
         title="Web3"
       >
         Web3
@@ -209,6 +195,7 @@ exports[`rc-segmented render segmented with CSSMotion basic 1`] = `
 exports[`rc-segmented render segmented with options 1`] = `
 <div
   aria-label="segmented control"
+  aria-orientation="horizontal"
   class="rc-segmented"
   role="radiogroup"
   tabindex="0"
@@ -225,9 +212,7 @@ exports[`rc-segmented render segmented with options 1`] = `
         type="radio"
       />
       <div
-        aria-checked="true"
         class="rc-segmented-item-label"
-        role="radio"
         title="iOS"
       >
         iOS
@@ -241,9 +226,7 @@ exports[`rc-segmented render segmented with options 1`] = `
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
         title="Android"
       >
         Android
@@ -257,9 +240,7 @@ exports[`rc-segmented render segmented with options 1`] = `
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
         title="Web"
       >
         Web
@@ -272,6 +253,7 @@ exports[`rc-segmented render segmented with options 1`] = `
 exports[`rc-segmented render segmented with options null/undefined 1`] = `
 <div
   aria-label="segmented control"
+  aria-orientation="horizontal"
   class="rc-segmented rc-segmented-disabled"
   role="radiogroup"
 >
@@ -288,9 +270,7 @@ exports[`rc-segmented render segmented with options null/undefined 1`] = `
         type="radio"
       />
       <div
-        aria-checked="true"
         class="rc-segmented-item-label"
-        role="radio"
       />
     </label>
     <label
@@ -302,9 +282,7 @@ exports[`rc-segmented render segmented with options null/undefined 1`] = `
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
       />
     </label>
     <label
@@ -316,9 +294,7 @@ exports[`rc-segmented render segmented with options null/undefined 1`] = `
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
         title=""
       />
     </label>
@@ -329,6 +305,7 @@ exports[`rc-segmented render segmented with options null/undefined 1`] = `
 exports[`rc-segmented render segmented with options: 1 1`] = `
 <div
   aria-label="segmented control"
+  aria-orientation="horizontal"
   class="rc-segmented"
   role="radiogroup"
   tabindex="0"
@@ -345,9 +322,7 @@ exports[`rc-segmented render segmented with options: 1 1`] = `
         type="radio"
       />
       <div
-        aria-checked="true"
         class="rc-segmented-item-label"
-        role="radio"
         title="1"
       >
         1
@@ -361,9 +336,7 @@ exports[`rc-segmented render segmented with options: 1 1`] = `
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
         title="2"
       >
         2
@@ -377,9 +350,7 @@ exports[`rc-segmented render segmented with options: 1 1`] = `
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
         title="3"
       >
         3
@@ -393,9 +364,7 @@ exports[`rc-segmented render segmented with options: 1 1`] = `
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
         title="4"
       >
         4
@@ -409,9 +378,7 @@ exports[`rc-segmented render segmented with options: 1 1`] = `
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
         title="5"
       >
         5
@@ -424,6 +391,7 @@ exports[`rc-segmented render segmented with options: 1 1`] = `
 exports[`rc-segmented render segmented with options: 2 1`] = `
 <div
   aria-label="segmented control"
+  aria-orientation="horizontal"
   class="rc-segmented"
   role="radiogroup"
   tabindex="0"
@@ -440,9 +408,7 @@ exports[`rc-segmented render segmented with options: 2 1`] = `
         type="radio"
       />
       <div
-        aria-checked="true"
         class="rc-segmented-item-label"
-        role="radio"
         title="iOS"
       >
         iOS
@@ -456,9 +422,7 @@ exports[`rc-segmented render segmented with options: 2 1`] = `
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
         title="Android"
       >
         Android
@@ -472,9 +436,7 @@ exports[`rc-segmented render segmented with options: 2 1`] = `
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
         title="Web"
       >
         Web
@@ -487,6 +449,7 @@ exports[`rc-segmented render segmented with options: 2 1`] = `
 exports[`rc-segmented render segmented with options: disabled 1`] = `
 <div
   aria-label="segmented control"
+  aria-orientation="horizontal"
   class="rc-segmented"
   role="radiogroup"
   tabindex="0"
@@ -503,9 +466,7 @@ exports[`rc-segmented render segmented with options: disabled 1`] = `
         type="radio"
       />
       <div
-        aria-checked="true"
         class="rc-segmented-item-label"
-        role="radio"
         title="iOS"
       >
         iOS
@@ -520,9 +481,7 @@ exports[`rc-segmented render segmented with options: disabled 1`] = `
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
         title="Android"
       >
         Android
@@ -536,9 +495,7 @@ exports[`rc-segmented render segmented with options: disabled 1`] = `
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
         title="Web"
       >
         Web
@@ -551,6 +508,7 @@ exports[`rc-segmented render segmented with options: disabled 1`] = `
 exports[`rc-segmented render segmented with title 1`] = `
 <div
   aria-label="segmented control"
+  aria-orientation="horizontal"
   class="rc-segmented"
   role="radiogroup"
   tabindex="0"
@@ -567,9 +525,7 @@ exports[`rc-segmented render segmented with title 1`] = `
         type="radio"
       />
       <div
-        aria-checked="true"
         class="rc-segmented-item-label"
-        role="radio"
         title="Web"
       >
         Web
@@ -583,9 +539,7 @@ exports[`rc-segmented render segmented with title 1`] = `
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
         title="hello1"
       >
         hello1
@@ -599,9 +553,7 @@ exports[`rc-segmented render segmented with title 1`] = `
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
       >
         <div>
           test1
@@ -616,9 +568,7 @@ exports[`rc-segmented render segmented with title 1`] = `
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
         title="hello1.5"
       >
         hello1
@@ -632,9 +582,7 @@ exports[`rc-segmented render segmented with title 1`] = `
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
         title=""
       >
         foo1
@@ -647,6 +595,7 @@ exports[`rc-segmented render segmented with title 1`] = `
 exports[`rc-segmented render segmented: disabled 1`] = `
 <div
   aria-label="segmented control"
+  aria-orientation="horizontal"
   class="rc-segmented rc-segmented-disabled"
   role="radiogroup"
 >
@@ -663,9 +612,7 @@ exports[`rc-segmented render segmented: disabled 1`] = `
         type="radio"
       />
       <div
-        aria-checked="true"
         class="rc-segmented-item-label"
-        role="radio"
         title="iOS"
       >
         iOS
@@ -680,9 +627,7 @@ exports[`rc-segmented render segmented: disabled 1`] = `
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
         title="Android"
       >
         Android
@@ -697,9 +642,7 @@ exports[`rc-segmented render segmented: disabled 1`] = `
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
         title="Web"
       >
         Web
@@ -712,6 +655,7 @@ exports[`rc-segmented render segmented: disabled 1`] = `
 exports[`rc-segmented should render vertical segmented 1`] = `
 <div
   aria-label="segmented control"
+  aria-orientation="vertical"
   class="rc-segmented rc-segmented-vertical"
   role="radiogroup"
   tabindex="0"
@@ -728,9 +672,7 @@ exports[`rc-segmented should render vertical segmented 1`] = `
         type="radio"
       />
       <div
-        aria-checked="true"
         class="rc-segmented-item-label"
-        role="radio"
         title="iOS"
       >
         iOS
@@ -744,9 +686,7 @@ exports[`rc-segmented should render vertical segmented 1`] = `
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
         title="Android"
       >
         Android
@@ -760,9 +700,7 @@ exports[`rc-segmented should render vertical segmented 1`] = `
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
         title="Web"
       >
         Web
@@ -775,6 +713,7 @@ exports[`rc-segmented should render vertical segmented 1`] = `
 exports[`rc-segmented should render vertical segmented and handle thumb animations correctly 1`] = `
 <div
   aria-label="segmented control"
+  aria-orientation="vertical"
   class="rc-segmented rc-segmented-vertical"
   role="radiogroup"
   tabindex="0"
@@ -791,9 +730,7 @@ exports[`rc-segmented should render vertical segmented and handle thumb animatio
         type="radio"
       />
       <div
-        aria-checked="true"
         class="rc-segmented-item-label"
-        role="radio"
         title="iOS"
       >
         iOS
@@ -807,9 +744,7 @@ exports[`rc-segmented should render vertical segmented and handle thumb animatio
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
         title="Android"
       >
         Android
@@ -823,9 +758,7 @@ exports[`rc-segmented should render vertical segmented and handle thumb animatio
         type="radio"
       />
       <div
-        aria-checked="false"
         class="rc-segmented-item-label"
-        role="radio"
         title="Web"
       >
         Web
