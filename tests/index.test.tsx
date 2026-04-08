@@ -754,6 +754,33 @@ describe('Segmented keyboard navigation', () => {
     expect(onChange).toHaveBeenCalledWith('iOS');
   });
 
+  it('should not select a disabled option when it is the only next item', async () => {
+    const user = userEvent.setup();
+    const onChange = jest.fn();
+    const { container } = render(
+      <Segmented
+        options={[
+          { label: 'Enabled', value: 'enabled' },
+          { label: 'Disabled', value: 'disabled', disabled: true },
+        ]}
+        defaultValue="enabled"
+        onChange={onChange}
+      />,
+    );
+
+    await user.tab();
+    await user.tab();
+    await user.keyboard('{ArrowRight}');
+
+    const inputs = container.querySelectorAll<HTMLInputElement>(
+      '.rc-segmented-item-input',
+    );
+
+    expect(onChange).not.toHaveBeenCalled();
+    expect(inputs[0].checked).toBe(true);
+    expect(inputs[1].checked).toBe(false);
+  });
+
   it('should not have focus style when clicking', async () => {
     const user = userEvent.setup();
     const { container } = render(
