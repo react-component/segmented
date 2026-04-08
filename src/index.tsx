@@ -237,15 +237,20 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
 
     // ======================= Keyboard ========================
     const onOffset = (offset: number) => {
-      const currentIndex = segmentedOptions.findIndex(
+      // keep the current option and not disabled options
+      const validOptions = segmentedOptions.filter(
+        (option) => option.value === rawValue || !option.disabled,
+      );
+
+      const currentIndex = validOptions.findIndex(
         (option) => option.value === rawValue,
       );
 
-      const total = segmentedOptions.length;
+      const total = validOptions.length;
       const nextIndex = (currentIndex + offset + total) % total;
+      const nextOption = validOptions[nextIndex];
 
-      const nextOption = segmentedOptions[nextIndex];
-      if (nextOption) {
+      if (nextOption && nextOption.value !== rawValue) {
         setRawValue(nextOption.value);
         onChange?.(nextOption.value);
       }
