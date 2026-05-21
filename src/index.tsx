@@ -1,6 +1,4 @@
-import useControlledState from '@rc-component/util/lib/hooks/useControlledState';
-import omit from '@rc-component/util/lib/omit';
-import { composeRef } from '@rc-component/util/lib/ref';
+import { composeRef, omit, useControlledState } from '@rc-component/util';
 import { clsx } from 'clsx';
 import * as React from 'react';
 
