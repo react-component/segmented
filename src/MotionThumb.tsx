@@ -1,6 +1,5 @@
 import CSSMotion from '@rc-component/motion';
-import useLayoutEffect from '@rc-component/util/lib/hooks/useLayoutEffect';
-import { composeRef } from '@rc-component/util/lib/ref';
+import { composeRef, useLayoutEffect } from '@rc-component/util';
 import { clsx } from 'clsx';
 import * as React from 'react';
 import type { SegmentedValue } from '.';
