@@ -63,7 +63,7 @@ Online preview: https://segmented.react-component.vercel.app/
 | `motionName` | string | `'thumb-motion'` | Motion class name for the active thumb. |
 | `name` | string | - | Radio group name. |
 | `onChange` | `(value: string \| number) => void` | - | Triggered when the selected value changes. |
-| `options` | Array<string \| number \| SegmentedLabeledOption> | [] | Available options. |
+| `options` | Array<string \| number \| SegmentedLabeledOption> | - | Available options. Required. |
 | `prefixCls` | string | `'rc-segmented'` | Prefix class name. |
 | `style` | React.CSSProperties | - | Root style. |
 | `styles` | Partial<Record<'item' \| 'label', React.CSSProperties>> | - | Semantic styles for internal slots. |

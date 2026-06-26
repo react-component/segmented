@@ -16,7 +16,10 @@
     "paths": {
       "@/*": ["src/*"],
       "@@/*": [".dumi/tmp/*"],
-      "@rc-component/segmented": ["src/index.tsx"]
+      "@rc-component/segmented": ["src/index.tsx"],
+      "@rc-component/segmented/es": ["src"],
+      "@rc-component/segmented/es/*": ["src/*"],
+      "@rc-component/segmented/assets/*": ["assets/*"]
     }
   },
   "include": [".dumirc.ts", "src", "tests", "docs/demo"],
