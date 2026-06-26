@@ -1,7 +1,7 @@
-import '../../assets/style.less';
+import type { SegmentedValue } from '@rc-component/segmented';
+import Segmented from '@rc-component/segmented';
 import React from 'react';
-import Segmented from 'rc-segmented';
-import type { SegmentedValue } from 'rc-segmented';
+import '../../assets/style.less';
 
 export default class Demo extends React.Component<
   unknown,

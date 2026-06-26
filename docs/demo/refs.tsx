@@ -1,6 +1,6 @@
-import '../../assets/style.less';
+import Segmented from '@rc-component/segmented';
 import React from 'react';
-import Segmented from 'rc-segmented';
+import '../../assets/style.less';
 
 class ClassComponentWithStringRef extends React.Component {
   componentDidMount() {

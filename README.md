@@ -1,78 +1,105 @@
-# @rc-component/segmented
+<div align="center">
+  <h1>@rc-component/segmented</h1>
+  <p>🧩 React segmented control for switching between compact options.</p>
+  <p>
+    <img alt="Ant Design" src="https://mdn.alipayobjects.com/huamei_7uahnr/afts/img/A*FBw7Rr5aC7AAAAAAAAAAAAAADrJ8AQ/original" height="24" />
+  </p>
+  <p>Part of the Ant Design ecosystem.</p>
 
-[![NPM version][npm-image]][npm-url] [![npm download][download-image]][download-url] [![dumi](https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square)](https://github.com/umijs/dumi) [![build status][github-actions-image]][github-actions-url] [![Codecov][codecov-image]][codecov-url] [![bundle size][bundlephobia-image]][bundlephobia-url]
+  <p>
+    <a href="https://www.npmjs.com/package/@rc-component/segmented"><img src="https://img.shields.io/npm/v/@rc-component/segmented.svg?style=flat-square" alt="npm version" /></a>
+    <a href="https://www.npmjs.com/package/@rc-component/segmented"><img src="https://img.shields.io/npm/dm/@rc-component/segmented.svg?style=flat-square" alt="npm downloads" /></a>
+    <a href="https://github.com/react-component/segmented/actions"><img src="https://github.com/react-component/segmented/actions/workflows/react-component-ci.yml/badge.svg" alt="CI" /></a>
+    <a href="https://codecov.io/gh/react-component/segmented"><img src="https://codecov.io/gh/react-component/segmented/branch/master/graph/badge.svg" alt="Codecov" /></a>
+    <a href="https://bundlephobia.com/package/@rc-component/segmented"><img src="https://badgen.net/bundlephobia/minzip/@rc-component/segmented" alt="bundle size" /></a>
+    <a href="https://github.com/umijs/dumi"><img src="https://img.shields.io/badge/docs%20by-dumi-blue?style=flat-square" alt="dumi" /></a>
+  </p>
+</div>
 
-[npm-image]: http://img.shields.io/npm/v/@rc-component/segmented.svg?style=flat-square
-[npm-url]: http://npmjs.org/package/@rc-component/segmented
-[github-actions-image]: https://github.com/react-component/segmented/actions/workflows/main.yml/badge.svg
-[github-actions-url]: https://github.com/react-component/segmented/actions/workflows/main.yml
-[codecov-image]: https://codecov.io/gh/react-component/segmented/branch/master/graph/badge.svg
-[codecov-url]: https://codecov.io/gh/react-component/segmented/branch/master
-[download-image]: https://img.shields.io/npm/dm/@rc-component/segmented.svg?style=flat-square
-[download-url]: https://npmjs.org/package/@rc-component/segmented
-[bundlephobia-url]: https://bundlephobia.com/package/@rc-component/segmented
-[bundlephobia-image]: https://badgen.net/bundlephobia/minzip/@rc-component/segmented
+## Highlights
 
-React Segmented Control.
-
-![](https://gw.alipayobjects.com/mdn/rms_50855f/afts/img/A*bmGGQpnWs0oAAAAAAAAAAAAAARQnAQ)
-
-## Live Demo
-
-https://react-component.github.io/segmented/
+- Supports string, number, and labeled option records.
+- Provides controlled and uncontrolled value flows.
+- Includes keyboard navigation, RTL, vertical layout, and disabled options.
+- Exposes semantic `classNames` and `styles` slots for item and label customization.
 
 ## Install
 
-[![@rc-component/segmented](https://nodei.co/npm/@rc-component/segmented.png)](https://npmjs.org/package/@rc-component/segmented)
+```bash
+npm install @rc-component/segmented
+```
 
 ## Usage
 
-```js
+```tsx pure
 import Segmented from '@rc-component/segmented';
-import '@rc-component/segmented/assets/index.css'; // import '@rc-component/segmented/assets/index.less';
-import { render } from 'react-dom';
+import '@rc-component/segmented/assets/index.css';
 
-render(
+export default () => (
   <Segmented
-    options={['Antd', 'Antv', 'Egg.js']}
-    onChange={(value) => handleValueChange(value)}
-  />,
-  mountNode,
+    options={['Daily', 'Weekly', 'Monthly']}
+    defaultValue="Weekly"
+    onChange={(value) => {
+      console.log(value);
+    }}
+  />
 );
 ```
 
+Online preview: https://segmented.react-component.vercel.app/
+
 ## API
 
-Please note that **onChange** API
- changed on v2.0.0+
+### Segmented
 
-| Property     | Type                                                           | Default      | Description                        |
-| --------- | --------- | --------- | --------- |
-| prefixCls    | string                                                         | `rc-segmented` | prefixCls of this component |
-| className    | string                                                         | ''           | additional class name of segmented |
-| style        | React.CSSProperties                                            |              | style properties of segmented      |
-| options      | Array<string \| number \| [SegmentedOption](#SegmentedOption)> | []           | options for choices                |
-| value        | string \| number                                               |              | value of segmented                 |
-| defaultValue | string \| number                                               |              | defaultValue of segmented          |
-| value | string \| number                                               |              | currently selected value of segmented          |
-| onChange     | (value: string \| number) => void                                               |              | defaultValue of segmented          |
-| disabled     | boolean                                                        | false        | disabled status of segmented       |
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| `className` | string | `''` | Additional class name. |
+| `classNames` | Partial<Record<'item' \| 'label', string>> | - | Semantic class names for internal slots. |
+| `defaultValue` | string \| number | first option value | Initial selected value. |
+| `direction` | `'ltr'` \| `'rtl'` | - | Layout direction. |
+| `disabled` | boolean | false | Disable all options. |
+| `itemRender` | `(node: ReactNode, info: { item: SegmentedLabeledOption }) => ReactNode` | identity | Custom option item renderer. |
+| `motionName` | string | `'thumb-motion'` | Motion class name for the active thumb. |
+| `name` | string | - | Radio group name. |
+| `onChange` | `(value: string \| number) => void` | - | Triggered when the selected value changes. |
+| `options` | Array<string \| number \| SegmentedLabeledOption> | [] | Available options. |
+| `prefixCls` | string | `'rc-segmented'` | Prefix class name. |
+| `style` | React.CSSProperties | - | Root style. |
+| `styles` | Partial<Record<'item' \| 'label', React.CSSProperties>> | - | Semantic styles for internal slots. |
+| `value` | string \| number | - | Controlled selected value. |
+| `vertical` | boolean | false | Render options vertically. |
 
-### SegmentedOption
+Additional valid `div` props are passed to the root element.
 
-| Property  | Type      | Default | Description                               |
-| --------- | --------- | --------- | --------- |
-| label     | ReactNode |         | label of segmented option                 |
-| value     | string \| number   |  | value of segmented option |
-| className | string    | ''      | additional class name of segmented option |
-| disabled  | boolean   | false   | disabled status of segmented option       |
+### SegmentedLabeledOption
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| `className` | string | - | Option class name. |
+| `disabled` | boolean | false | Disable this option. |
+| `label` | ReactNode | - | Displayed option content. |
+| `title` | string | derived from label | Native title for the label. |
+| `value` | string \| number | - | Option value. |
 
 ## Development
 
-```
+```bash
 npm install
 npm start
+npm test
+npm run tsc
+npm run compile
+npm run build
 ```
+
+## Release
+
+```bash
+npm run prepublishOnly
+```
+
+`prepublishOnly` builds the package with Father and publishes through `rc-np`. Run `npm run gh-pages` to deploy the dumi site.
 
 ## License
 
