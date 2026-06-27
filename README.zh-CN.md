@@ -1,8 +1,7 @@
 <div align="center">
   <h1>@rc-component/segmented</h1>
-  <p><sub>Ant Design 生态的一部分。</sub></p>
-  <img alt="Ant Design" height="32" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" />
-  <p>🔘 React 分段控制器组件。</p>
+  <p><sub><img alt="Ant Design" height="14" src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg" style="vertical-align: -0.125em;" /> Ant Design 生态的一部分。</sub></p>
+  <p>🧩 React 分段控制器组件。</p>
 
   <p>
     <a href="https://www.npmjs.com/package/@rc-component/segmented"><img src="https://img.shields.io/npm/v/@rc-component/segmented.svg?style=flat-square" alt="npm version" /></a>
@@ -19,10 +18,10 @@
 
 ## 特性
 
-- 支持 string, number, and labeled option records.
-- 提供 controlled and uncontrolled value flows.
-- Includes keyboard navigation, RTL, vertical layout, and disabled options.
-- 暴露 semantic `classNames` and `styles` slots for item and label customization.
+- 支持字符串、数字和带标签的选项记录。
+- 提供受控和不受控的价值流。
+- 包括键盘导航、RTL、垂直布局和禁用选项。
+- 引入用于项目和标签定制的语义 `classNames` 和 `styles` 插槽。
 
 ## 安装
 
@@ -47,7 +46,7 @@ export default () => (
 );
 ```
 
-Online preview: https://segmented.react-component.vercel.app/
+在线预览：https://segmented.react-component.vercel.app/
 
 ## API
 
@@ -55,33 +54,33 @@ Online preview: https://segmented.react-component.vercel.app/
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `className` | string | `''` | Additional class name. |
-| `classNames` | Partial<Record<'item' \| 'label', string>> | - | Semantic class names for internal slots. |
-| `defaultValue` | string \| number | first option value | Initial selected value. |
+| `className` | string | `''` | 附加className。 |
+| `classNames` | 部分<记录<'项目'\| '标签'，字符串>> | - | 内部插槽的语义化 className。 |
+| `defaultValue` | string \| number | 第一个选项值 | 初始选中值。 |
 | `direction` | `'ltr'` \| `'rtl'` | - | Layout direction. |
-| `disabled` | boolean | false | Disable all options. |
-| `itemRender` | `(node: ReactNode, info: { item: SegmentedLabeledOption }) => ReactNode` | identity | Custom option item renderer. |
-| `motionName` | string | `'thumb-motion'` | Motion class name for the active thumb. |
+| `disabled` | boolean | false | 禁用所有选项。 |
+| `itemRender` | `(node: ReactNode, info: { item: SegmentedLabeledOption }) => ReactNode` | identity | 自定义选项项渲染器。 |
+| `motionName` | string | `'thumb-motion'` | 活动拇指的运动className称。 |
 | `name` | string | - | Radio group name. |
-| `onChange` | `(value: string \| number) => void` | - | Triggered when the selected value changes. |
-| `options` | Array<string \| number \| SegmentedLabeledOption> | - | Available options. Required. |
-| `prefixCls` | string | `'rc-segmented'` | Prefix class name. |
-| `style` | React.CSSProperties | - | Root style. |
-| `styles` | Partial<Record<'item' \| 'label', React.CSSProperties>> | - | Semantic styles for internal slots. |
-| `value` | string \| number | - | Controlled selected value. |
-| `vertical` | boolean | false | Render options vertically. |
+| `onChange` | `(value: string \| number) => void` | - | 当所选值更改时触发。 |
+| `options` | Array<string \| number \| SegmentedLabeledOption> | - | 可用选项，必填。 |
+| `prefixCls` | string | `'rc-segmented'` | 前缀className。 |
+| `style` | React.CSSProperties | - | 根样式。 |
+| `styles` | 部分<记录<'项目'\| '标签'，React.CSSProperties>> | - | 内部插槽的语义化样式。 |
+| `value` | string \| number | - | 受控选中值。 |
+| `vertical` | boolean | false | 垂直渲染选项。 |
 
-Additional valid `div` props are passed to the root element.
+其他合法的 `div` 属性会透传给根元素。
 
 ### SegmentedLabeledOption
 
 | 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `className` | string | - | Option class name. |
-| `disabled` | boolean | false | Disable this option. |
-| `label` | ReactNode | - | Displayed option content. |
-| `title` | string | derived from label | Native title for the label. |
-| `value` | string \| number | - | Option value. |
+| `className` | string | - | 选项className称。 |
+| `disabled` | boolean | false | 禁用此选项。 |
+| `label` | ReactNode | - | 展示的选项内容。 |
+| `title` | string | 源自标签 | 标签的原生标题。 |
+| `value` | string \| number | - | 选项值。 |
 
 ## 本地开发
 
@@ -100,8 +99,8 @@ npm run build
 npm run prepublishOnly
 ```
 
-The release flow is handled by `@rc-component/np` through the `rc-np` command after the package build.
+包构建完成后，发布流程由 `@rc-component/np` 通过 `rc-np` 命令处理。
 
 ## 许可证
 
-@rc-component/segmented is released under the [MIT](./LICENSE.md) license.
+@rc-component/segmented 基于 [MIT](./LICENSE.md) 许可证发布。
