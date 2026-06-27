@@ -4,7 +4,10 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "baseUrl": "./",
-    "lib": ["dom", "es2017"],
+    "lib": [
+      "dom",
+      "es2017"
+    ],
     "jsx": "react",
     "strict": true,
     "esModuleInterop": true,
@@ -12,16 +15,42 @@
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "declaration": true,
-    "types": ["jest", "node", "@testing-library/jest-dom"],
+    "types": [
+      "jest",
+      "node",
+      "@testing-library/jest-dom"
+    ],
     "paths": {
-      "@/*": ["src/*"],
-      "@@/*": [".dumi/tmp/*"],
-      "@rc-component/segmented": ["src/index.tsx"],
-      "@rc-component/segmented/es": ["src"],
-      "@rc-component/segmented/es/*": ["src/*"],
-      "@rc-component/segmented/assets/*": ["assets/*"]
-    }
+      "@/*": [
+        "src/*"
+      ],
+      "@@/*": [
+        ".dumi/tmp/*"
+      ],
+      "@rc-component/segmented": [
+        "src/index.tsx"
+      ],
+      "@rc-component/segmented/es": [
+        "src"
+      ],
+      "@rc-component/segmented/es/*": [
+        "src/*"
+      ],
+      "@rc-component/segmented/assets/*": [
+        "assets/*"
+      ]
+    },
+    "ignoreDeprecations": "5.0"
   },
-  "include": [".dumirc.ts", "src", "tests", "docs/demo"],
-  "exclude": ["docs-dist", "lib", "es"]
+  "include": [
+    ".dumirc.ts",
+    "src",
+    "tests",
+    "docs/demo"
+  ],
+  "exclude": [
+    "docs-dist",
+    "lib",
+    "es"
+  ]
 }
