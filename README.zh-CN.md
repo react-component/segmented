@@ -1,7 +1,7 @@
 <div align="center">
   <h1>@rc-component/segmented</h1>
-  <p><sub>Part of the Ant Design ecosystem.</sub></p>
-  <p>🧩 React segmented control for switching between compact options.</p>
+  <p><sub>Ant Design 生态的一部分。</sub></p>
+  <p>🔘 React 分段控制器组件。</p>
 
   <p>
     <a href="https://www.npmjs.com/package/@rc-component/segmented"><img src="https://img.shields.io/npm/v/@rc-component/segmented.svg?style=flat-square" alt="npm version" /></a>
@@ -13,23 +13,23 @@
   </p>
 </div>
 
-<p align="center">English | <a href="./README.zh-CN.md">简体中文</a></p>
+<p align="center"><a href="./README.md">English</a> | 简体中文</p>
 
 
-## Highlights
+## 特性
 
-- Supports string, number, and labeled option records.
-- Provides controlled and uncontrolled value flows.
+- 支持 string, number, and labeled option records.
+- 提供 controlled and uncontrolled value flows.
 - Includes keyboard navigation, RTL, vertical layout, and disabled options.
-- Exposes semantic `classNames` and `styles` slots for item and label customization.
+- 暴露 semantic `classNames` and `styles` slots for item and label customization.
 
-## Install
+## 安装
 
 ```bash
 npm install @rc-component/segmented
 ```
 
-## Usage
+## 使用
 
 ```tsx pure
 import Segmented from '@rc-component/segmented';
@@ -52,7 +52,7 @@ Online preview: https://segmented.react-component.vercel.app/
 
 ### Segmented
 
-| Name | Type | Default | Description |
+| 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | `className` | string | `''` | Additional class name. |
 | `classNames` | Partial<Record<'item' \| 'label', string>> | - | Semantic class names for internal slots. |
@@ -74,7 +74,7 @@ Additional valid `div` props are passed to the root element.
 
 ### SegmentedLabeledOption
 
-| Name | Type | Default | Description |
+| 名称 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
 | `className` | string | - | Option class name. |
 | `disabled` | boolean | false | Disable this option. |
@@ -82,7 +82,7 @@ Additional valid `div` props are passed to the root element.
 | `title` | string | derived from label | Native title for the label. |
 | `value` | string \| number | - | Option value. |
 
-## Development
+## 本地开发
 
 ```bash
 npm install
@@ -93,7 +93,7 @@ npm run compile
 npm run build
 ```
 
-## Release
+## 发布
 
 ```bash
 npm run prepublishOnly
@@ -101,6 +101,6 @@ npm run prepublishOnly
 
 The release flow is handled by `@rc-component/np` through the `rc-np` command after the package build.
 
-## License
+## 许可证
 
 @rc-component/segmented is released under the [MIT](./LICENSE.md) license.
