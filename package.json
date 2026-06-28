@@ -24,10 +24,10 @@
   "homepage": "https://react-component.github.io/segmented",
   "repository": {
     "type": "git",
-    "url": "git@github.com:react-component/segmented.git"
+    "url": "https://github.com/react-component/segmented.git"
   },
   "bugs": {
-    "url": "http://github.com/react-component/segmented/issues"
+    "url": "https://github.com/react-component/segmented/issues"
   },
   "license": "MIT",
   "scripts": {
