@@ -67,11 +67,11 @@ npm start
 | `className`    | string                                                                   | `''`             | 附加 className。             |
 | `classNames`   | Partial<Record<'item' \| 'label', string>>                               | -                | 内部插槽的语义化 className。 |
 | `defaultValue` | string \| number                                                         | 第一个选项值     | 初始选中值。                 |
-| `direction`    | `'ltr'` \| `'rtl'`                                                       | -                | Layout direction.            |
+| `direction`    | `'ltr'` \| `'rtl'`                                                       | -                | 布局方向。                   |
 | `disabled`     | boolean                                                                  | false            | 禁用所有选项。               |
 | `itemRender`   | `(node: ReactNode, info: { item: SegmentedLabeledOption }) => ReactNode` | identity         | 自定义选项项渲染器。         |
 | `motionName`   | string                                                                   | `'thumb-motion'` | 活动拇指的动画 className。   |
-| `name`         | string                                                                   | -                | Radio group name.            |
+| `name`         | string                                                                   | -                | 单选组名称。                 |
 | `onChange`     | `(value: string \| number) => void`                                      | -                | 当所选值更改时触发。         |
 | `options`      | Array<string \| number \| SegmentedLabeledOption>                        | -                | 可用选项，必填。             |
 | `prefixCls`    | string                                                                   | `'rc-segmented'` | className 前缀。             |
