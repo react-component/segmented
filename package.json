@@ -42,10 +42,9 @@
     "prepublishOnly": "npm run compile && rc-np",
     "lint": "eslint src/ --ext .ts,.tsx,.jsx,.js,.md",
     "prettier": "prettier --write --ignore-unknown .",
-    "pretty-quick": "pretty-quick",
     "test": "jest",
     "coverage": "jest --coverage",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "@babel/runtime": "^7.11.1",
@@ -75,11 +74,11 @@
     "jest-environment-jsdom": "^29.7.0",
     "less": "^4.6.7",
     "prettier": "^3.9.0",
-    "pretty-quick": "^4.2.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "ts-node": "^10.9.1",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "lint-staged": "^16.4.0"
   },
   "peerDependencies": {
     "react": ">=16.0.0",
@@ -93,5 +92,8 @@
   },
   "tnpm": {
     "mode": "npm"
+  },
+  "lint-staged": {
+    "*": "prettier --write --ignore-unknown"
   }
 }
