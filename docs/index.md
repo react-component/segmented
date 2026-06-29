@@ -1,6 +1,6 @@
 ---
 hero:
-  title: rc-segmented
+  title: '@rc-component/segmented'
   description: React segmented controls used in ant.design
 ---
 

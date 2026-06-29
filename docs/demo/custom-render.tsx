@@ -1,6 +1,6 @@
-import '../../assets/style.less';
+import Segmented from '@rc-component/segmented';
 import * as React from 'react';
-import Segmented from 'rc-segmented';
+import '../../assets/style.less';
 
 const options = [
   {
