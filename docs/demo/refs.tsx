@@ -3,6 +3,10 @@ import React from 'react';
 import '../../assets/style.less';
 
 class ClassComponentWithStringRef extends React.Component {
+  refs: {
+    segmentedRef: HTMLDivElement;
+  };
+
   componentDidMount() {
     // eslint-disable-next-line react/no-string-refs
     console.log(this.refs.segmentedRef, 'ref');
@@ -29,7 +33,9 @@ class ClassComponent2 extends React.Component {
     return (
       <Segmented
         options={['iOS', 'Android', 'Web']}
-        ref={(ref) => (this.segmentedRef = ref)}
+        ref={(ref) => {
+          this.segmentedRef = ref;
+        }}
       />
     );
   }
