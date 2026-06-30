@@ -1,5 +1,4 @@
-import { fireEvent } from '@testing-library/dom';
-import { act, render } from '@testing-library/react';
+import { act, fireEvent, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as React from 'react';
 import Segmented from '../src';
