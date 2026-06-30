@@ -2,8 +2,7 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "ESNext",
-    "moduleResolution": "node",
-    "baseUrl": "./",
+    "moduleResolution": "bundler",
     "lib": ["dom", "es2017"],
     "jsx": "react",
     "strict": false,
@@ -13,14 +12,13 @@
     "skipLibCheck": true,
     "declaration": true,
     "paths": {
-      "@/*": ["src/*"],
-      "@@/*": [".dumi/tmp/*"],
-      "@rc-component/segmented": ["src/index.tsx"],
-      "@rc-component/segmented/es": ["src"],
-      "@rc-component/segmented/es/*": ["src/*"],
-      "@rc-component/segmented/assets/*": ["assets/*"]
+      "@/*": ["./src/*"],
+      "@@/*": ["./.dumi/tmp/*"],
+      "@rc-component/segmented": ["./src/index.tsx"],
+      "@rc-component/segmented/es": ["./src"],
+      "@rc-component/segmented/es/*": ["./src/*"],
+      "@rc-component/segmented/assets/*": ["./assets/*"]
     },
-    "ignoreDeprecations": "6.0",
     "noImplicitAny": false,
     "strictNullChecks": false,
     "strictPropertyInitialization": false,
