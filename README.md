@@ -53,7 +53,7 @@ Online preview: https://segmented.react-component.vercel.app/
 Run the local dumi site:
 
 ```bash
-npm install
+ut install
 npm start
 ```
 
@@ -96,7 +96,7 @@ Additional valid `div` props are passed to the root element.
 ## Development
 
 ```bash
-npm install
+ut install
 npm start
 npm test
 npm run tsc
