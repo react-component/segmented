@@ -3,7 +3,7 @@ import React from 'react';
 import '../../assets/style.less';
 
 class ClassComponentWithStringRef extends React.Component {
-  refs: {
+  refs!: {
     segmentedRef: HTMLDivElement;
   };
 
