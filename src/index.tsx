@@ -26,15 +26,13 @@ type ItemRender = (
 ) => React.ReactNode;
 
 type SegmentedOptions<T = SegmentedRawOption> = (
-  | T
-  | SegmentedLabeledOption<T>
+  T | SegmentedLabeledOption<T>
 )[];
 
-export interface SegmentedProps<ValueType = SegmentedValue>
-  extends Omit<
-    React.HTMLProps<HTMLDivElement>,
-    'defaultValue' | 'value' | 'onChange'
-  > {
+export interface SegmentedProps<ValueType = SegmentedValue> extends Omit<
+  React.HTMLProps<HTMLDivElement>,
+  'defaultValue' | 'value' | 'onChange'
+> {
   options: SegmentedOptions<ValueType>;
   defaultValue?: ValueType;
   value?: ValueType;
@@ -67,13 +65,14 @@ function normalizeOptions(options: SegmentedOptions): SegmentedLabeledOption[] {
       const validTitle = getValidTitle(option);
       return {
         ...option,
+        value: option.value as SegmentedValue,
         title: validTitle,
-      };
+      } as SegmentedLabeledOption;
     }
     return {
       label: option?.toString(),
       title: option?.toString(),
-      value: option,
+      value: option as SegmentedValue,
     };
   });
 }

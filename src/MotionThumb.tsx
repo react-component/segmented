@@ -14,7 +14,7 @@ type ThumbReact = {
 } | null;
 
 export interface MotionThumbInterface {
-  containerRef: React.RefObject<HTMLDivElement>;
+  containerRef: React.RefObject<HTMLDivElement | null>;
   value: SegmentedValue;
   getValueIndex: (value: SegmentedValue) => number;
   prefixCls: string;

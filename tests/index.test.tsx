@@ -102,7 +102,7 @@ describe('rc-segmented', () => {
     );
 
     fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[2]);
-    expect(handleValueChange).toBeCalledWith('Web');
+    expect(handleValueChange).toHaveBeenCalledWith('Web');
     expectMatchChecked(container, [false, false, true]);
   });
 
@@ -118,7 +118,7 @@ describe('rc-segmented', () => {
     expectMatchChecked(container, [true, false, false, false, false]);
 
     fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[4]);
-    expect(handleValueChange).toBeCalledWith(5);
+    expect(handleValueChange).toHaveBeenCalledWith(5);
     expectMatchChecked(container, [false, false, false, false, true]);
   });
 
@@ -133,7 +133,7 @@ describe('rc-segmented', () => {
     expect(asFragment().firstChild).toMatchSnapshot();
 
     fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[1]);
-    expect(handleValueChange).toBeCalledWith('Android');
+    expect(handleValueChange).toHaveBeenCalledWith('Android');
 
     expectMatchChecked(container, [false, true, false]);
   });
@@ -161,13 +161,13 @@ describe('rc-segmented', () => {
     ).toBeTruthy();
 
     fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[1]);
-    expect(handleValueChange).not.toBeCalled();
+    expect(handleValueChange).not.toHaveBeenCalled();
 
     expectMatchChecked(container, [true, false, false]);
 
     fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[2]);
-    expect(handleValueChange).toBeCalledWith('Web');
-    expect(handleValueChange).toBeCalledTimes(1);
+    expect(handleValueChange).toHaveBeenCalledWith('Web');
+    expect(handleValueChange).toHaveBeenCalledTimes(1);
 
     expectMatchChecked(container, [false, false, true]);
   });
@@ -196,11 +196,11 @@ describe('rc-segmented', () => {
     });
 
     fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[1]);
-    expect(handleValueChange).not.toBeCalled();
+    expect(handleValueChange).not.toHaveBeenCalled();
     expectMatchChecked(container, [true, false, false]);
 
     fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[2]);
-    expect(handleValueChange).not.toBeCalled();
+    expect(handleValueChange).not.toHaveBeenCalled();
     expectMatchChecked(container, [true, false, false]);
   });
 
@@ -321,7 +321,7 @@ describe('rc-segmented', () => {
       fireEvent.click(
         container.querySelectorAll('.rc-segmented-item-input')[2],
       );
-      expect(handleValueChange).toBeCalledWith('Web3');
+      expect(handleValueChange).toHaveBeenCalledWith('Web3');
       expectMatchChecked(container, [false, false, true]);
 
       expect(container.querySelectorAll('.rc-segmented-thumb')[0]).toHaveClass(
@@ -352,7 +352,7 @@ describe('rc-segmented', () => {
       fireEvent.click(
         container.querySelectorAll('.rc-segmented-item-input')[1],
       );
-      expect(handleValueChange).toBeCalledWith('Android');
+      expect(handleValueChange).toHaveBeenCalledWith('Android');
       expectMatchChecked(container, [false, true, false]);
 
       // thumb should move
@@ -542,7 +542,7 @@ describe('rc-segmented', () => {
 
     fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[1]);
     expectMatchChecked(container, [false, true, false]);
-    expect(handleValueChange).toBeCalledWith('Android');
+    expect(handleValueChange).toHaveBeenCalledWith('Android');
 
     // Motion to active
     act(() => {
@@ -593,7 +593,7 @@ describe('rc-segmented', () => {
 
     // Click: Web
     fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[2]);
-    expect(handleValueChange).toBeCalledWith('Web');
+    expect(handleValueChange).toHaveBeenCalledWith('Web');
     expectMatchChecked(container, [false, false, true]);
 
     // Thumb should appear at `iOS`
@@ -618,7 +618,7 @@ describe('rc-segmented', () => {
 
     // Click: Android
     fireEvent.click(container.querySelectorAll('.rc-segmented-item-input')[1]);
-    expect(handleValueChange).toBeCalledWith('Android');
+    expect(handleValueChange).toHaveBeenCalledWith('Android');
     expectMatchChecked(container, [false, true, false]);
 
     // Thumb should move
