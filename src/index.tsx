@@ -288,6 +288,7 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
             {
               [`${prefixCls}-item-selected`]:
                 optionValue === rawValue && !thumbShow,
+              [`${prefixCls}-item-selected-text`]: optionValue === rawValue,
               [`${prefixCls}-item-focused`]:
                 isFocused && isKeyboard && optionValue === rawValue,
             },

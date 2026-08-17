@@ -323,9 +323,18 @@ describe('rc-segmented', () => {
       );
       expect(handleValueChange).toBeCalledWith('Web3');
       expectMatchChecked(container, [false, false, true]);
+      expect(container.querySelectorAll('.rc-segmented-item')[2]).toHaveClass(
+        'rc-segmented-item-selected-text',
+      );
 
       expect(container.querySelectorAll('.rc-segmented-thumb')[0]).toHaveClass(
         'rc-segmented-thumb-motion',
+      );
+      expect(
+        container.querySelectorAll('.rc-segmented-item')[2],
+      ).not.toHaveClass('rc-segmented-item-selected');
+      expect(container.querySelectorAll('.rc-segmented-item')[2]).toHaveClass(
+        'rc-segmented-item-selected-text',
       );
 
       // thumb appeared at `iOS`

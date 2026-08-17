@@ -24,7 +24,7 @@ exports[`rc-segmented render label with ReactNode 1`] = `
     class="rc-segmented-group"
   >
     <label
-      class="rc-segmented-item rc-segmented-item-selected"
+      class="rc-segmented-item rc-segmented-item-selected rc-segmented-item-selected-text"
     >
       <input
         checked=""
@@ -91,7 +91,7 @@ exports[`rc-segmented render segmented ok 1`] = `
     class="rc-segmented-group"
   >
     <label
-      class="rc-segmented-item rc-segmented-item-selected"
+      class="rc-segmented-item rc-segmented-item-selected rc-segmented-item-selected-text"
     >
       <input
         checked=""
@@ -154,7 +154,7 @@ exports[`rc-segmented render segmented with CSSMotion basic 1`] = `
     class="rc-segmented-group"
   >
     <label
-      class="rc-segmented-item rc-segmented-item-selected"
+      class="rc-segmented-item rc-segmented-item-selected rc-segmented-item-selected-text"
     >
       <input
         checked=""
@@ -217,7 +217,7 @@ exports[`rc-segmented render segmented with options 1`] = `
     class="rc-segmented-group"
   >
     <label
-      class="rc-segmented-item rc-segmented-item-selected"
+      class="rc-segmented-item rc-segmented-item-selected rc-segmented-item-selected-text"
     >
       <input
         checked=""
@@ -279,7 +279,7 @@ exports[`rc-segmented render segmented with options null/undefined 1`] = `
     class="rc-segmented-group"
   >
     <label
-      class="rc-segmented-item rc-segmented-item-selected rc-segmented-item-disabled"
+      class="rc-segmented-item rc-segmented-item-selected rc-segmented-item-selected-text rc-segmented-item-disabled"
     >
       <input
         checked=""
@@ -337,7 +337,7 @@ exports[`rc-segmented render segmented with options: 1 1`] = `
     class="rc-segmented-group"
   >
     <label
-      class="rc-segmented-item rc-segmented-item-selected"
+      class="rc-segmented-item rc-segmented-item-selected rc-segmented-item-selected-text"
     >
       <input
         checked=""
@@ -432,7 +432,7 @@ exports[`rc-segmented render segmented with options: 2 1`] = `
     class="rc-segmented-group"
   >
     <label
-      class="rc-segmented-item rc-segmented-item-selected"
+      class="rc-segmented-item rc-segmented-item-selected rc-segmented-item-selected-text"
     >
       <input
         checked=""
@@ -495,7 +495,7 @@ exports[`rc-segmented render segmented with options: disabled 1`] = `
     class="rc-segmented-group"
   >
     <label
-      class="rc-segmented-item rc-segmented-item-selected"
+      class="rc-segmented-item rc-segmented-item-selected rc-segmented-item-selected-text"
     >
       <input
         checked=""
@@ -559,7 +559,7 @@ exports[`rc-segmented render segmented with title 1`] = `
     class="rc-segmented-group"
   >
     <label
-      class="rc-segmented-item rc-segmented-item-selected"
+      class="rc-segmented-item rc-segmented-item-selected rc-segmented-item-selected-text"
     >
       <input
         checked=""
@@ -654,7 +654,7 @@ exports[`rc-segmented render segmented: disabled 1`] = `
     class="rc-segmented-group"
   >
     <label
-      class="rc-segmented-item rc-segmented-item-selected rc-segmented-item-disabled"
+      class="rc-segmented-item rc-segmented-item-selected rc-segmented-item-selected-text rc-segmented-item-disabled"
     >
       <input
         checked=""
@@ -720,7 +720,7 @@ exports[`rc-segmented should render vertical segmented 1`] = `
     class="rc-segmented-group"
   >
     <label
-      class="rc-segmented-item rc-segmented-item-selected"
+      class="rc-segmented-item rc-segmented-item-selected rc-segmented-item-selected-text"
     >
       <input
         checked=""
@@ -783,7 +783,7 @@ exports[`rc-segmented should render vertical segmented and handle thumb animatio
     class="rc-segmented-group"
   >
     <label
-      class="rc-segmented-item rc-segmented-item-selected"
+      class="rc-segmented-item rc-segmented-item-selected rc-segmented-item-selected-text"
     >
       <input
         checked=""
