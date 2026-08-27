@@ -6,7 +6,6 @@ exports[`rc-segmented render empty segmented 1`] = `
   aria-orientation="horizontal"
   class="rc-segmented"
   role="radiogroup"
-  tabindex="0"
 >
   <div
     class="rc-segmented-group"
@@ -20,7 +19,6 @@ exports[`rc-segmented render label with ReactNode 1`] = `
   aria-orientation="horizontal"
   class="rc-segmented"
   role="radiogroup"
-  tabindex="0"
 >
   <div
     class="rc-segmented-group"
@@ -82,7 +80,6 @@ exports[`rc-segmented render segmented ok 1`] = `
   aria-orientation="horizontal"
   class="rc-segmented"
   role="radiogroup"
-  tabindex="0"
 >
   <div
     class="rc-segmented-group"
@@ -140,7 +137,6 @@ exports[`rc-segmented render segmented with CSSMotion basic 1`] = `
   aria-orientation="horizontal"
   class="rc-segmented"
   role="radiogroup"
-  tabindex="0"
 >
   <div
     class="rc-segmented-group"
@@ -198,7 +194,6 @@ exports[`rc-segmented render segmented with options 1`] = `
   aria-orientation="horizontal"
   class="rc-segmented"
   role="radiogroup"
-  tabindex="0"
 >
   <div
     class="rc-segmented-group"
@@ -308,7 +303,6 @@ exports[`rc-segmented render segmented with options: 1 1`] = `
   aria-orientation="horizontal"
   class="rc-segmented"
   role="radiogroup"
-  tabindex="0"
 >
   <div
     class="rc-segmented-group"
@@ -394,7 +388,6 @@ exports[`rc-segmented render segmented with options: 2 1`] = `
   aria-orientation="horizontal"
   class="rc-segmented"
   role="radiogroup"
-  tabindex="0"
 >
   <div
     class="rc-segmented-group"
@@ -452,7 +445,6 @@ exports[`rc-segmented render segmented with options: disabled 1`] = `
   aria-orientation="horizontal"
   class="rc-segmented"
   role="radiogroup"
-  tabindex="0"
 >
   <div
     class="rc-segmented-group"
@@ -511,7 +503,6 @@ exports[`rc-segmented render segmented with title 1`] = `
   aria-orientation="horizontal"
   class="rc-segmented"
   role="radiogroup"
-  tabindex="0"
 >
   <div
     class="rc-segmented-group"
@@ -658,7 +649,6 @@ exports[`rc-segmented should render vertical segmented 1`] = `
   aria-orientation="vertical"
   class="rc-segmented rc-segmented-vertical"
   role="radiogroup"
-  tabindex="0"
 >
   <div
     class="rc-segmented-group"
@@ -716,7 +706,6 @@ exports[`rc-segmented should render vertical segmented and handle thumb animatio
   aria-orientation="vertical"
   class="rc-segmented rc-segmented-vertical"
   role="radiogroup"
-  tabindex="0"
 >
   <div
     class="rc-segmented-group"
