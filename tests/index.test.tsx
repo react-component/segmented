@@ -687,11 +687,17 @@ describe('Segmented keyboard navigation', () => {
     const firstInput = inputs[0];
 
     await user.tab();
-    // segmented container should be focused
-    expect(segmentedContainer).toHaveFocus();
-    await user.tab();
-    // first segmented item should be focused
+    // The radio group should not add an empty stop before its native radios.
+    expect(segmentedContainer).not.toHaveAttribute('tabindex');
     expect(firstInput).toHaveFocus();
+  });
+
+  it('should honor an explicit group tabIndex', () => {
+    const { getByRole } = render(
+      <Segmented options={['Daily', 'Weekly', 'Monthly']} tabIndex={0} />,
+    );
+
+    expect(getByRole('radiogroup')).toHaveAttribute('tabindex', '0');
   });
 
   it('should handle circular navigation with arrow keys', async () => {
@@ -701,8 +707,6 @@ describe('Segmented keyboard navigation', () => {
       <Segmented options={['iOS', 'Android', 'Web']} onChange={onChange} />,
     );
 
-    // focus on segmented
-    await user.tab();
     // focus on first item
     await user.tab();
 
@@ -752,7 +756,6 @@ describe('Segmented keyboard navigation', () => {
     );
 
     await user.tab();
-    await user.tab();
 
     await user.keyboard('{ArrowRight}');
     expect(onChange).toHaveBeenCalledWith('Web');
@@ -777,7 +780,6 @@ describe('Segmented keyboard navigation', () => {
       />,
     );
 
-    await user.tab();
     await user.tab();
     await user.keyboard('{ArrowRight}');
 

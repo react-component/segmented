@@ -308,7 +308,6 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       <div
         role="radiogroup"
         aria-label="segmented control"
-        tabIndex={disabled ? undefined : 0}
         aria-orientation={vertical ? 'vertical' : 'horizontal'}
         style={style}
         {...divProps}
