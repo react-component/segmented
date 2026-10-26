@@ -248,19 +248,32 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       const nextOption = validOptions[nextIndex];
 
       if (nextOption && nextOption.value !== rawValue) {
+        const optionIndex = segmentedOptions.indexOf(nextOption);
+        containerRef.current
+          ?.querySelectorAll<HTMLInputElement>(`input.${prefixCls}-item-input`)
+          [optionIndex]?.focus();
         setRawValue(nextOption.value);
         onChange?.(nextOption.value);
       }
     };
 
     const handleKeyDown = (event: React.KeyboardEvent) => {
+      const isRtl = direction === 'rtl';
       switch (event.key) {
         case 'ArrowLeft':
-        case 'ArrowUp':
-          onOffset(-1);
+          event.preventDefault();
+          onOffset(isRtl ? 1 : -1);
           break;
         case 'ArrowRight':
+          event.preventDefault();
+          onOffset(isRtl ? -1 : 1);
+          break;
+        case 'ArrowUp':
+          event.preventDefault();
+          onOffset(-1);
+          break;
         case 'ArrowDown':
+          event.preventDefault();
           onOffset(1);
           break;
       }

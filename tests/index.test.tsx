@@ -719,6 +719,35 @@ describe('Segmented keyboard navigation', () => {
     expect(onChange).toHaveBeenCalledWith('Web');
   });
 
+  it('should handle arrow navigation in RTL mode and prevent default', async () => {
+    const user = userEvent.setup();
+    const onChange = jest.fn();
+    const { getAllByRole } = render(
+      <Segmented
+        name="platform"
+        direction="rtl"
+        options={['iOS', 'Android', 'Web']}
+        onChange={onChange}
+      />,
+    );
+
+    await user.tab();
+    await user.tab();
+
+    // In RTL, ArrowRight moves to previous item
+    await user.keyboard('{ArrowRight}');
+    expect(onChange).toHaveBeenCalledWith('Web');
+
+    expect(getAllByRole('radio')[2]).toHaveFocus();
+
+    onChange.mockClear();
+
+    // In RTL, ArrowLeft moves to next item
+    await user.keyboard('{ArrowLeft}');
+    expect(onChange).toHaveBeenCalledWith('iOS');
+    expect(getAllByRole('radio')[0]).toHaveFocus();
+  });
+
   it('should skip Tab navigation when disabled', async () => {
     const user = userEvent.setup();
     const { container } = render(
